@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nyondo Hardware Credit Page</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: darkblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: orange;
+  }
+
+  
+  .summary {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    flex: 1;
+    background: #eef2ff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .card h3 {
+    margin: 0;
+    color: darkblue;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  table, th, td {
+    border: 1px solid #ccc;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background: darkblue;
+    color: white;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>Credit Summary</h2>
+
+  
+  <div class="summary">
+    <div class="card">
+      <h3>Total Credit</h3>
+      <p>UGX 2,500,000</p>
+    </div>
+
+    <div class="card">
+      <h3>Total number of Customers With credit</h3>
+      <p>5</p>
+    </div>
+  </div>
+
+
+  <h2>Customers with Credit</h2>
+
+  <table>
+    <tr>
+      <th>Customer Name</th>
+      <th>Item Taken</th>
+      <th>Location</th>
+      <th>Date</th>
+    </tr>
+
+    <tr>
+      <td>Ronnie Victor</td>
+      <td>Cement (20 bags)</td>
+      <td>Kawempe</td>
+      <td>2/01/2026</td>
+    </tr>
+
+    <tr>
+      <td>Blessing Karungi</td>
+      <td>Iron Sheets (15 pcs)</td>
+      <td>Ntinda</td>
+      <td>24/01/2026</td>
+    </tr>
+
+    <tr>
+      <td>Precious Kajumba</td>
+      <td>Cement (10 bags)</td>
+      <td>Makindye</td>
+      <td>3/03/2026</td>
+    </tr>
+
+    <tr>
+      <td>Kahunde Diana</td>
+      <td>Iron Sheets (30 pcs)</td>
+      <td>Nansana</td>
+      <td>7/04/2026</td>
+    </tr>
+  </table>
+
+  <br><br>
+
+  <h2>Register New Credit</h2>
+
+  
+  <form>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label> Valid Customer Name</label>
+        <input type="text" name="Valid Customer Name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Valid Phone Number</label>
+        <input type="text" name="Valid phone number"  required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" name="Location" />
+      </div>
+
+      <div class="form-group">
+        <label>Item Name</label>
+        <select>
+          <option>Cement</option>
+          <option>Iron Sheets</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" name="quantity" />
+      </div>
+
+      <div class="form-group">
+        <label>Unit Price</label>
+        <input type="number" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Total Amount</label>
+        <input type="number" name="totalAmount"/>
+      </div>
+
+      <div class="form-group">
+        <label>Amount Paid</label>
+        <input type="number" name="Amountpaid" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Balance</label>
+        <input type="number" name="Balance" />
+      </div>
+
+      <div class="form-group">
+        <label>Due Date</label>
+        <input type="date" name="Due Date" />
+      </div>
+    </div>
+
+    <br>
+
+    <button type="submit">Submit Credit</button>
+
+  </form>
+
+</div>
+
+</body>
+</html>

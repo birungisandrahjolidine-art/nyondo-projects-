@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        display: flex;
+        background: #f4f4f4;
+      }
+
+      .sidebar {
+        width: 240px;
+        height: 100vh;
+        background: darkblue;
+        color: white;
+        padding: 20px;
+        position: fixed;
+      }
+
+      .sidebar-header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .sidebar-logo {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto 10px auto;
+      }
+
+      .sidebar-header h2 {
+        color: orange;
+        font-size: 18px;
+      }
+
+      .sidebar ul {
+        list-style: none;
+      }
+
+      .sidebar ul li {
+        margin: 18px 0;
+      }
+
+      .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .sidebar ul li a:hover {
+        color: orange;
+      }
+
+      .main {
+        margin-left: 240px;
+        padding: 20px;
+        width: 100%;
+      }
+
+      .header {
+        background: darkblue;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+      }
+
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .card p {
+        font-size: 18px;
+        font-weight: bold;
+        color: orange;
+      }
+      .finance {
+        margin-top: 25px;
+      }
+
+      .finance-box {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .income {
+        color: green;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .creditors {
+        margin-top: 25px;
+        background: #0b1f3a;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .creditor-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+      }
+
+      .creditor {
+        background: white;
+        color: black;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .debt {
+        color: red;
+        font-weight: bold;
+      }
+
+      .low-stock {
+        margin-top: 25px;
+        background: #0b1f3a;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .warning {
+        color: #ffcc00;
+        font-weight: bold;
+      }
+      .stock-table {
+        margin-top: 25px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .stock-table h3 {
+        margin-bottom: 15px;
+        color: darkblue;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: darkblue;
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      tr:hover {
+        background: #f5f5f5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="images/loggo.png" class="sidebar-logo" />
+        <h2>Nyondo Admin</h2>
+      </div>
+
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="stock.html">Stock</a></li>
+        <li><a href="sales.html">Sales</a></li>
+        <li><a href="transport.html">Transport</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="login.html">Logout</a></li>
+        <li><a href="credit.html">Credit</a></li>
+        <li><a href="logout.html">Logout</a></li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="header">
+        <h1>Dashboard Overview</h1>
+        <p>Welcome back Admin! Business summary below.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Total Stock</h3>
+          <p>1,200 Items</p>
+        </div>
+
+        <div class="card">
+          <h3>Sales Today</h3>
+          <p>UGX 750,000</p>
+        </div>
+
+        <div class="card">
+          <h3>Transport from customers</h3>
+          <p>UGX 500,000</p>
+        </div>
+
+        <div class="card">
+          <h3>Transport Used</h3>
+          <p>UGX 120,000</p>
+        </div>
+      </div>
+      <div class="finance">
+        <div class="finance-box">
+          <h3>📊 Net Profit</h3>
+          <p class="income">UGX 630,000</p>
+        </div>
+      </div>
+      <div class="creditors">
+        <h3>🧾 Creditors (Customers Who Owe Money)</h3>
+
+        <div class="creditor-list">
+          <div class="creditor">
+            <p><strong>John Builders Ltd</strong></p>
+            <p class="debt">Owes: UGX 150,000</p>
+          </div>
+
+          <div class="creditor">
+            <p><strong>Mukasa Construction</strong></p>
+            <p class="debt">Owes: UGX 220,000</p>
+          </div>
+
+          <div class="creditor">
+            <p><strong>Sarah Hardware Works</strong></p>
+            <p class="debt">Owes: UGX 90,000</p>
+          </div>
+        </div>
+      </div>
+      <div class="low-stock">
+        <h3>⚠ Low Stock Items</h3>
+        <ul>
+          <li><span class="warning">Cement:</span> Only 20 bags left</li>
+          <li><span class="warning">Iron Sheets:</span> Very low stock</li>
+          <li><span class="warning">Nails:</span> Needs restocking</li>
+        </ul>
+      </div>
+      <div class="stock-table">
+        <h3>📦 Items in Stock</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Cement 11N</td>
+              <td>200 bags</td>
+            </tr>
+            <tr>
+              <td>Cement 111N</td>
+              <td>250 bags</td>
+            </tr>
+            <tr>
+              <td>Nails 1 inch</td>
+              <td>90 kgs</td>
+            </tr>
+            <tr>
+              <td>Nails 3 inch</td>
+              <td>60 kgs</td>
+            </tr>
+            <tr>
+              <td>Nails 4 inch</td>
+              <td>120 kgs</td>
+            </tr>
+            <tr>
+              <td>Nails 5 inch</td>
+              <td>300 kgs</td>
+            </tr>
+            <tr>
+              <td>Roofing Nails</td>
+              <td>232 packs</td>
+            </tr>
+            <tr>
+              <td>Iron Bars 10mm</td>
+              <td>120</td>
+            </tr>
+            <tr>
+              <td>Iron Bars 12mm</td>
+              <td>300</td>
+            </tr>
+            <tr>
+              <td>Iron Bars 16mm</td>
+              <td>130</td>
+            </tr>
+            <tr>
+              <td>Wheelbarrows</td>
+              <td>290</td>
+            </tr>
+            <tr>
+              <td>Wiremesh</td>
+              <td>170</td>
+            </tr>
+            <tr>
+              <td>Barbed Wire High Tensile</td>
+              <td>210</td>
+            </tr>
+            <tr>
+              <td>Barbed Wire Low Tensile</td>
+              <td>250</td>
+            </tr>
+            <tr>
+              <td>Iron Sheets Black</td>
+              <td>700</td>
+            </tr>
+            <tr>
+              <td>Iron Sheets Red</td>
+              <td>800</td>
+            </tr>
+            <tr>
+              <td>Iron Sheets Green</td>
+              <td>1000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

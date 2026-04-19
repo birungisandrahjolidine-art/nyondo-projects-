@@ -1,10 +1,91 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hardware Dashboard</title>
-    <link rel="stylesheet" href="styles/dashboard.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        margin: 0;
+      }
+      .header {
+        background: darkblue;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .header nav {
+        margin-top: 10px;
+      }
+
+      .header nav a {
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .header nav a:hover {
+        text-decoration: underline;
+      }
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        padding: 20px;
+      }
+
+      
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+      }
+
+      .card p {
+        font-size: 22px;
+        font-weight: bold;
+      }
+      .alert {
+        grid-column: span 3;
+        border: 1px solid red;
+      }
+      .table-section {
+        padding: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background: #f0f0f0;
+      }
+
+      tr:hover {
+        background: #f9f9f9;
+      }
+    </style>
   </head>
 
   <body>
@@ -13,22 +94,23 @@
       <nav>
         <a href="#">Login</a>
         <a href="#">Signin</a>
-        <a href="#">sales</a>
+        <a href="#">Sales</a>
         <a href="#">Stock</a>
-        <a href="#">credit</a>
-        <a href="#">transport scheme</a>
+        <a href="#">Credit</a>
+        <a href="#">Transport Scheme</a>
       </nav>
     </header>
-
+    <section class="cards-container">
       <div class="card">
         <h2>Today's Sales</h2>
         <p>UGX 450,000</p>
       </div>
-<div class="card">
-  <h2> weekly sales</h2>
-  <p>45,000,000</p>
 
-</div>
+      <div class="card">
+        <h2>Weekly Sales</h2>
+        <p>UGX 45,000,000</p>
+      </div>
+
       <div class="card">
         <h2>Low Stock Items</h2>
         <p>8 Items</p>

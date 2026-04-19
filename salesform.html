@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Registration Form</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        margin: 0;
+        height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 420px;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #1e3a8a;
+        margin-bottom: 15px;
+      }
+
+      label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+        color: #333;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 9px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #1e3a8a;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background: orange;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Register New Sales</h2>
+
+      <form>
+        <label>Date</label>
+        <input type="date" name="date" required />
+
+        <label>Customer Name</label>
+        <input type="text" placeholder="Enter customer name" required />
+
+        <label>Phone Number</label>
+        <input type="text" placeholder="Enter phone number" required />
+
+        <label>Item Name</label>
+        <select>
+          <option>Wheelbarrow</option>
+          <option>Nails 1 inch</option>
+          <option>Nails 3 inch</option>
+          <option>Nails 4 inch</option>
+          <option>Nails 5 inch</option>
+          <option>Roofing nails in 5kgs packs</option>
+          <option>Barbed wires high tensile</option>
+          <option>Barbed wires low tensile</option>
+          <option>Iron sheets (black - different gauges)</option>
+          <option>Iron sheets (red - different gauges)</option>
+          <option>Iron sheets (green - different gauges)</option>
+          <option>Wire mesh</option>
+          <option>Iron bars 10mm</option>
+          <option>Iron bars 12mm</option>
+          <option>Iron bars 16mm</option>
+        </select>
+
+        <label>Quantity</label>
+        <input type="text" name="quantity" required />
+
+        <label>Unit Price</label>
+        <input type="text" name="unit_price" required />
+
+        <label>Payment Method</label>
+        <select>
+          <option>Cash</option>
+          <option>Mobile Money</option>
+          <option>Bank</option>
+        </select>
+
+        <label>Action</label>
+        <select>
+          <option>Edit</option>
+          <option>Delete</option>
+        </select>
+
+        <button type="submit">Submit Sales</button>
+      </form>
+    </div>
+  </body>
+</html>

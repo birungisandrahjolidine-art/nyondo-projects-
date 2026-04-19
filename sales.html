@@ -4,10 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nyondo Hardware Sales Page</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f4f6f9;
+      }
+
+      nav {
+        background: darkblue;
+        padding: 15px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        color: darkblue;
+      }
+
+      h1,
+      h2 {
+        margin-left: 20px;
+      }
+
+      table {
+        width: 95%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background: darkblue;
+        color: white;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+      }
+
+      button {
+        margin: 20px;
+        padding: 10px 20px;
+        background: darkblue;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background: orange;
+      }
+    </style>
   </head>
-  <styles>
-    
-  </styles>
+
   <body>
     <nav>
       <a href="stock.html">Stock Page</a> |
@@ -17,7 +84,7 @@
       <a href="logout.html">Logout</a>
     </nav>
 
-    <h1>Welcome to Nyondo Hardware Sales Page</h1>
+    <h1>Welcome to Sales Page</h1>
 
     <h2>Sales Summary</h2>
     <table border="1">
@@ -46,54 +113,14 @@
         <td>0</td>
       </tr>
     </table>
-    <h2>Record New Sale</h2>
+    <a href="stockregform.html">
+      <h2>Record New Sale</h2>
+    </a>
+    <br /><br />
+    <button>Submit sales</button>
 
-    <table border="1">
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Unit Price (UGX)</th>
-        <th>Customer Name</th>
-        <th>Payment Method</th>
-        <th>Action</th>
-      </tr>
-
-      <tr>
-        <td>
-          <select>
-            <option>Wheelbarrow</option>
-            <option>Nails 1 inc</option>
-            <option>Nails 3 inc</option>
-            <option>Nails 4 inc</option>
-            <option>Nails 5 inc</option>
-            <option>Roofings nails in 5 kgs packs</option>
-            <option>Barbed Wires high tensile</option>
-            <option>Barbed wires low tensile</option>
-            <option>Iron Sheetsin black and different guages</option>
-            <option>Ironsheets in Red and different guages</option>
-            <option>Iron Sheets in green and different guages</option>
-            <option>Wiremesh</option>
-            <option>Iron bars 10 mms</option>
-            <option>Iron bars 12 mms</option>
-            <option>Iron bars 16 mms</option>
-          </select>
-        </td>
-        <td><input type="number" placeholder="Quantity" /></td>
-        <td><input type="number" placeholder="Unit Price" /></td>
-        <td><input type="text" placeholder="Customer Name" /></td>
-        <td>
-          <select>
-            <option>Cash</option>
-            <option>Mobile Money</option>
-            <option>Bank</option>
-          </select>
-        </td>
-        <td>
-          <button>Add Sale</button>
-        </td>
-      </tr>
-    </table>
     <h2>Stock Alerts</h2>
+
     <table border="1">
       <tr>
         <th>product</th>
@@ -112,6 +139,7 @@
         <td>20</td>
         <td style="color: orange">Medium</td>
       </tr>
+
       <tr>
         <td>Paint</td>
         <td>100 packs</td>

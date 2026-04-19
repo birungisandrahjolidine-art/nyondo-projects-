@@ -1,0 +1,112 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Registration Form</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .form-container {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+
+  input:focus, select:focus {
+    border-color: darkblue;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background: darkblue;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: orange;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Stock Registration</h2>
+
+  <form>
+    <label>Item Name</label>
+    <select>
+      <option>Select Item</option>
+      <option>Cement</option>
+      <option>Iron Sheets</option>
+      <option>Nails</option>
+      <option>Paint</option>
+    </select>
+
+    <label>Quantity</label>
+    <input type="number" placeholder="Enter quantity">
+
+    <label>Unit Price</label>
+    <input type="number" placeholder="Enter price">
+
+    <label>Supplier Name</label>
+    <input type="text" placeholder="Enter supplier">
+
+    <label>Date</label>
+    <input type="date">
+
+    <label>Payment Method</label>
+    <select>
+      <option>Select Method</option>
+      <option>Cash</option>
+      <option>Mobile Money</option>
+      <option>Bank Transfer</option>
+    </select>
+
+    <button type="submit">Register Stock</button>
+  </form>
+</div>
+
+</body>
+</html>

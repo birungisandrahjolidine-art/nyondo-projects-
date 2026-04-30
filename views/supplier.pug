@@ -1,0 +1,45 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title NYONDO HARDWARE SYSTEM 
+  link(rel='stylesheet' href='/css/supplier.css')
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo Supplier Form
+.container
+  h2 Supplier Registration form
+  form
+    label(for='date') Date
+    input(type='date' placeholder='Date' required='')
+    label Supplier Name
+    input(type='text' placeholder='Enter supplier name' required='')
+    label Company Name
+    input(type='text' placeholder='Enter company name')
+    label Phone Number
+    input(type='tel' placeholder='07XXXXXXXX' required='')
+    label Email
+    input(type='email' placeholder='supplier@email.com')
+    label Product Details
+    input(type='text' placeholder='Product Type e.g Cement, Nails')
+    .row
+      div
+        label Quantity
+        input(type='number' placeholder='e.g 50')
+      div
+        label Unit Type
+        input(type='text' placeholder='e.g bags, boxes, kg')
+    label Payment Method
+    .radio-group
+      div
+        input#cash(type='radio' name='payment' value='cash')
+        label(for='cash') Cash
+      div
+        input#credit(type='radio' name='payment' value='credit')
+        label(for='credit') Credit
+    label Location
+    input(type='text' placeholder='Supplier location')
+    label Notes
+    textarea(rows='4' placeholder='Any extra details...')
+    button(type='submit') Save Supplier

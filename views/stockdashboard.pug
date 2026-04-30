@@ -1,0 +1,86 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Hardware Store Dashboard
+  link(rel='stylesheet' href='/css/stockdashboard.css')
+// SIDEBAR
+.sidebar
+  h2 Store Manager
+  a(href='#') Dashboard
+  a(href='#') Stock Alerts
+  a(href='#') Items Sold
+  a(href='#') New Stock
+  a(href='#') Old Stock
+  a(href='#') All Stock
+// MAIN CONTENT
+.main
+  .top-buttons
+    button.btn.orange Register New Stock
+    button.btn.blue Register Supplier
+  // STOCK ALERTS
+  .card.alert
+    h3 Stock Alerts
+    p &#x26A0; Cement is running low
+    p &#x26A0; Nails stock below minimum level
+  // ITEMS SOLD TODAY
+  .card
+    h3 Items Sold Today
+    table
+      tr
+        th Item
+        th Quantity
+        th Price
+      tr
+        td Iron Sheets
+        td 5
+        td 250,000 UGX
+      tr
+        td Cement
+        td 10
+        td 420,000 UGX
+  // NEW STOCK
+  .card
+    h3 Newly Stocked Items
+    table
+      tr
+        th Item
+        th Quantity
+      tr
+        td Paint
+        td 20
+      tr
+        td Wood Planks
+        td 50
+  // OLD STOCK
+  .card
+    h3 Old Stock
+    table
+      tr
+        th Item
+        th Quantity
+      tr
+        td Nails
+        td 200
+      tr
+        td Bricks
+        td 500
+  // ALL STOCK
+  .card
+    h3 All Items in Stock
+    table
+      tr
+        th Item
+        th Quantity
+        th Status
+      tr
+        td Cement
+        td 15
+        td Low
+      tr
+        td Iron Sheets
+        td 80
+        td Good
+      tr
+        td Paint
+        td 40
+        td Good

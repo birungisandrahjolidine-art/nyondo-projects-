@@ -1,0 +1,67 @@
+
+ body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f4f6f9;
+      }
+
+      nav {
+        background: darkblue;
+        padding: 15px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        color: darkblue;
+      }
+
+      h1,
+      h2 {
+        margin-left: 20px;
+      }
+
+      table {
+        width: 95%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background: darkblue;
+        color: white;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 5px;
+      }
+
+      button {
+        margin: 20px;
+        padding: 10px 20px;
+        background: darkblue;
+        color: white;
+        border: none;
+         cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background: orange;
+      }

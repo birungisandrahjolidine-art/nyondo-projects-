@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hardware Store Dashboard</title>
+  <link rel="stylesheet" href="/css/stockdashboard.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Store Manager</h2>
+  <a href="#">Dashboard</a>
+  <a href="#">Stock Alerts</a>
+  <a href="#">Items Sold</a>
+  <a href="#">New Stock</a>
+  <a href="#">Old Stock</a>
+  <a href="#">All Stock</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <div class="top-buttons">
+    <button class="btn orange">Register New Stock</button>
+    <button class="btn blue">Register Supplier</button>
+  </div>
+
+  <!-- STOCK ALERTS -->
+  <div class="card alert">
+    <h3>Stock Alerts</h3>
+    <p>⚠ Cement is running low</p>
+    <p>⚠ Nails stock below minimum level</p>
+  </div>
+
+  <!-- ITEMS SOLD TODAY -->
+  <div class="card">
+    <h3>Items Sold Today</h3>
+    <table>
+      <tr><th>Item</th><th>Quantity</th><th>Price</th></tr>
+      <tr><td>Iron Sheets</td><td>5</td><td>250,000 UGX</td></tr>
+      <tr><td>Cement</td><td>10</td><td>420,000 UGX</td></tr>
+    </table>
+  </div>
+
+  <!-- NEW STOCK -->
+  <div class="card">
+    <h3>Newly Stocked Items</h3>
+    <table>
+      <tr><th>Item</th><th>Quantity</th></tr>
+      <tr><td>Paint</td><td>20</td></tr>
+      <tr><td>Wood Planks</td><td>50</td></tr>
+    </table>
+  </div>
+
+  <!-- OLD STOCK -->
+  <div class="card">
+    <h3>Old Stock</h3>
+    <table>
+      <tr><th>Item</th><th>Quantity</th></tr>
+      <tr><td>Nails</td><td>200</td></tr>
+      <tr><td>Bricks</td><td>500</td></tr>
+    </table>
+  </div>
+
+  <!-- ALL STOCK -->
+  <div class="card">
+    <h3>All Items in Stock</h3>
+    <table>
+      <tr><th>Item</th><th>Quantity</th><th>Status</th></tr>
+      <tr><td>Cement</td><td>15</td><td>Low</td></tr>
+      <tr><td>Iron Sheets</td><td>80</td><td>Good</td></tr>
+      <tr><td>Paint</td><td>40</td><td>Good</td></tr>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

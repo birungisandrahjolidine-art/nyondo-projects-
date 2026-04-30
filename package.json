@@ -1,0 +1,33 @@
+{
+  "name": "nyondo-project",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/birungisandrahjolidine-art/nyondo-projects-#readme",
+  "bugs": {
+    "url": "https://github.com/birungisandrahjolidine-art/nyondo-projects-/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/birungisandrahjolidine-art/nyondo-projects-.git"
+  },
+  "license": "ISC",
+  "author": "BIRUNGI SANDRAH JOLIDINE",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.5.0",
+    "passport": "^0.7.0",
+    "passport-local-mongoose": "^9.0.1",
+    "pug": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

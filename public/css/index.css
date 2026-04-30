@@ -1,0 +1,44 @@
+
+ *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+      .hero {
+        height: 100vh;
+        background: url("/images/nyondo.png") no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .content {
+        text-align: center;
+        color: white;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 40px;
+        border-radius: 10px;
+      }
+
+      .content h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .content p {
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        padding: 12px 25px;
+        background: orange;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
+      .btn:hover {
+        background: darkblue;
+      }

@@ -1,0 +1,105 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Hardware Dashboard
+  link(rel='stylesheet' href='/css/salesdashboard.css')
+// SIDEBAR
+.sidebar
+  h2 Dashboard
+  a(href='#') Login
+  a(href='#') Signin
+  a(href='#') Sales
+  a(href='#') Stock
+  a(href='#') Credit
+  a(href='#') Transport Scheme
+// MAIN CONTENT
+.main-content
+  header.header
+    h1 WELCOME To SALES DASHBOARD SYSTEM
+  // CARDS
+  section.cards-container
+    .card
+      h2 Today&apos;s Sales
+      p UGX 450,000
+    .card
+      h2 Weekly Sales
+      p UGX 45,000,000
+    .card
+      h2 Low Stock Items
+      p 8 Items
+    .card.alert
+      h2 Stock Alerts &#x1F6A8;
+      ul
+        li Cement - Only 5 bags left
+        li Iron Sheets - 12 remaining
+        li Nails (2 inch) - Out of stock
+        li Paint (White) - Low stock
+  // ITEMS & PRICES
+  section.table-section
+    h2 Items &amp; Prices
+    table
+      tr
+        th Item
+        th Price
+      tr
+        td Cement
+        td UGX 55,000
+      tr
+        td Iron Sheets
+        td UGX 300,000
+      tr
+        td Nails (Box)
+        td UGX 25,000
+      tr
+        td Paint (White)
+        td UGX 80,000
+  // RECENT SALES
+  section.table-section
+    h2 Recent Sales
+    table
+      tr
+        th Item
+        th Quantity
+        th Price
+        th Date
+      tr
+        td Cement
+        td 10
+        td UGX 55,000
+        td Today
+      tr
+        td Iron Sheets
+        td 20
+        td UGX 300,000
+        td Today
+      tr
+        td Nails
+        td 5 boxes
+        td UGX 25,000
+        td Today
+  // CREDIT SALES
+  section.table-section
+    h2 Items Sold on Credit
+    table
+      tr
+        th Customer Name
+        th Item
+        th Quantity
+        th Amount
+      tr
+        td John Doe
+        td Cement
+        td 5
+        td UGX 275,000
+      tr
+        td Mary Namutebi
+        td Iron Sheets
+        td 10
+        td UGX 3,000,000
+      tr
+        td Peter Okello
+        td Nails
+        td 2 boxes
+        td UGX 50,000
+| m

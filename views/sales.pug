@@ -1,0 +1,57 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo Hardware Sales Page
+  link(rel='stylesheet' href='/css/sales.css')
+nav
+  a(href='stock.html') Stock Page
+  |  |
+  a(href='Dashboard.html') Dashboard
+  |  |
+  a(href='home.html') Home Page
+  |  |
+  a(href='credit.html') Credit
+  a(href='logout.html') Logout
+h1 Welcome to Sales Page
+h2 Sales Summary
+table(border='1')
+  tr
+    th Metric
+    th Value
+  tr
+    td Date
+    td Today
+  tr
+    td Total Transactions
+    td 0
+  tr
+    td Total Sales Made
+    td UGX 0
+  tr
+    td Items Sold
+    td 0
+a(href='stockregform.html')
+  h2 Record New Sale
+br
+br
+button Submit sales
+h2 Stock Alerts
+table(border='1')
+  tr
+    th product
+    th stock left
+    th Status
+  tr
+    td Nails
+    td 5 kgs
+    td(style='color: red') Low stock
+  tr
+    td Ironsheets
+    td 20
+    td(style='color: orange') Medium
+  tr
+    td Paint
+    td 100 packs
+    td(style='color: green') enough stock
+| ,

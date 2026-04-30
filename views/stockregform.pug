@@ -1,0 +1,47 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Stock Registration Form
+  link(rel='stylesheet' href='/css/stockregform.css')
+  li
+    a(href='stockdashboard.html') stockdashboard
+  li
+    a(href='stock.html') stock
+  li
+    a(href='logout..html') logout
+.form-container
+  h2 Stock Registration
+  form
+    label Item Name name="ItemName" 
+    select
+      option Wheelbarrow
+      option Nails 1 inch
+      option Nails 3 inch
+      option Nails 4 inch
+      option Nails 5 inch
+      option Roofing nails in 5kgs packs
+      option Barbed wires high tensile
+      option Barbed wires low tensile
+      option Iron sheets (black - different gauges)
+      option Iron sheets (red - different gauges)
+      option Iron sheets (green - different gauges)
+      option Wire mesh
+      option Iron bars 10mm
+      option Iron bars 12mm
+      option Iron bars 16mm
+    label Quantity
+    input(type='number' placeholder='Enter quantity' name="quantity")
+    label Unit Price
+    input(type='number' placeholder='Enter price' name="price")
+    label Supplier Name
+    input(type='text' placeholder='Enter supplier' name="supplierName")
+    label Date
+    input(type='date' name="date")
+    label Payment Method
+    select name="PaymentMethod" 
+      option Select Method
+      option Cash
+      option Mobile Money
+      option Bank Transfer
+    button(type='submit') Register Stock

@@ -1,0 +1,138 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Admin Dashboard
+  link(rel='stylesheet' href='/css/admindashboard.css')
+.sidebar
+  .sidebar-header
+    img.sidebar-logo(src='images/loggo.png')
+    h2 Nyondo Admin
+  ul
+    li
+      a(href='salesdashboard.html') Dashboard
+    li
+      a(href='stockdashboard.html') Dashboard
+    li
+      a(href='stock.html') Stock
+    li
+      a(href='sales.html') Sales
+    li
+      a(href='transport.html') Transport
+    li
+      a(href='suppliers.html') Suppliers
+    li
+      a(href='reports.html') Reports
+    li
+      a(href='login.html') Logout
+    li
+      a(href='credit.html') Credit
+    li
+      a(href='logout.html') Logout
+.main
+  .header
+    h1 Dashboard Overview
+    p Welcome back Admin! Business summary below.
+  .cards
+    .card
+      h3 Total Stock
+      p 1,200 Items
+    .card
+      h3 Sales Today
+      p UGX 750,000
+    .card
+      h3 Transport from customers
+      p UGX 500,000
+    .card
+      h3 Transport Used
+      p UGX 120,000
+  .finance
+    .finance-box
+      h3 &#x1F4CA; Net Profit
+      p.income UGX 630,000
+  .creditors
+    h3 &#x1F9FE; Creditors (Customers Who Owe Money)
+    .creditor-list
+      .creditor
+        p
+          strong John Builders Ltd
+        p.debt Owes: UGX 150,000
+      .creditor
+        p
+          strong Mukasa Construction
+        p.debt Owes: UGX 220,000
+      .creditor
+        p
+          strong Sarah Hardware Works
+        p.debt Owes: UGX 90,000
+  .low-stock
+    h3 &#x26A0; Low Stock Items
+    ul
+      li
+        span.warning Cement:
+        |  Only 20 bags left
+      li
+        span.warning Iron Sheets:
+        |  Very low stock
+      li
+        span.warning Nails:
+        |  Needs restocking
+  .stock-table
+    h3 &#x1F4E6; Items in Stock
+    table
+      thead
+        tr
+          th Item Name
+          th Quantity
+      tbody
+        tr
+          td Cement 11N
+          td 200 bags
+        tr
+          td Cement 111N
+          td 250 bags
+        tr
+          td Nails 1 inch
+          td 90 kgs
+        tr
+          td Nails 3 inch
+          td 60 kgs
+        tr
+          td Nails 4 inch
+          td 120 kgs
+        tr
+          td Nails 5 inch
+          td 300 kgs
+        tr
+          td Roofing Nails
+          td 232 packs
+        tr
+          td Iron Bars 10mm
+          td 120
+        tr
+          td Iron Bars 12mm
+          td 300
+        tr
+          td Iron Bars 16mm
+          td 130
+        tr
+          td Wheelbarrows
+          td 290
+        tr
+          td Wiremesh
+          td 170
+        tr
+          td Barbed Wire High Tensile
+          td 210
+        tr
+          td Barbed Wire Low Tensile
+          td 250
+        tr
+          td Iron Sheets Black
+          td 700
+        tr
+          td Iron Sheets Red
+          td 800
+        tr
+          td Iron Sheets Green
+          td 1000

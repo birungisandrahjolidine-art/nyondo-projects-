@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Credit Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="form-wrapper">
+    <div class="form-container">
+      <h2>Register new Credit</h2>
+
+      <form action="/submit-credit" method="POST">
+<label for="date">Date</label>
+<input type="date" name="date" required>
+        <label>Customer Name</label>
+        <input type="text" name="customerName" required>
+
+
+        <label>Item Name</label>
+        <select name="itemName" required>
+          <option value="">-- Select Item --</option>
+          <option value="cement">Cement</option>
+          <option value="iron_sheets">Iron Sheets</option>
+          <option value="nails">Nails</option>
+        </select>
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" required>
+
+        <label>Price per Item</label>
+        <input type="number" name="price" required>
+
+        <label>Amount deposited</label>
+        <input type="number" name="amountDeposited">
+
+        <label>Due Date</label>
+        <input type="date" name="dueDate">
+
+        <button type="submit">Save Credit</button>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

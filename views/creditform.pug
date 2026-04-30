@@ -1,0 +1,28 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Credit Form
+  link(rel='stylesheet' href='/css/creditform.css')
+.form-wrapper
+  .form-container
+    h2 Register new Credit
+    form(action='/creditform' method='POST')
+      label(for='date') Date
+      input(type='date' name='date' required='')
+      label Customer Name
+      input(type='text' name='customerName' required='')
+      label Item Name
+      select(name='itemName' required='')
+        option(value='')
+        option(value='cement') Cement
+        option(value='iron_sheets') Iron Sheets
+        option(value='nails') Nails
+      label Quantity
+      input(type='number' name='quantity' required='')
+      label Price per Item
+      input(type='number' name='price' required='')
+      label Amount deposited
+      input(type='number' name='amountDeposited')
+      label Due Date
+      input(type='date' name='dueDate')
+      button(type='submit') Save Credit

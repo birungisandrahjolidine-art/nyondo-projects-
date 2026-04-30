@@ -1,0 +1,106 @@
+
+ body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+      }
+
+      header {
+        background: darkblue;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 20px;
+      }
+
+      .container {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .info {
+        background: #e3f2fd;
+        border-left: 5px solid darkblue;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+      }
+      .form-box {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        color: darkblue;
+        margin-top: 0;
+      }
+
+      .row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 12px;
+      }
+
+      .row input,
+      .row select {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: darkblue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: darkblue;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background: darkblue;
+        color: white;
+      }
+
+      tr:hover {
+        background: #f1f1f1;
+        
+      }
+      button:hover{
+        background-color: orange;
+      }

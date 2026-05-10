@@ -8,14 +8,16 @@ head
     h2 Register new Credit
     form(action='/creditform' method='POST')
       label(for='date') Date
-      input(type='date' name='date' required='')
+      input(type='date' name='dateTaken' required='')
       label Customer Name
       input(type='text' name='customerName' required='')
       label Item Name
       select(name='itemName' required='')
         option(value='')
         option(value='cement') Cement
-        option(value='iron_sheets') Iron Sheets
+        option(value='iron_sheetsguage28') Iron Sheets guage28
+        option(value='iron_sheetsguage28') Iron Sheets guage32 
+        option(value='iron_sheetsguage28') Iron Sheets guage30
         option(value='nails') Nails
       label Quantity
       input(type='number' name='quantity' required='')

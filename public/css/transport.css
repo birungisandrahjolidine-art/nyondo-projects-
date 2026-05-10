@@ -1,106 +1,101 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
 
- body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f4f6f9;
-      }
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 6px solid darkblue;
+}
 
-      header {
-        background: darkblue;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        font-size: 20px;
-      }
+/* HEADINGS */
+h1 {
+  text-align: center;
+  color: darkblue;
+}
 
-      .container {
-        width: 90%;
-        margin: auto;
-        padding: 20px;
-      }
+h2 {
+  color: darkblue;
+}
 
-      .info {
-        background: #e3f2fd;
-        border-left: 5px solid darkblue;
-        padding: 15px;
-        border-radius: 6px;
-        margin-bottom: 15px;
-      }
-      .form-box {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-      }
+/* NOTE */
+.note {
+  background-color: orange;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
 
-      h2 {
-        color: darkblue;
-        margin-top: 0;
-      }
+/* BUTTON */
+button {
+  background-color: darkblue;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
 
-      .row {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 12px;
-      }
+button:hover {
+  background-color: navy;
+}
 
-      .row input,
-      .row select {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
+/* FORM */
+.form-section {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
 
-      textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 10px;
-      }
+.hidden {
+  display: none;
+}
 
-      button {
-        width: 100%;
-        padding: 12px;
-        background: darkblue;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-      }
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
 
-      button:hover {
-        background: darkblue;
-      }
+/* TABLE */
+.table-section {
+  margin-top: 20px;
+}
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-      }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-      th,
-      td {
-        padding: 12px;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-      }
+th {
+  background-color: darkblue;
+  color: white;
+  padding: 10px;
+}
 
-      th {
-        background: darkblue;
-        color: white;
-      }
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
 
-      tr:hover {
-        background: #f1f1f1;
-        
-      }
-      button:hover{
-        background-color: orange;
-      }
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    font-size: 12px;
+  }
+}

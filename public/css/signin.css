@@ -1,7 +1,7 @@
 
    body {
   font-family: Arial;
-  background: white;
+  background: url("/images/loggo.png");
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nyondo Hardware - Transport</title>
+  <link rel="stylesheet" href="transport.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <h1>Nyondo Hardware Transport Services</h1>
+
+  <!-- NOTE -->
+  <div class="note">
+    NOTE: Clients who are a distance from the hardware and want to use transport services will pay UGX 50,000.
+  </div>
+
+  <!-- BUTTON -->
+  <button onclick="toggleForm()">+ Add Transport Record</button>
+
+  <!-- FORM -->
+  <div id="formContainer" class="hidden form-section">
+    <h2>Transport Form</h2>
+
+    <form id="transportForm">
+      <input type="text" id="customer" placeholder="Customer Name" required>
+      <input type="text" id="location" placeholder="Delivery Location" required>
+      <input type="text" id="item" placeholder="Item Transported" required>
+      <input type="number" id="cost" placeholder="Transport Cost (UGX)" required>
+
+      <button type="submit">Save Record</button>
+    </form>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-section">
+    <h2>Transport Records</h2>
+
+    <table id="transportTable">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Location</th>
+          <th>Item</th>
+          <th>Cost (UGX)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data appears here -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+function toggleForm() {
+  document.getElementById("formContainer").classList.toggle("hidden");
+}
+
+document.getElementById("transportForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let customer = document.getElementById("customer").value;
+  let location = document.getElementById("location").value;
+  let item = document.getElementById("item").value;
+  let cost = document.getElementById("cost").value;
+
+  let table = document.querySelector("#transportTable tbody");
+
+  let row = `
+    <tr>
+      <td>${customer}</td>
+      <td>${location}</td>
+      <td>${item}</td>
+      <td>${cost}</td>
+      <td>${DriverName}</td>
+      <td>${fuelCost}</td>
+      <td>${carNumber}</td>
+      <td>${route}</td>
+      <td>${fuelCost}</td>
+    </tr>
+  `;
+
+  table.insertAdjacentHTML("beforeend", row);
+
+  document.getElementById("transportForm").reset();
+});
+</script>
+
+</body>
+</html>

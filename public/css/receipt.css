@@ -1,0 +1,107 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* FORM */
+.form-section {
+  width: 50%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 5px solid darkblue;
+}
+
+.form-section h2 {
+  color: darkblue;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.item-row {
+  display: flex;
+  gap: 10px;
+}
+
+.item-row input {
+  width: 33%;
+}
+
+button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: darkorange;
+}
+
+/* RECEIPT */
+.receipt-section {
+  width: 50%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border-top: 5px solid darkblue;
+}
+
+.receipt-section h3 {
+  text-align: center;
+  color: darkblue;
+}
+
+.receipt-section p {
+  margin: 5px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: darkblue;
+  color: white;
+  padding: 8px;
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+/* PRINT STYLE */
+@media print {
+  .form-section {
+    display: none;
+  }
+
+  .receipt-section {
+    width: 100%;
+    border: none;
+  }
+
+  button {
+    display: none;
+  }
+}

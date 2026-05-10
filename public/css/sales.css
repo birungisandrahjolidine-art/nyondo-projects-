@@ -1,67 +1,99 @@
+*{
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
- body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #f4f6f9;
-      }
+body{
+    margin: 0;
+    background: #f3f6fb;
+    padding: 20px;
+}
 
-      nav {
-        background: darkblue;
-        padding: 15px;
-      }
+/* MAIN CONTAINER */
+.container{
+    width: 780px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-top: 6px solid #1e3a8a;
+}
 
-      nav a {
-        color: white;
-        text-decoration: none;
-        margin-right: 10px;
-        font-weight: bold;
-      }
+/* TITLE */
+h2{
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 25px;
+}
 
-      nav a:hover {
-        color: darkblue;
-      }
+/* ROW = 2 INPUTS PER ROW */
+.row{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 18px;
+}
 
-      h1,
-      h2 {
-        margin-left: 20px;
-      }
+/* INPUT BOX */
+.input-box{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
 
-      table {
-        width: 95%;
-        margin: 20px auto;
-        border-collapse: collapse;
-        background: white;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
+/* LABEL */
+label{
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #1e3a8a;
+    font-size: 14px;
+}
 
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-      }
+/* INPUTS & SELECTS */
+input,
+select{
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+    background: #fff;
+}
 
-      th {
-        background: darkblue;
-        color: white;
-      }
+/* FOCUS EFFECT */
+input:focus,
+select:focus{
+    border-color: orange;
+    box-shadow: 0 0 6px rgba(255,165,0,0.4);
+}
 
-      input,
-      select {
+/* BUTTON */
+button{
+    width: 100%;
+    padding: 14px;
+    background: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover{
+    background: orange;
+    color: black;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px){
+    .container{
         width: 100%;
-        padding: 5px;
-      }
+    }
 
-      button {
-        margin: 20px;
-        padding: 10px 20px;
-        background: darkblue;
-        color: white;
-        border: none;
-         cursor: pointer;
-        font-size: 16px;
-      }
-
-      button:hover {
-        background: orange;
-      }
+    .row{
+        flex-direction: column;
+    }
+}

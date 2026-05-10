@@ -1,65 +1,64 @@
 doctype html
 head
   meta(charset='UTF-8')
-  title Transport System
+  title Nyondo Hardware - Transport
   link(rel='stylesheet' href='/css/transport.css')
-header &#x1F69B; Transport Expense Page
 .container
-  .info
-    h3 &#x1F69B; Transport Offer Qualification
-    p
-      | Customers qualify for transport offers based on purchase value that is 500,000/=,
-      | delivery distance which is 10km from the shop, Else they are charged extra 30,000/=.
-  .form-box
-    h2 Record Transport Expense
-    .row
-      input(type='date')
-      input(type='text' placeholder='Vehicle Plate Number')
-    .row
-      input(type='text' placeholder='Driver Name')
-      input(type='text' placeholder='Route (Kampala - Jinja)')
-    .row
-      input(type='number' placeholder='Fuel Cost' name='fuel Cost')
-      input(type='number' placeholder='Maintenance Cost' name='maintanance Cost')
-    .row
-      select
-        option Payment Method
-        option Cash
-        option Credit
-        option Bank
-      select
-        option Payment Status
-        option Paid
-        option Unpaid
-    textarea(rows='3' placeholder='Alert / Remarks (Delay, Breakdown, High Fuel Usage, etc)')
-    button Save Transport Expense
-  h2 &#x1F4CB; Previous Transport Expenses
-  table
-    tr
-      th Date
-      th Vehicle
-      th Driver
-      th Route
-      th Fuel
-      th Maintenance
-      th Total
-      th Status
-    tr
-      td 2026-04-09
-      td UGA 123A
-      td John
-      td Kampala - Mukono
-      td 50,000
-      td 10,000
-      td 60,000
-      td Paid
-    tr
-      td 2026-04-08
-      td UGA 456B
-      td Peter
-      td Kampala - Jinja
-      td 70,000
-      td 15,000
-      td 85,000
-      td Unpaid
-| m
+  // HEADER
+  h1 Nyondo Hardware Transport Services
+  // NOTE
+  .note
+    | NOTE: Clients who are a distance from the hardware and want to use transport services will pay UGX 50,000.
+  // BUTTON
+  button(onclick='toggleForm()') + Add Transport Record
+  // FORM
+  #formContainer.hidden.form-section
+    h2 Transport Form
+    form#transportForm
+      input#customer(type='text' placeholder='Customer Name' required='')
+      input#location(type='text' placeholder='Delivery Location' required='')
+      input#item(type='text' placeholder='Item Transported' required='')
+      input#cost(type='number' placeholder='Transport Cost (UGX)' required='')
+      button(type='submit') Save Record
+  // TABLE
+  .table-section
+    h2 Transport Records
+    table#transportTable
+      thead
+        tr
+          th Customer
+          th Location
+          th Item
+          th fuelCost (UGX)
+          th driverName
+          th  vehicleNumber
+          th route
+      tbody
+        // Data appears here
+script.
+  function toggleForm() {
+  document.getElementById("formContainer").classList.toggle("hidden");
+  }
+  document.getElementById("transportForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let customer = document.getElementById("customer").value;
+  let location = document.getElementById("location").value;
+  let item = document.getElementById("item").value;
+  let cost = document.getElementById("cost").value;
+  let table = document.querySelector("#transportTable tbody");
+  let row = `
+  <tr>
+  <td>${customer}</td>
+  <td>${location}</td>
+  <td>${item}</td>
+  <td>${fuelcost}</td>
+  <td>${driverName}</td>
+  <td>${fuelCost}</td>
+  <td>${vehicleNumber}</td>
+  <td>${route}</td>
+  </tr>
+  `;
+  table.insertAdjacentHTML("beforeend", row);
+  document.getElementById("transportForm").reset();
+  });
+| l

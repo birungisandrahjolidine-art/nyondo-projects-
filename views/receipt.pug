@@ -1,0 +1,60 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Nyondo Hardware Receipt
+  link(rel='stylesheet' href='/css/receipt.css')
+.container
+  // FORM
+  .form-section
+    h2 Create Receipt
+    form#receiptForm
+      input(type='text' name='customerName' placeholder='Customer Name' required='')
+      select(name='paymentStatus')
+        option(value='CLEARED') Cleared
+        option(value='PARTIAL') Partial Deposit
+      #items
+        .item-row
+          input(type='text' name='itemName[]' placeholder='Item Name' required='')
+          input(type='number' name='quantity[]' placeholder='Qty' required='')
+          input(type='number' name='price[]' placeholder='Price' required='')
+      button(type='button' onclick='addItem()') Add Item
+      input(type='number' name='amountPaid' placeholder='Amount Paid' required='')
+      button(type='submit') Save Receipt
+  // RECEIPT
+  #receipt.receipt-section
+    h3 NYONDO HARDWARE
+    p Kampala, Uganda
+    p +256 700 123456
+    hr
+    p Receipt No: ________
+    p Date: ________
+    p Customer: ________
+    p Status: ________
+    hr
+    table
+      thead
+        tr
+          th Item
+          th Qty
+          th Price
+          th Total
+      tbody#receiptItems
+        // Items will appear here
+    hr
+    p Grand Total: UGX ________
+    p Amount Paid: UGX ________
+    p Balance: UGX ________
+    h4 ________
+    button(onclick='window.print()') Print Receipt
+script.
+  function addItem() {
+  const itemsDiv = document.getElementById("items");
+  const row = document.createElement("div");
+  row.classList.add("item-row");
+  row.innerHTML = `
+  <input type="text" name="itemName[]" placeholder="Item Name" required''>
+  <input type="number" name="quantity[]" placeholder="Qty" required>
+  <input type="number" name="price[]" placeholder="Price" required>
+  `;
+  itemsDiv.appendChild(row);
+  }

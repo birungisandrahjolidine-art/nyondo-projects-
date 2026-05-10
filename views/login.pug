@@ -5,8 +5,8 @@ head
   title Login Page
   link(rel='stylesheet' href='/css/login.css')
 .login-box
-  h2 Login
-  form
+  h2 
+  form.login-form(action='/login' method='post')
     input(type='text' placeholder='Email or Username' required='')
     input(type='password' placeholder='Password' required='')
     button(type='submit') Sign In
@@ -14,5 +14,5 @@ head
     a(href='#') Forgot Password?
   p
     | Don&apos;t have an account? 
-    a(href='#') Sign Up
+    a(href='/sign') Sign Up
 | l

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nyondo Hardware Receipt</title>
+  <link rel="stylesheet" href="/css/receipt.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- FORM -->
+  <div class="form-section">
+    <h2>Create Receipt</h2>
+
+    <form id="receiptForm">
+
+      <input type="text" name="customerName" placeholder="Customer Name" required>
+
+      <select name="paymentStatus">
+        <option value="CLEARED">Cleared</option>
+        <option value="PARTIAL">Partial Deposit</option>
+      </select>
+
+      <div id="items">
+        <div class="item-row">
+          <input type="text" name="itemName[]" placeholder="Item Name" required>
+          <input type="number" name="quantity[]" placeholder="Qty" required>
+          <input type="number" name="price[]" placeholder="Price" required>
+        </div>
+      </div>
+
+      <button type="button" onclick="addItem()">Add Item</button>
+
+      <input type="number" name="amountPaid" placeholder="Amount Paid" required>
+
+      <button type="submit">Save Receipt</button>
+    </form>
+  </div>
+
+
+  <!-- RECEIPT -->
+  <div class="receipt-section" id="receipt">
+
+    <h3>NYONDO HARDWARE</h3>
+    <p>Kampala, Uganda</p>
+    <p>+256 700 123456</p>
+
+    <hr>
+
+    <p>Receipt No: ________</p>
+    <p>Date: ________</p>
+    <p>Customer: ________</p>
+    <p>Status: ________</p>
+
+    <hr>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="receiptItems">
+        <!-- Items will appear here -->
+      </tbody>
+    </table>
+
+    <hr>
+
+    <p>Grand Total: UGX ________</p>
+    <p>Amount Paid: UGX ________</p>
+    <p>Balance: UGX ________</p>
+
+    <h4>________</h4>
+
+    <button onclick="window.print()">Print Receipt</button>
+
+  </div>
+
+</div>
+
+<script>
+function addItem() {
+  const itemsDiv = document.getElementById("items");
+
+  const row = document.createElement("div");
+  row.classList.add("item-row");
+
+  row.innerHTML = `
+    <input type="text" name="itemName[]" placeholder="Item Name" required>
+    <input type="number" name="quantity[]" placeholder="Qty" required>
+    <input type="number" name="price[]" placeholder="Price" required>
+  `;
+
+  itemsDiv.appendChild(row);
+}
+</script>
+
+</body>
+</html>

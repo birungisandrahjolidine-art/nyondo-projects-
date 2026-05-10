@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,58 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stock Registration Form</title>
 <link rel="stylesheet" href="/css/stockregform.css" />
-<li><a href="stockdashboard.html">stockdashboard</a></li>
-<li><a href="stock.html">stock</a></li>
-<li><a href="logout..html">logout</a></li>
 </head>
 <body>
-
 <div class="form-container">
   <h2>Stock Registration</h2>
-
   <form>
     <label>Item Name</label>
     <select name="ItemName">
-     <option>Wheelbarrow</option>
-          <option>Nails 1 inch</option>
-          <option>Nails 3 inch</option>
-          <option>Nails 4 inch</option>
-          <option>Nails 5 inch</option>
-          <option>Roofing nails in 5kgs packs</option>
-          <option>Barbed wires high tensile</option>
-          <option>Barbed wires low tensile</option>
-          <option>Iron sheets (black - different gauges)</option>
-          <option>Iron sheets (red - different gauges)</option>
-          <option>Iron sheets (green - different gauges)</option>
-          <option>Wire mesh</option>
-          <option>Iron bars 10mm</option>
-          <option>Iron bars 12mm</option>
-          <option>Iron bars 16mm</option>
+      <option>Wheelbarrow</option>
+      <option>Nails 1 inch</option>
+      <option>Nails 3 inch</option>
+      <option>Nails 4 inch</option>
+      <option>Nails 5 inch</option>
+      <option>Roofing nails in 5kgs packs</option>
+      <option>Barbed wires high tensile</option>
+      <option>Barbed wires low tensile</option>
+      <option>Iron sheets (black - 30)</option>
+      <option>Iron sheets (red - 32)</option>
+      <option>Iron sheets (green - 28)</option>
+      <option>Wire mesh</option>
+      <option>Iron bars 10mm</option>
+      <option>Iron bars 12mm</option>
+      <option>Iron bars 16mm</option>
     </select>
-
-    <label>Quantity</label>
-    <input type="number" placeholder="Enter quantity" name="quantity">
-
-    <label>Unit Price</label>
-    <input type="number" placeholder="Enter price" name="price">
-
-    <label>Supplier Name</label>
-    <input type="text" placeholder="Enter supplier" name="supplier">
-
-    <label>Date</label>
-    <input type="date" name="date">
-
-    <label>Payment Method</label>
-    <select name="PaymentMethod">
-      <option>Select Method</option>
+    <div class="row">
+      <div class="input-box">
+        <label>Quantity</label>
+        <input type="number" placeholder="Enter quantity" name="quantity">
+      </div>
+      <div class="input-box">
+        <label>Unit Price</label>
+        <input type="number" placeholder="Enter price" name="price">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-box">
+        <label>Supplier Name</label>
+        <input type="text" placeholder="Enter supplier" name="supplier">
+      </div>
+      <div class="input-box">
+        <label>Supplier Phone Number</label>
+        <input type="tel" placeholder="Enter phone number" name="phone">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-box">
+        <label>Factory Name</label>
+        <input type="text" placeholder="Enter factory name" name="factory">
+      </div>
+      <div class="input-box">
+        <label>Date</label>
+        <input type="date" name="date">
+      </div>
+      </div>
+    <label>Payment Status</label>
+    <select name="paymentStatus">
+      <option>Select Payment Status</option>
       <option>Cash</option>
-      <option>Mobile Money</option>
-      <option>Bank Transfer</option>
+      <option>Credit</option>
     </select>
-
     <button type="submit">Register Stock</button>
   </form>
 </div>
-
 </body>
 </html>

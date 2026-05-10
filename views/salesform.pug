@@ -2,101 +2,60 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Sales Registration Form
-  style.
-    body {
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    }
-    .container {
-    width: 100%;
-    max-width: 420px;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-    text-align: center;
-    color: #1e3a8a;
-    margin-bottom: 15px;
-    }
-    label {
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
-    color: #333;
-    }
-    input,
-    select {
-    width: 100%;
-    padding: 9px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    }
-    input:focus,
-    select:focus {
-    border-color: #1e3a8a;
-    }
-    button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background: #1e3a8a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    }
-    button:hover {
-    background: orange;
-    }
+  title Sales Registration
+  link(rel='stylesheet' href='/css/sales.css')
 .container
   h2 Register New Sales
   form
-    label Date
-    input(type='date' name='date' required='')
-    label Customer Name
-    input(type='text' placeholder='Enter customer name' required='' name='customerName')
-    label Phone Number
-    input(type='text' placeholder='Enter phone number' required='' name='phoneNumber')
-    label Item Name
-    select(name='ItemName')
-      option Wheelbarrow
-      option Nails 1 inch
-      option Nails 3 inch
-      option Nails 4 inch
-      option Nails 5 inch
-      option Roofing nails in 5kgs packs
-      option Barbed wires high tensile
-      option Barbed wires low tensile
-      option Iron sheets (black - different gauges)
-      option Iron sheets (red - different gauges)
-      option Iron sheets (green - different gauges)
-      option Wire mesh
-      option Iron bars 10mm
-      option Iron bars 12mm
-      option Iron bars 16mm
-    label Quantity
-    input(type='text' name='quantity' required='')
-    label Unit Price
-    input(type='text' name='unit_price' required='')
-    label Payment Method
-    select(name='PaymentMethod')
-      option Cash
-      option Mobile Money
-      option Bank
-    label Action
-    select
-      option Edit
-      option Delete
+    .row
+      .input-box
+        label Customer Name
+        input(type='text' placeholder='Enter customer name' name='customerName')
+    .row
+      .input-box
+        label Customer Address
+        input(type='text' placeholder='Enter address' name='customerAddress')
+      .input-box
+        label Customer Distance (KM)
+        input(type='number' placeholder='Enter distance' name='customerDistance')
+    .row
+      .input-box
+        label Phone Number
+        input(type='text' placeholder='Enter phone number' name='phoneNumber')
+      .input-box
+        label Item Name
+        select(name='itemName')
+          option Wheelbarrow
+          option Nails 1 inch
+          option Iron sheets
+          option Wire mesh
+    .row
+      .input-box
+        label Quantity
+        input(type='number' name='quantity')
+        //- .input-box
+        //- label item image 
+        //- input(type='file' name='itemimage')
+      .input-box
+        label Unit Price
+        input(type='number' name='unitPrice')
+    .row
+      .input-box
+        label Transport Charge
+        input(type='number' placeholder='Enter transport charge' name='transportCharge')
+      .input-box
+        label Total Charge
+        input(type='number' placeholder='Enter total charge' name='totalCharge')
+    .row
+      .input-box
+        label Payment Method
+        select(name='paymentMethod')
+          option Cash
+          option Mobile Money
+          option Bank
+      .input-box
+        label Action
+        select
+          option Edit
+          option Delete
     button(type='submit') Submit Sales

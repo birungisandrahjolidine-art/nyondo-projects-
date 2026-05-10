@@ -1,47 +1,125 @@
+//- doctype html
+//- head
+//-   meta(charset='UTF-8')
+//-   meta(name='viewport' content='width=device-width, initial-scale=1.0')
+//-   title Stock Registration Form
+//-   link(rel='stylesheet' href='/css/stockregform.css')
+//- .form-container
+//-   h2 Stock Registration
+//-   form(Action="/stockregform" method="post")
+//-     label Item Name
+//-     select(name='itemName')
+//-       option Wheelbarrow
+//-       option Nails 1 inch
+//-       option Nails 3 inch
+//-       option Nails 4 inch
+//-       option Nails 5 inch
+//-       option Roofing nails in 5kgs packs
+//-       option Barbed wires high tensile
+//-       option Barbed wires low tensile
+//-       option Iron sheets (black - 30)
+//-       option Iron sheets (red - 32)
+//-       option Iron sheets (green - 28)
+//-       option Wire mesh
+//-       option Iron bars 10mm
+//-       option Iron bars 12mm
+//-       option Iron bars 16mm
+//-     .row
+//-       .input-box
+//-         label Quantity
+//-         input(type='number' placeholder='Enter quantity' name='quantity')
+//-       .input-box
+//-         label Unit Price
+//-         input(type='number' placeholder='Enter price' name='unitPrice')
+//-     .row
+//-       .input-box
+//-           label Selling price 
+//-           input(type='number' placeholder='Enter price' name='sellingPrice')
+//-       .input-box
+//-         label Supplier Name
+//-         input(type='text' placeholder='Enter supplier' name='supplierName')
+//-       .input-box
+//-         label Supplier Phone Number
+//-         input(type='tel' placeholder='Enter phone number' name='supplierPhone')
+//-     .row
+//-       .input-box
+//-         label Factory Name
+//-         input(type='text' placeholder='Enter factory name' name='factory')
+//-       .input-box
+//-         label Payment Status
+//-         select(name='paymentStatus')
+//-           option Select Payment Status
+//-           option Cash
+//-           option Credit
+//-     button(type='submit') Register Stock
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Stock Registration Form
-  link(rel='stylesheet' href='/css/stockregform.css')
-  li
-    a(href='stockdashboard.html') stockdashboard
-  li
-    a(href='stock.html') stock
-  li
-    a(href='logout..html') logout
-.form-container
-  h2 Stock Registration
-  form
-    label Item Name name="ItemName" 
-    select
-      option Wheelbarrow
-      option Nails 1 inch
-      option Nails 3 inch
-      option Nails 4 inch
-      option Nails 5 inch
-      option Roofing nails in 5kgs packs
-      option Barbed wires high tensile
-      option Barbed wires low tensile
-      option Iron sheets (black - different gauges)
-      option Iron sheets (red - different gauges)
-      option Iron sheets (green - different gauges)
-      option Wire mesh
-      option Iron bars 10mm
-      option Iron bars 12mm
-      option Iron bars 16mm
-    label Quantity
-    input(type='number' placeholder='Enter quantity' name="quantity")
-    label Unit Price
-    input(type='number' placeholder='Enter price' name="price")
-    label Supplier Name
-    input(type='text' placeholder='Enter supplier' name="supplierName")
-    label Date
-    input(type='date' name="date")
-    label Payment Method
-    select name="PaymentMethod" 
-      option Select Method
-      option Cash
-      option Mobile Money
-      option Bank Transfer
-    button(type='submit') Register Stock
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Stock Registration Form
+    link(rel='stylesheet' href='/css/stockregform.css')
+
+  body
+    .form-container
+      h2 Stock Registration
+
+      form(action="/stockregform" method="post" enctype='multipart/form-data')
+
+        label Item Name
+        select(name='itemName')
+          option Wheelbarrow
+          option Nails 1 inch
+          option Nails 3 inch
+          option Nails 4 inch
+          option Nails 5 inch
+          option Roofing nails in 5kgs packs
+          option Barbed wires high tensile
+          option Barbed wires low tensile
+          option Iron sheets (black - 30)
+          option Iron sheets (red - 32)
+          option Iron sheets (green - 28)
+          option Wire mesh
+          option Iron bars 10mm
+          option Iron bars 12mm
+          option Iron bars 16mm
+
+        .row
+          .input-box
+            label Quantity
+            input(type='number' placeholder='Enter quantity' name='quantity')
+
+          .input-box
+            label Unit Price
+            input(type='number' placeholder='Enter price' name='unitPrice')
+
+        .row
+          .input-box
+            label Selling Price
+            input(type='number' placeholder='Enter selling price' name='sellingPrice')
+
+          .input-box
+            label Supplier Name
+            input(type='text' placeholder='Enter supplier' name='supplierName')
+
+          .input-box
+            label Supplier Phone Number
+            input(type='tel' placeholder='Enter phone number' name='supplierPhone')
+
+        .row
+          .input-box
+            label item image 
+            input(type='file' placeholder='uploading' name='itemimage')
+          .input-box
+            label Factory Name
+            input(type='text' placeholder='Enter factory name' name='factory')
+
+          .input-box
+            label Payment Status
+
+            select(name='paymentStatus')
+              option Select Payment Status
+              option Cash
+              option Credit
+
+        button(type='submit') Register Stock

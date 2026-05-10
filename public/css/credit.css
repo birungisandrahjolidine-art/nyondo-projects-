@@ -48,11 +48,11 @@ h1 {
 
 .card {
     flex: 1;
-    background-color: orange;
+    background-color: whitesmoke;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .card p {
@@ -78,7 +78,7 @@ table {
 }
 
 th {
-    background-color: orange;
+    background-color: #0a1f44;
     color: white;
     padding: 12px;
 }

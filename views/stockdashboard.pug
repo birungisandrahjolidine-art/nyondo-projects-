@@ -1,5 +1,4 @@
-
-doctype html
+       
 html
   head
     meta(charset='UTF-8')
@@ -14,18 +13,12 @@ html
       a(href='/logout') Logout
 
     .main
-      .top-buttons
-        button.btn.orange Register New Stock
-        button.btn.blue Register Supplier
-
-      .card.alert
-        h3 Stock Alerts
-        p ⚠ Cement is running low
-        p ⚠ Nails stock below minimum level
+      h2 Total Stock Investment 
+      h1 UGX #{(totalInvestment || 0).toLocaleString()}
+      p Based on buying price
 
       .card
-        h3 new stocked items 
-
+        h3 New Stocked Items 
         table
           thead
             tr
@@ -39,10 +32,11 @@ html
               th Selling Price
               th Date
               th Payment Status
-              th Actions
+              th Stock cost 
+              //- th Action 
 
           tbody
-            each stock  in dbStock 
+            each stock in dbStock 
               tr
                 td
                   img(
@@ -51,7 +45,6 @@ html
                     width='120px',
                     height='120px'
                   )
-
                 td #{stock.itemName}
                 td #{stock.quantity}
                 td #{stock.unitPrice}
@@ -61,52 +54,19 @@ html
                 td #{stock.sellingPrice}
                 td #{new Date(stock.date).toLocaleDateString()}
                 td #{stock.paymentStatus}
-
-                td
-                  .d-flex.gap-2
-                    a.btn.btn-sm.btn-outline-warning(
-                      href=`/stock/edit/${stock._id}`
-                    )
-                      i.fas.fa-edit
-
-                    form(
-                      action=`/delete/${stock._id}`,
-                      method='POST',
-                      onsubmit='return confirm("Are you sure you want to delete this item?")'
-                    )
-                      button.btn.btn-sm.btn-outline-danger(type='submit')
-                        i.fas.fa-trash-alt
-
-            if dbStock.length === 0
+                td(style="font-weight: bold; color: #1a237e;") 
+                  | #{(stock.quantity * stock.unitPrice).toLocaleString()}  
+                //- td
+                //-   .d-flex.gap-2
+                //-     a.btn.btn-sm.btn-outline-warning(href=`/stock/edit/${stock._id}`)
+                //-       i.fas.fa-edit
+                //-     form(
+                //-       action=`/delete/${stock._id}`,
+                //-       method='POST',
+                //-       onsubmit='return confirm("Are you sure?")'
+                //-     )
+                //-       button.btn.btn-sm.btn-outline-danger(type='submit')
+                //-         i.fas.fa-trash-alt
+            else
               tr
-                td.text-center(colspan='10')
-                  | No stock have been recorded yet
-
-      .card
-        h3 All Items in stock 
-
-        table
-           thead
-             tr
-                th Item Image
-                th Item Name
-                th Quantity
-                th Factory
-                th Selling Price
-           tbody
-            each stock  in dbStock 
-              tr
-                td
-                  img(
-                    src='/uploads/' + stock.itemimage,
-                    alt='image',
-                    width='120px',
-                    height='120px'
-                  )
-
-                td #{stock.itemName}
-                td #{stock.quantity}
-                td #{stock.factory}
-                td #{stock.sellingPrice}
-                
-                
+                td.text-center(colspan='10') No stock has been recorded yet

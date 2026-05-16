@@ -6,11 +6,15 @@ head
 .form-wrapper
   .form-container
     h2 Register new Credit
-    form(action='/creditform' method='POST')
+    form(action='/creditform' method='post')
       label(for='date') Date
       input(type='date' name='dateTaken' required='')
       label Customer Name
       input(type='text' name='customerName' required='')
+
+      label phone 
+      input(type='text' name='phone' required='')
+
       label Item Name
       select(name='itemName' required='')
         option(value='')
@@ -18,13 +22,10 @@ head
         option(value='iron_sheetsguage28') Iron Sheets guage28
         option(value='iron_sheetsguage28') Iron Sheets guage32 
         option(value='iron_sheetsguage28') Iron Sheets guage30
-        option(value='nails') Nails
       label Quantity
       input(type='number' name='quantity' required='')
-      label Price per Item
-      input(type='number' name='price' required='')
+      label unitPrice 
+      input(type='number' name='unitPrice' required='')
       label Amount deposited
-      input(type='number' name='amountDeposited')
-      label Due Date
-      input(type='date' name='dueDate')
+      input(type='number' name='amountDeposited' required='')
       button(type='submit') Save Credit

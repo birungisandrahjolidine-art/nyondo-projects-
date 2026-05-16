@@ -1,61 +1,130 @@
+//- doctype html
+//- head
+//-   meta(charset='UTF-8')
+//-   meta(name='viewport' content='width=device-width, initial-scale=1.0')
+//-   title Sales Registration
+//-   link(rel='stylesheet' href='/css/sales.css')
+//- .container
+//-   h2 Register New Sales
+//-   form(action="/salesform" method="post" enctype='multipart/form-data')
+//-     .row
+//-       .input-box
+//-         label Customer Name
+//-         input(type='text' placeholder='Enter customer name' name='customerName')
+//-     .row
+//-       .input-box
+//-         label Customer Address
+//-         input(type='text' placeholder='Enter address' name='customerAddress')
+//-       .input-box
+//-         label Customer Distance (KM)
+//-         input(type='number' placeholder='Enter distance' name='customerDistance')
+//-     .row
+//-       .input-box
+//-         label Phone Number
+//-         input(type='text' placeholder='Enter phone number' name='phoneNumber')
+//-       .input-box
+//-         label Item Name
+//-         select(name='itemName')
+//-           option Wheelbarrow
+//-           option Nails 1 inch
+//-           option Iron sheets
+//-           option Wire mesh
+//-     .row
+//-       .input-box
+//-         label Quantity
+//-         input(type='number' name='quantity')
+//-         //- .input-box
+//-         //- label item image 
+//-         //- input(type='file' name='itemimage')
+//-       .input-box
+//-         label Unit Price
+//-         input(type='number' name='unitPrice')
+//-     .row
+//-       .input-box
+//-         label Transport Charge
+//-         input(type='number' placeholder='Enter transport charge' name='transportCharge')
+//-       .input-box
+//-         label Total Charge
+//-         input(type='number' placeholder='Enter total charge' name='totalCharge')
+//-     .row
+//-       .input-box
+//-         label Payment Method
+//-         select(name='paymentMethod')
+//-           option Cash
+//-           option Mobile Money
+//-           option Bank
+//-       .input-box
+//-         label Action
+//-         select
+//-           option Edit
+//-           option Delete
+//-     button(type='submit') Submit Sales
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Sales Registration
-  link(rel='stylesheet' href='/css/sales.css')
-.container
-  h2 Register New Sales
-  form
-    .row
-      .input-box
-        label Customer Name
-        input(type='text' placeholder='Enter customer name' name='customerName')
-    .row
-      .input-box
-        label Customer Address
-        input(type='text' placeholder='Enter address' name='customerAddress')
-      .input-box
-        label Customer Distance (KM)
-        input(type='number' placeholder='Enter distance' name='customerDistance')
-    .row
-      .input-box
-        label Phone Number
-        input(type='text' placeholder='Enter phone number' name='phoneNumber')
-      .input-box
-        label Item Name
-        select(name='itemName')
-          option Wheelbarrow
-          option Nails 1 inch
-          option Iron sheets
-          option Wire mesh
-    .row
-      .input-box
-        label Quantity
-        input(type='number' name='quantity')
-        //- .input-box
-        //- label item image 
-        //- input(type='file' name='itemimage')
-      .input-box
-        label Unit Price
-        input(type='number' name='unitPrice')
-    .row
-      .input-box
-        label Transport Charge
-        input(type='number' placeholder='Enter transport charge' name='transportCharge')
-      .input-box
-        label Total Charge
-        input(type='number' placeholder='Enter total charge' name='totalCharge')
-    .row
-      .input-box
-        label Payment Method
-        select(name='paymentMethod')
-          option Cash
-          option Mobile Money
-          option Bank
-      .input-box
-        label Action
-        select
-          option Edit
-          option Delete
-    button(type='submit') Submit Sales
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Sales Registration
+    link(rel='stylesheet' href='/css/sales.css')
+
+  body
+    .container
+      h2 Register New Sales
+
+      form(action="/salesform" method="post")
+
+        .row
+          .input-box
+            label Customer Name
+            input(type='text' name='customerName' placeholder='Enter customer name' required)
+
+        .row
+          .input-box
+            label Customer Address
+            input(type='text' name='customerAddress' placeholder='Enter address' required)
+
+          .input-box
+            label Customer Distance (KM)
+            input(type='number' name='customerDistance' placeholder='Enter distance' required)
+
+        .row
+          .input-box
+            label Phone Number
+            input(type='text' name='phoneNumber' placeholder='Enter phone number')
+
+          .input-box
+            label Item Name
+            select(name='itemId' required)
+              option(value='') Select Item
+
+              each item in stockItems
+                option(value=item._id)
+                  = item.itemName + " (Stock: " + item.quantity + ")"
+
+        .row
+          .input-box
+            label Quantity
+            input(type='number' name='quantity' required)
+
+          .input-box
+            label Unit Price
+            input(type='number' name='unitPrice' required)
+
+        .row
+          .input-box
+            label Transport Charge
+            input(type='number' name='transportCharge' placeholder='Enter transport charge')
+
+          .input-box
+            label Total Charge (auto handled)
+            input(type='number' name='totalCharge' readonly)
+
+        .row
+          .input-box
+            label Payment Method
+            select(name='paymentMethod' required)
+              option Cash
+              option Mobile Money
+              option Bank
+
+        button(type='submit') Submit Sales

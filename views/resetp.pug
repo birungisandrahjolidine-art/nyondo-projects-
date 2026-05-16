@@ -1,0 +1,20 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Reset Password
+  link(rel='stylesheet' href='/css/resetp.css')
+.reset-container
+  form.reset-form
+    h1 Reset Password
+    p Create a new password for your account
+    .input-group
+      label New Password
+      input(type='password' placeholder='Enter new password' required='')
+    .input-group
+      label Confirm Password
+      input(type='password' placeholder='Confirm password' required='')
+    button(type='submit') Reset Password
+    .login-link
+      a(href='/login') Back to Login
+| k

@@ -1,0 +1,136 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.sidebar {
+    width: 260px;
+    background-color:#0b1f3a ;
+    color: white;
+    height: 100vh;
+    padding: 30px 20px;
+    position: fixed;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    border-bottom: 1px  #0b1f3a;
+    padding-bottom: 10px;
+}
+
+.sidebar nav a {
+    display: block;
+    color: #cfd8dc;
+    text-decoration: none;
+    padding: 15px 0;
+    transition: 0.3s;
+}
+
+.sidebar nav a:hover, .sidebar nav a.active {
+    color: #fff;
+    padding-left: 10px;
+}
+
+.main-content {
+    margin-left: 260px;
+    padding: 40px;
+    width: 100%;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #1a237e;
+}
+.alert-card {
+    background-color: #fff4e5;
+    border-left: 6px solid #ffa000;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #bf360c;
+}
+
+.warning-icon {
+    font-size: 1.8rem;
+    margin-right: 10px;
+}
+
+.alert-list {
+    list-style: none;
+}
+
+.alert-list li {
+    padding: 5px 0;
+    font-size: 0.95rem;
+}
+
+.action-text {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+.table-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f8f9fa;
+    padding: 15px;
+    text-align: left;
+    color: #666;
+    border-bottom: 2px solid #eee;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+
+.status {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status.healthy {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.low {
+    background-color: #ffebee;
+    color: #c62828;
+}

@@ -7,7 +7,7 @@ body {
 /* SIDEBAR */
 .sidebar {
   position: fixed;
-  width: 220px;
+  width: 200px;
   height: 100%;
   background: #0b1f3a;
   padding-top: 20px;
@@ -75,7 +75,7 @@ body {
 
 /* TABLES */
 table {
-  width: 100%;
+  width: 75%;
   border-collapse: collapse;
   margin-top: 10px;
 }
@@ -89,4 +89,33 @@ table th, table td {
 table th {
   background: #0b1f3a;
   color: white;
+}
+/* Styling the Grand Total Card */
+.total-investment-card {
+    background-color: #1a237e; /* Dark Blue */
+    color: white;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border-left: 8px solid #ffa500; /* Professional Orange accent */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.total-investment-card h4 {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.total-investment-card h1 {
+    font-size: 2.8rem;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Ensure the table column for Stock Cost looks distinct */
+.stock-cost-column {
+    font-weight: bold;
+    color: #1a237e;
 }

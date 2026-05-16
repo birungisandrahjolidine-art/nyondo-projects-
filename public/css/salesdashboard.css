@@ -1,4 +1,6 @@
-/* RESET */
+/* =========================
+   RESET
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,34 +8,42 @@
   font-family: Arial, sans-serif;
 }
 
-/* BODY */
+/* =========================
+   BODY
+========================= */
 body {
-  display: flex;
   background-color: #f4f6f9;
+  overflow-x: hidden;
+  color: #333;
 }
 
-/* SIDEBAR */
+/* =========================
+   SIDEBAR
+========================= */
 .sidebar {
-  width: 220px;
-  height: 100vh;
-  background-color: #0a1f44; /* dark blue */
-  color: white;
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 230px;
+  height: 100vh;
+  background-color: #0a1f44;
   padding-top: 20px;
 }
 
 .sidebar h2 {
   text-align: center;
-  margin-bottom: 30px;
   color: orange;
+  margin-bottom: 30px;
+  font-size: 24px;
 }
 
 .sidebar a {
   display: block;
-  padding: 12px 20px;
+  padding: 14px 20px;
   color: white;
   text-decoration: none;
   transition: 0.3s;
+  font-size: 15px;
 }
 
 .sidebar a:hover {
@@ -41,107 +51,209 @@ body {
   color: #0a1f44;
 }
 
-/* MAIN CONTENT */
+/* =========================
+   MAIN CONTENT
+========================= */
 .main-content {
-  margin-left: 220px;
+  margin-left: 230px;
   padding: 20px;
-  width: 100%;
+  min-height: 100vh;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 .header {
   background-color: #0a1f44;
   color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
-/* CARDS */
+.header h1 {
+  font-size: 28px;
+}
+
+/* =========================
+   CARDS
+========================= */
 .cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
   margin-bottom: 25px;
 }
 
 .card {
   background-color: white;
+  width: 280px;
   padding: 20px;
-  border-left: 5px solid orange;
+  border-left: 6px solid orange;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .card h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
   color: #0a1f44;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .card p {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
+  color: green;
 }
 
-/* ALERT CARD */
-.card.alert {
-  border-left: 5px solid red;
-}
-
-.card.alert ul {
-  margin-top: 10px;
-  padding-left: 18px;
-}
-
-.card.alert li {
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-/* TABLE SECTION */
+/* =========================
+   TABLE SECTION
+========================= */
 .table-section {
-  margin-bottom: 25px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .table-section h2 {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: #0a1f44;
 }
 
-/* TABLE */
+/* =========================
+   TABLE
+========================= */
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
+  min-width: 1200px;
 }
 
+/* =========================
+   TABLE HEADERS
+========================= */
 table th {
   background-color: #0a1f44;
   color: white;
   padding: 12px;
-  text-align: left;
+  text-align: center;
+  font-size: 13px;
+  border: 1px solid #ddd;
 }
 
+/* =========================
+   TABLE CELLS
+========================= */
 table td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 13px;
+
+  /* FIX TEXT OVERFLOW */
+  white-space: normal;
+  word-wrap: break-word;
 }
 
-table tr:hover {
-  background-color: #f1f1f1;
+/* =========================
+   ZEBRA STRIPES
+========================= */
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-/* RESPONSIVE */
+/* =========================
+   HOVER EFFECT
+========================= */
+table tbody tr:hover {
+  background-color: #eef3ff;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.edit-btn,
+.delete-btn {
+  display: inline-block;
+  padding: 7px 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* EDIT BUTTON */
+.edit-btn {
+  background-color: orange;
+  color: #0a1f44;
+}
+
+.edit-btn:hover {
+  background-color: #0a1f44;
+  color: white;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  background-color: red;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 768px) {
+
   .sidebar {
     width: 180px;
   }
 
   .main-content {
     margin-left: 180px;
+    padding: 15px;
   }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  table th,
+  table td {
+    font-size: 11px;
+    padding: 8px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}
+a[href^="/receipt"] {
+  background-color: green;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+a[href^="/receipt"]:hover {
+  background-color: darkblue;
 }

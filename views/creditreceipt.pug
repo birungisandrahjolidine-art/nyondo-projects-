@@ -1,0 +1,201 @@
+//- //- doctype html
+//- //- head
+//- //-   meta(charset='UTF-8')
+//- //-   title Credit Receipt
+//- //-   link(rel='stylesheet' href='/css/receipt.css')
+//- //-   style.
+//- //-     @media print {
+//- //-     .no-print {
+//- //-     display: none;
+//- //-     }
+//- //-     }
+//- //- .receipt-container
+//- //-   .receipt-header
+//- //-     h2 NYONDO HARDWARE NANSANA UGANDA
+//- //-     h3 CREDIT RECEIPT
+//- //-     p Thank you for trusting us!
+//- //-   hr
+//- //-   .info
+//- //-     p
+//- //-       strong Customer:
+//- //-       |  {{customerName}}
+//- //-     p
+//- //-       strong Phone:
+//- //-       |  {{phone}}
+//- //-     p
+//- //-       strong Date:
+//- //-       |  {{date}}
+//- //-   hr
+//- //-   table(border='1' width='100%' cellpadding='8')
+//- //-     thead
+//- //-       tr
+//- //-         th Item
+//- //-         th Quantity
+//- //-         th Unit Price
+//- //-         th Total Cost
+//- //-     tbody
+//- //-       tr
+//- //-         td {{itemName}}
+//- //-         td {{quantity}}
+//- //-         td UGX {{unitPrice}}
+//- //-         td UGX {{totalCost}}
+//- //-   hr
+//- //-   .summary
+//- //-     p
+//- //-       strong Amount Paid:
+//- //-       |  UGX {{amountDeposited}}
+//- //-     p
+//- //-       strong Balance:
+//- //-       |  UGX {{balance}}
+//- //-   hr
+//- //-   .footer
+//- //-     p Thank you for trusting us .
+//- //-   .no-print
+//- //-     button(onclick='window.print()') Print Receipt
+
+//- doctype html
+//- html
+//-   head
+//-     meta(charset='UTF-8')
+//-     title Credit Receipt
+//-     link(rel='stylesheet' href='/css/receipt.css')
+
+//-     style.
+//-       @media print {
+//-         .no-print {
+//-           display: none;
+//-         }
+//-       }
+
+//-   body
+//-     .receipt-container
+
+//-       .receipt-header
+//-         h2 NYONDO HARDWARE NANSANA UGANDA
+//-         h3 CREDIT RECEIPT
+//-         p Thank you for trusting us!
+
+//-       hr
+
+//-       .info
+//-         p
+//-           strong Customer:
+//-           | #{credit && credit.customerName ? credit.customerName : "N/A"}
+
+//-         p
+//-           strong Phone:
+//-           | #{credit && credit.phone ? credit.phone : "N/A"}
+
+//-         p
+//-           strong Date:
+//-           |  #{sale && sale.date ? new Date(sale.date).toLocaleDateString() : "N/A"}
+
+//-       hr
+
+//-       table(border='1' width='100%' cellpadding='8')
+//-         thead
+//-           tr
+//-             th Item
+//-             th Quantity
+//-             th Unit Price
+//-             th Total Cost
+
+//-         tbody
+//-           tr
+//-             td #{credit.itemName}
+//-             td #{credit.quantity}
+//-             td UGX #{credit.unitPrice}
+//-             td UGX #{credit.totalCost}
+
+//-       hr
+
+//-       .summary
+//-         p
+//-           strong Amount Paid:
+//-           | UGX #{credit.amountDeposited}
+
+//-         p
+//-           strong Balance:
+//-           | UGX #{credit.balance}
+
+//-       hr
+
+//-       .footer
+//-         p Thank you for trusting us.
+
+//-       .no-print
+//-         button(onclick='window.print()') Print Receipt
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title Credit Receipt
+    link(rel='stylesheet' href='/css/receipt.css')
+
+    style.
+      @media print {
+        .no-print {
+          display: none;
+        }
+      }
+
+  body
+    .receipt-container
+
+      .receipt-header
+        h2 NYONDO HARDWARE NANSANA UGANDA
+        h3 CREDIT RECEIPT
+        p Thank you for trusting us!
+
+      hr
+
+      .info
+        p
+          strong Customer:
+          | #{credit ? credit.customerName : "N/A"}
+
+        p
+          strong Phone:
+          | #{credit ? credit.phone : "N/A"}
+
+        p
+          strong Date:
+          | #{credit && credit.date ? new Date(credit.date).toLocaleDateString() : "N/A"}
+
+      hr
+
+      table(border='1' width='100%' cellpadding='8')
+        thead
+          tr
+            th Item
+            th Quantity
+            th Unit Price
+            th Total Cost
+            th Action 
+
+        tbody
+          tr
+            td #{credit ? credit.itemName : "N/A"}
+            td #{credit ? credit.quantity : "N/A"}
+            td UGX #{credit ? credit.unitPrice : "N/A"}
+            td UGX #{credit ? credit.totalCost : "N/A"}
+
+      hr
+
+      .summary
+        p
+          strong Amount Paid:
+          | UGX #{credit ? credit.amountDeposited : 0}
+
+        p
+          strong Balance:
+          | UGX #{credit ? credit.balance : 0}
+
+      hr
+
+      .footer
+        p Thank you for trusting us.
+
+      .no-print(style="margin-top: 20px; display: flex; gap: 10px;")
+        button(onclick='window.print()') Print Receipt
+        a(href='/credit' style="text-decoration: none; padding: 6px 12px; background: #ccc; color: #333; border-radius: 4px; font-size: 14px;") Back to List

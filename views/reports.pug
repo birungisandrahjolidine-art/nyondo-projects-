@@ -1,0 +1,67 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Nyondo Hardware Report
+  link(rel='stylesheet' href='/css/reports.css')
+.report-container
+  .header
+    div
+      h1 Nyondo Hardware Report
+      p Sales, Stock and Supplier Report
+    .report-date
+      | Report Date: 12 May 2026
+  .summary-cards
+    .card
+      h3 Total Sales
+      h2 UGX 12,500,000
+    .card
+      h3 Total Stock Items
+      h2 320
+    .card
+      h3 Low Stock Items
+      h2 18
+    .card
+      h3 Total Suppliers
+      h2 24
+  .table-section
+    h2 Stock Report
+    table
+      thead
+        tr
+          th Item Name
+          th Category
+          th Quantity
+          th Unit Price
+          th Status
+      tbody
+        tr
+          td Cement
+          td Building Materials
+          td 120 Bags
+          td UGX 38,000
+          td
+            span.status.available Available
+        tr
+          td Iron Sheets
+          td Roofing
+          td 15 Pieces
+          td UGX 95,000
+          td
+            span.status.low-stock Low Stock
+        tr
+          td Nails
+          td Tools
+          td 0
+          td UGX 12,000
+          td
+            span.status.out-stock Out of Stock
+        tr
+          td Paint
+          td Decorations
+          td 45 Tins
+          td UGX 75,000
+          td
+            span.status.available Available
+  .footer
+    p &copy; 2026 Nyondo Hardware. All Rights Reserved.

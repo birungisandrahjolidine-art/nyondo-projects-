@@ -1,71 +1,85 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  title Credit page
-  link(rel='stylesheet' href='/css/credit.css')
-.container
-  h1 Credit page 
-  // BUTTON
-  .top-bar
-    a.btn(href='/creditform' onclick="goToForm('/creditform')") + Add New Sale on credit 
-  // CARDS
-  .cards
-    .card
-      h2 Total Credit
-      p UGX 2,500,000
-      h3 Total Deposited
-      p UGX 1,450,000
-    .card
-      h2 People with Credit
-      p 12
-  // CREDITORS TABLE
-  h2.section-title Creditors List
-  table
-    thead
-      tr
-        th Creditor Name
-        th Item Taken
-        th Quantity
-        th Date Taken
-        th Due Date
-        th Deposited (UGX)
-    tbody
-      tr
-        td Jinah 
-        td Cement
-        td 10 Bags
-        td 2026-04-20
-        td 2026-05-20
-        td 500,000
-      tr
-        td victor
-        td Iron Sheets
-        td 15 Pieces
-        td 2026-04-18
-        td 2026-05-18
-        td 750,000
-      tr
-        td shillar
-        td Nails
-        td 5 Boxes
-        td 2026-04-22
-        td 2026-05-22
-        td 200,000
-  // ITEMS UNDER CREDIT
-  h2.section-title Items Under Credit
-  table
-    thead
-      tr
-        th Item Name
-        th Total Quantity
-    tbody
-      tr
-        td Cement
-        td 30 Bags
-      tr
-        td Iron Sheets
-        td 45 Pieces
-      tr
-        td Nails
-        td 20 Boxes
-| g
+html
+  head
+    meta(charset='UTF-8')
+    title Credit page
+    link(rel='stylesheet' href='/css/credit.css')
+
+  body
+    .container
+
+      h1 Credit page
+
+      // BUTTON
+      .top-bar
+        a.btn(href='/creditform') + Add New Sale on credit
+
+      // CARDS (DYNAMIC)
+      .cards
+
+        .card
+          h2 Total Credit
+          p UGX #{totalCredit}
+
+          h2 Total Paid
+          p UGX #{totalPaid}
+
+        .card
+          h2 People with Credit
+          p #{peopleWithCredit}
+
+      // CREDITORS TABLE
+      h2.section-title Creditors List
+
+      table
+        thead
+          tr
+            th Creditor Name
+            th Phone
+            th Item Taken
+            th Quantity
+            th Unit Price
+            th Total cost 
+            th amountDeposited 
+            th Balance
+            th Date Taken
+            th Action 
+
+        tbody
+          if credits && credits.length > 0
+            each credit in credits
+              tr
+                td #{credit.customerName}
+                td #{credit.phoneNumber}
+                td #{credit.itemName}
+                td #{credit.quantity}
+                td #{credit.unitPrice}
+                td #{credit.totalCost}
+                td #{credit.amountDeposited}
+                td #{credit.balance}
+                td #{credit.date.toDateString()}
+                td.action 
+                 a.btn-receipt(href=`/creditreceipt/${credit._id}`) 
+                  |Receipt
+          else
+            tr
+              td(colspan='10') No credit records found
+
+      // ITEMS UNDER CREDIT (OPTIONAL SIMPLE VERSION)
+      h2.section-title Items Under Credit
+
+      table
+        thead
+          tr
+            th Item Name
+            th Quantity
+
+        tbody
+          if credits.length > 0
+            each credit in credits
+              tr
+                td #{credit.itemName}
+                td #{credit.quantity}
+          else
+            tr
+              td(colspan='2') No items found

@@ -1,0 +1,89 @@
+const express = require("express");
+const router = express.Router();
+const Credit = require("../models/Credit");
+
+
+// Get route for credit form
+router.get("/creditform", (req, res) => {
+  res.render("creditform");
+});
+router.post("/creditform", async (req, res) => {
+  try {
+
+    const quantity = Number(req.body.quantity || 0);
+    const unitPrice = Number(req.body.unitPrice || 0);
+    const amountDeposited = Number(req.body.amountDeposited || 0);
+
+    const totalCost = quantity * unitPrice;
+    const balance = totalCost - amountDeposited;
+
+    const credit = new Credit({
+      customerName: req.body.customerName,
+      phone: req.body.phone,
+      itemName: req.body.itemName,
+      quantity,
+      unitPrice,
+      totalCost,
+      amountDeposited,
+      balance,
+      date: req.body.date
+    });
+
+    await credit.save();
+
+    res.redirect("/credit");
+
+  } catch (error) {
+    console.log(error);
+    res.send("Error saving credit");
+  }
+});
+
+// get route for credit page
+router.get("/credit", async (req, res) => {
+  try {
+    const credits = await Credit.find() || [];
+
+    const totalCredit = credits.reduce((sum, c) =>
+      sum + (Number(c.totalAmount) || 0), 0);
+
+    const totalPaid = credits.reduce((sum, c) =>
+      sum + (Number(c.amountPaid) || 0), 0);
+
+    const peopleWithCredit = new Set(credits.map(c => c.customerName)).size;
+
+    res.render("credit", {
+      credits,
+      totalCredit,
+      totalPaid,
+      peopleWithCredit
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    res.render("credit", {
+      credits: [],
+      totalCredit: 0,
+      totalPaid: 0,
+      peopleWithCredit: 0
+    });
+  }
+});
+//  generating the receipt for the credit
+router.get("/creditreceipt/:id", async (req, res) => {
+  try {
+    const credit = await Credit.findById(req.params.id);
+
+    if (!credit) {
+      return res.status(404).send("Credit not found");
+    }
+
+    res.render("creditreceipt",{credit});
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error loading receipt");
+  }
+});
+module.exports = router;

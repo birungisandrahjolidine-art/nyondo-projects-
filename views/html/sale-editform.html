@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Sales Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Edit Sale</h2>
+
+    <form action="/sale/edit" method="POST">
+
+      <label>Customer Name</label>
+      <input type="text" name="customerName" placeholder="Enter customer name" required>
+
+      <label>Customer Address</label>
+      <input type="text" name="customerAddress" placeholder="Enter customer address" required>
+
+      <label>Customer Distance (km)</label>
+      <input type="number" name="customerDistance" placeholder="Enter distance" required>
+
+      <label>Quantity</label>
+      <input type="number" name="quantity" placeholder="Enter quantity" required>
+
+      <button type="submit">Update Sale</button>
+
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receipt</title>
+
+  <link rel="stylesheet" href="/css/receipt.css" />
+</head>
+
+<body>
+
+  <div class="receipt-container">
+
+    <!-- HEADER -->
+    <div class="receipt-header">
+      <h2>HARDWARE SHOP RECEIPT</h2>
+      <p>Thank you for your purchase!</p>
+    </div>
+
+    <hr />
+
+    <!-- CUSTOMER INFO -->
+    <div class="info">
+      <p><strong>Customer:</strong> John Doe</p>
+      <p><strong>Phone:</strong> 0700000000</p>
+      <p><strong>Address:</strong> Kampala</p>
+      <p><strong>Date:</strong> 16/05/2026</p>
+    </div>
+
+    <hr />
+
+    <!-- ITEM TABLE -->
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Iron Sheets</td>
+          <td>10</td>
+          <td>UGX 70,000</td>
+          <td>UGX 700,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr />
+
+    <!-- SUMMARY -->
+    <div class="summary">
+      <p><strong>Transport:</strong> UGX 10,000</p>
+      <p class="total"><strong>GRAND TOTAL:</strong> UGX 710,000</p>
+    </div>
+
+    <hr />
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>Thank you for shopping with us!</p>
+      <p>Please come again</p>
+    </div>
+
+    <!-- PRINT BUTTON -->
+    <div class="actions">
+      <button onclick="window.print()">Print Receipt</button>
+    </div>
+
+  </div>
+
+</body>
+</html>

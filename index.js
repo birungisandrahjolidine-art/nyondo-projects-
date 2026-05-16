@@ -43,6 +43,8 @@ passport.serializeUser(Registration.serializeUser());
 passport.deserializeUser(Registration.deserializeUser());
 // 5.Routes
 app.use('/',require('./routes/jolidineRoutes'))
+app.use('/',require('./routes/salesRoutes'))
+app.use('/',require('./routes/creditRoutes'))
 
 // / this is the second last chunk of code:
 app.use((req, res) => {

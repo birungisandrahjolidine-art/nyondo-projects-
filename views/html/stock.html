@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Inventory | Nyondo Hardware</title>
+    <link rel="stylesheet" href="/css/stock.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Store Manager</h2>
+        <nav>
+            <a href="/stockdashboard">Dashboard</a>
+            <a href="/stockregform">Add New Stock</a>
+            <a href="/inventory" class="active">Inventory Levels</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header>
+            <h1>Current Inventory</h1>
+            <p>Overview of available stock and reorder alerts.</p>
+        </header>
+
+        <!-- Low Stock Alert Section -->
+        <section class="alert-section">
+            <div class="alert-card">
+                <div class="alert-header">
+                    <span class="warning-icon">⚠</span>
+                    <h3>Low Stock Alerts</h3>
+                </div>
+                <ul class="alert-list">
+                    <!-- This would be dynamic in Pug, but here is the HTML look -->
+                    <li><strong>Cement:</strong> Only 3 bags left. <span class="action-text">Reorder soon</span></li>
+                    <li><strong>Nails (2 inch):</strong> Only 5 boxes left. <span class="action-text">Reorder soon</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Inventory Table Section -->
+        <section class="table-section">
+            <div class="table-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Selling Price (UGX)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Iron Sheets (G28)</td>
+                            <td>45</td>
+                            <td>45,000</td>
+                            <td><span class="status healthy">Healthy</span></td>
+                        </tr>
+                        <tr>
+                            <td>Cement (Tororo)</td>
+                            <td>3</td>
+                            <td>32,000</td>
+                            <td><span class="status low">Low Stock</span></td>
+                        </tr>
+                        <tr>
+                            <td>Paint (White - 20L)</td>
+                            <td>12</td>
+                            <td>180,000</td>
+                            <td><span class="status healthy">Healthy</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

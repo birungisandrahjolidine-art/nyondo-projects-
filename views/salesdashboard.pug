@@ -1,102 +1,74 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Hardware Dashboard
-  link(rel='stylesheet' href='/css/salesdashboard.css')
-// SIDEBAR
-.sidebar
-  h2 Dashboard
-  a(href='/salesform') register new sale
-  a(href='/index') Home
-  a(href='/logout') logout 
-// MAIN CONTENT
-.main-content
-  header.header
-    h1 WELCOME To SALES DASHBOARD SYSTEM
-  // CARDS
-  section.cards-container
-    .card
-      h2 Today&apos;s Sales
-      p UGX 450,000
-    .card
-      h2 Weekly Sales
-      p UGX 45,000,000
-    .card
-      h2 Low Stock Items
-      p 8 Items
-    .card.alert
-      h2 Stock Alerts &#x1F6A8;
-      ul
-        li Cement - Only 5 bags left
-        li Iron Sheets - 12 remaining
-        li Nails (2 inch) - Out of stock
-        li Paint (White) - Low stock
-  // ITEMS & PRICES
-  section.table-section
-    h2 Items &amp; Prices
-    table
-      tr
-        th Item
-        th Price
-      tr
-        td Cement
-        td UGX 55,000
-      tr
-        td Iron Sheets
-        td UGX 300,000
-      tr
-        td Nails (Box)
-        td UGX 25,000
-      tr
-        td Paint (White)
-        td UGX 80,000
-  // RECENT SALES
-  section.table-section
-    h2 Recent Sales
-    table
-      tr
-        th Item
-        th Quantity
-        th Price
-        th Date
-      tr
-        td Cement
-        td 10
-        td UGX 55,000
-        td Today
-      tr
-        td Iron Sheets
-        td 20
-        td UGX 300,000
-        td Today
-      tr
-        td Nails
-        td 5 boxes
-        td UGX 25,000
-        td Today
-  // CREDIT SALES
-  section.table-section
-    h2 Items Sold on Credit
-    table
-      tr
-        th Customer Name
-        th Item
-        th Quantity
-        th Amount
-      tr
-        td John Doe
-        td Cement
-        td 5
-        td UGX 275,000
-      tr
-        td Mary Namutebi
-        td Iron Sheets
-        td 10
-        td UGX 3,000,000
-      tr
-        td Peter Okello
-        td Nails
-        td 2 boxes
-        td UGX 50,000
-| m
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Sales Dashboard
+    link(rel='stylesheet' href='/css/salesdashboard.css')
+
+  body
+
+    .sidebar
+      h2 Dashboard
+      a(href='/salesform') Register New Sale
+      a(href='/index') Home
+      a(href='/logout') Logout
+      
+
+    .main-content
+
+      // HEADER
+      .header
+        h1 SALES DASHBOARD 
+      .cards-container
+        .card
+          h2 Total Sales Today
+          p UGX #{todayTotal ? todayTotal.toLocaleString() : '0'}
+
+      .table-section
+        h2 Recent Sales
+
+        table
+          thead
+            tr
+              th Item Name
+              th Qty
+              th Unit Price
+              th Customer Name
+              th Address
+              th Phone
+              th Distance
+              th Payment
+              th Transport
+              th Total
+              th Date
+              th Attendant
+              th Action
+          tbody
+            if dbSales && dbSales.length > 0
+
+              each sale in dbSales
+                tr
+                  td #{sale.itemName}
+                  td #{sale.quantity}
+                  td UGX #{sale.unitPrice.toLocaleString()}
+                  td #{sale.customerName}
+                  td #{sale.customerAddress}
+                  td #{sale.phoneNumber}
+                  td #{sale.customerDistance}
+                  td #{sale.paymentMethod}
+                  td #{sale.transportCharge ? sale.transportCharge.toLocaleString() : '0'}
+                  td UGX #{sale.totalCharge ? sale.totalCharge.toLocaleString() : '0'}
+                  td #{new Date(sale.date).toLocaleDateString()}
+                  td #{sale.attendant ? sale.attendant.fullname : ''}
+
+                  td.actions
+                    a.edit-btn(href=`/sale/edit/${sale._id}`) Edit
+                    a(href=`/receipt/${sale._id}`) receipt 
+                    form(action=`/sale/delete/${sale._id}` method="POST" style="display:inline")
+                      button.delete-btn(type="submit") Delete
+
+            else
+              tr
+                td(colspan="13" style="text-align:center; padding:20px;")
+                  | No sales records found.

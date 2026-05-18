@@ -127,5 +127,69 @@ router.get("/receipt/:id", async (req, res) => {
   }
 });
 
+// --- 4. THE MONTHLY REPORT ROUTE ---
+router.get("/reports", async (req, res) => {
+  try {
+    // 1. Set up the start and end dates for the current month (May 2026)
+    const year = parseInt(req.query.year) || new Date().getFullYear();
+    const month = parseInt(req.query.month) || (new Date().getMonth() + 1);
+
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59);
+
+    // 2. Fetch all Sales and Stock records for this month from MongoDB
+    const sales = await Sale.find({ date: { $gte: startDate, $lte: endDate } });
+    const stockPurchases = await Stock.find({ date: { $gte: startDate, $lte: endDate } });
+
+    // 3. Variables to hold our calculations
+    let totalCashSales = 0;
+    let totalCustomerCredit = 0;
+    let totalTransportExpenses = 0;
+    let totalSupplierCredit = 0;
+    let totalStockCost = 0;
+
+    // 4. Loop through Sales to calculate Revenue, Credit, and Transport
+    sales.forEach(sale => {
+      // Check payment method based on your project requirements
+      if (sale.paymentMethod === "Credit" || sale.isSalaryScheme) {
+        totalCustomerCredit += sale.totalCharge || 0;
+      } else {
+        totalCashSales += sale.totalCharge || 0;
+      }
+
+      // Track transport collections / costs
+      if (sale.transportCharge) {
+        totalTransportExpenses += parseFloat(sale.transportCharge);
+      }
+    });
+
+    // 5. Loop through Stock to calculate Supplier Credit and Costs
+    stockPurchases.forEach(item => {
+      totalStockCost += (item.quantity * item.unitCost) || 0;
+      if (item.supplierCreditOwed) {
+        totalSupplierCredit += item.supplierCreditOwed;
+      }
+    });
+
+    // 6. Final Dashboard Calculations
+    const totalRevenue = totalCashSales + totalCustomerCredit;
+    const netCashFlow = totalCashSales - totalTransportExpenses;
+
+    // 7. RENDER your reports.pug file and pass all variables to it
+    res.render("reports", {
+      reportTitle: `${startDate.toLocaleString('default', { month: 'long' }).toUpperCase()} ${year}`,
+      totalRevenue,
+      totalExpenses: totalStockCost + totalTransportExpenses,
+      netCashFlow,
+      totalSupplierCredit,
+      dbSales: sales,
+      stockItems: stockPurchases
+    });
+
+  } catch (error) {
+    console.error("Error generating report:", error);
+    res.status(500).send("Unable to load report statistics.");
+  }
+});
 
 module.exports = router;

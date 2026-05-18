@@ -93,3 +93,20 @@ tr:hover {
     background-color: orange;
     color: white;
 }
+/* css for the receipt link */
+.btn-receipt{
+  display: inline-block;
+  padding: 8px 16px;
+  background: darkblue;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-receipt:hover{
+  background: orange;
+  transform: scale(1.05);
+}

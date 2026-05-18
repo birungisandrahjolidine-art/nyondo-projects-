@@ -45,6 +45,7 @@ passport.deserializeUser(Registration.deserializeUser());
 app.use('/',require('./routes/jolidineRoutes'))
 app.use('/',require('./routes/salesRoutes'))
 app.use('/',require('./routes/creditRoutes'))
+app.use('/admin', require('./routes/adminRoutes'))
 
 // / this is the second last chunk of code:
 app.use((req, res) => {
@@ -53,5 +54,5 @@ app.use((req, res) => {
 
 // 6.Bootstraping server
 // this is the last line of the code
-app.listen(port, () => console.log(`listerning on port ${port}`));
+app.listen(port, () => console.log(`listening on port ${port}`));
 

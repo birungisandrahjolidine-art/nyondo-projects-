@@ -1,123 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nyondo Hardware Report</title>
-
-  <link rel="stylesheet" href="/css/report.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Business Performance Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="report-container">
+    <div class="dashboard-container">
+        
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <div class="header-title">
+                <span class="icon">📅</span>
+                <h1>MAY 2026 MONTHLY BUSINESS PERFORMANCE</h1>
+            </div>
+            <div class="header-logo">
+                <!-- Replace with your actual logo img tag or text -->
+                <span class="logo-text">Nyondo Hardware</span>
+            </div>
+        </header>
 
-    <div class="header">
+        <!-- Top Metrics Row -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <h3>TOTAL REVENUE (Cash + Credit)</h3>
+                <p class="metric-value">UGX 13,850,000</p>
+            </div>
+            <div class="metric-card">
+                <h3>TOTAL EXPENSES (Stock + Transport)</h3>
+                <p class="metric-value">UGX 6,480,000</p>
+            </div>
+            <div class="metric-card">
+                <h3>NET CASH FLOW</h3>
+                <p class="metric-value positive">UGX 7,370,000</p>
+            </div>
+            <div class="metric-card">
+                <h3>OUTSTANDING PAYABLES (Supplier Credit)</h3>
+                <p class="metric-value negative">UGX 2,150,000</p>
+            </div>
+        </section>
 
-      <div>
-        <h1>Nyondo Hardware Report</h1>
-        <p>Sales, Stock and Supplier Report</p>
-      </div>
+        <!-- Main Data Tables Section -->
+        <main class="data-grid">
+            
+            <!-- Sales Summary Card -->
+            <div class="data-card">
+                <h2>SALES SUMMARY - ITEM BREAKDOWN</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Cash Sales</th>
+                                <th>Credit Sales</th>
+                                <th>Total Qty</th>
+                                <th>Total Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Cement</td><td>4.5M</td><td>2M</td><td>100 bags</td><td>6.5M</td></tr>
+                            <tr><td>Rebar</td><td>2M</td><td>1.5M</td><td>50 pcs</td><td>3.5M</td></tr>
+                            <tr><td>Paint</td><td>1.5M</td><td>0.5M</td><td>20 tins</td><td>2.0M</td></tr>
+                            <tr class="row-total"><td>Total</td><td>8.0M</td><td>4.0M</td><td>-</td><td>12.0M</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-      <div class="report-date">
-        Report Date: 12 May 2026
-      </div>
+            <!-- Stock Added Card -->
+            <div class="data-card">
+                <h2>STOCK ADDED - ORDER HISTORY</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Supplier</th>
+                                <th>Order Date</th>
+                                <th>Qty Ordered</th>
+                                <th>Unit Cost</th>
+                                <th>Total Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Mukwano Steel</td><td>03/05/2026</td><td>50 pcs</td><td>40,000</td><td>2.0M</td></tr>
+                            <tr><td>Simba Cement</td><td>23/05/2026</td><td>100 bags</td><td>32,000</td><td>3.2M</td></tr>
+                            <tr class="row-total"><td>Total</td><td>-</td><td>-</td><td>-</td><td>5.2M</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <!-- Transport Expenses Card -->
+            <div class="data-card">
+                <h2>TRANSPORT EXPENSES</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Description</th>
+                                <th>Amount (UGX)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Weekly 1</td><td>Fuel & Local Deliveries</td><td>350,000</td></tr>
+                            <tr><td>Weekly 2</td><td>Vehicle Maintenance</td><td>150,000</td></tr>
+                            <tr><td>Weekly 3</td><td>Fuel & Offloading</td><td>400,000</td></tr>
+                            <tr class="row-total"><td>Total</td><td>-</td><td>900,000</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Customer Credit Card -->
+            <div class="data-card">
+                <h2>CUSTOMER CREDIT (Owed to Us)</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Due Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>J. Mukasa</td><td>03/05/2026</td><td>UGX 850,000</td><td><span class="badge active">Active</span></td></tr>
+                            <tr><td>S. Kato</td><td>12/05/2026</td><td>UGX 600,000</td><td><span class="badge overdue">Overdue</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Supplier Credit Card -->
+            <div class="data-card">
+                <h2>SUPPLIER CREDIT (We Owe)</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Supplier</th>
+                                <th>Invoice Date</th>
+                                <th>Amount</th>
+                                <th>Terms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Mukwano Steel</td><td>03/05/2026</td><td>UGX 900,000</td><td>Net 30</td></tr>
+                            <tr><td>Simba Cement</td><td>23/05/2026</td><td>UGX 1,250,000</td><td>Net 15</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
     </div>
-
-    <div class="summary-cards">
-
-      <div class="card">
-        <h3>Total Sales</h3>
-        <h2>UGX 12,500,000</h2>
-      </div>
-
-      <div class="card">
-        <h3>Total Stock Items</h3>
-        <h2>320</h2>
-      </div>
-
-      <div class="card">
-        <h3>Low Stock Items</h3>
-        <h2>18</h2>
-      </div>
-
-      <div class="card">
-        <h3>Total Suppliers</h3>
-        <h2>24</h2>
-      </div>
-
-    </div>
-
-    <div class="table-section">
-
-      <h2>Stock Report</h2>
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Category</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <tr>
-            <td>Cement</td>
-            <td>Building Materials</td>
-            <td>120 Bags</td>
-            <td>UGX 38,000</td>
-            <td>
-              <span class="status available">Available</span>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Iron Sheets</td>
-            <td>Roofing</td>
-            <td>15 Pieces</td>
-            <td>UGX 95,000</td>
-            <td>
-              <span class="status low-stock">Low Stock</span>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Nails</td>
-            <td>Tools</td>
-            <td>0</td>
-            <td>UGX 12,000</td>
-            <td>
-              <span class="status out-stock">Out of Stock</span>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Paint</td>
-            <td>Decorations</td>
-            <td>45 Tins</td>
-            <td>UGX 75,000</td>
-            <td>
-              <span class="status available">Available</span>
-            </td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-    <div class="footer">
-      <p>© 2026 Nyondo Hardware. All Rights Reserved.</p>
-    </div>
-
-  </div>
 
 </body>
 </html>

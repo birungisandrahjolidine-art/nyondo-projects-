@@ -1,67 +1,101 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Nyondo Hardware Report
-  link(rel='stylesheet' href='/css/reports.css')
-.report-container
-  .header
-    div
-      h1 Nyondo Hardware Report
-      p Sales, Stock and Supplier Report
-    .report-date
-      | Report Date: 12 May 2026
-  .summary-cards
-    .card
-      h3 Total Sales
-      h2 UGX 12,500,000
-    .card
-      h3 Total Stock Items
-      h2 320
-    .card
-      h3 Low Stock Items
-      h2 18
-    .card
-      h3 Total Suppliers
-      h2 24
-  .table-section
-    h2 Stock Report
-    table
-      thead
-        tr
-          th Item Name
-          th Category
-          th Quantity
-          th Unit Price
-          th Status
-      tbody
-        tr
-          td Cement
-          td Building Materials
-          td 120 Bags
-          td UGX 38,000
-          td
-            span.status.available Available
-        tr
-          td Iron Sheets
-          td Roofing
-          td 15 Pieces
-          td UGX 95,000
-          td
-            span.status.low-stock Low Stock
-        tr
-          td Nails
-          td Tools
-          td 0
-          td UGX 12,000
-          td
-            span.status.out-stock Out of Stock
-        tr
-          td Paint
-          td Decorations
-          td 45 Tins
-          td UGX 75,000
-          td
-            span.status.available Available
-  .footer
-    p &copy; 2026 Nyondo Hardware. All Rights Reserved.
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Monthly Business Performance Report
+    link(rel="stylesheet", href="/css/reports.css") 
+  body
+    .dashboard-container
+      
+      // Header Section
+      header.dashboard-header
+        .header-title
+          span
+          h1 #{reportTitle} PERFORMANCE REPORT
+        .header-logo
+          span.logo-text NYONDO Hardware LTD
+
+      // Top Summary Metrics Cards
+      section.metrics-grid
+        .metric-card
+          h3 TOTAL REVENUE (Cash + Credit)
+          p.metric-value UGX #{totalRevenue.toLocaleString()}
+        .metric-card
+          h3 TOTAL EXPENSES (Stock + Transport)
+          p.metric-value UGX #{totalExpenses.toLocaleString()}
+        .metric-card
+          h3 NET CASH FLOW
+          p.metric-value(class=netCashFlow >= 0 ? 'positive' : 'negative') UGX #{netCashFlow.toLocaleString()}
+        .metric-card
+          h3 OWE TO SUPPLIERS (Factory Credit)
+          p.metric-value.negative UGX #{totalSupplierCredit.toLocaleString()}
+
+      // Data Tables Grid
+      main.data-grid
+        
+        // 1. Sales & Customer Credit Table
+        .data-card
+          h2 Sales & Payments Log
+          .table-container
+            table
+              thead
+                tr
+                  th Customer Name
+                  th Payment Method
+                  th Transport Charge
+                  th Total Charged
+              tbody
+                each sale in dbSales
+                  tr
+                    td #{sale.customerName || 'Walk-in Buyer'}
+                    td 
+                      if sale.paymentMethod === 'Credit' || sale.isSalaryScheme
+                        span.badge.overdue #{sale.paymentMethod}
+                      else
+                        span.badge.active #{sale.paymentMethod || 'Cash'}
+                    td UGX #{sale.transportCharge.toLocaleString()}
+                    td UGX #{sale.totalCharge.toLocaleString()}
+                if dbSales.length === 0
+                  tr
+                    td(colspan="4") No sales records found for this month.
+
+        // 2. Stock Added Table (Uses unitPrice matching your schema definition)
+        .data-card
+          h2 Stock Added & Vendor Balances
+          .table-container
+            table
+              thead
+                tr
+                  th Item Name
+                  th Qty Registered
+                  th Unit Price
+                  th Total Value
+              tbody
+                each item in stockItems
+                  tr
+                    td #{item.itemName}
+                    td #{item.quantity} units
+                    td UGX #{(item.unitPrice || 0).toLocaleString()}
+                    td UGX #{(item.quantity * (item.unitPrice || 0)).toLocaleString()}
+                if stockItems.length === 0
+                  tr
+                    td(colspan="4") No stock replenishment registered this month.
+
+        // 3. Transport Table
+        .data-card
+          h2 Transport Operational Costs
+          .table-container
+            table
+              thead
+                tr
+                  th Customer / Delivery Area
+                  th Distance (KM)
+                  th Transport Fee Collected
+              tbody
+                each sale in dbSales
+                  if sale.transportCharge > 0
+                    tr
+                      td #{sale.customerAddress || 'Local Delivery'}
+                      td #{sale.customerDistance || '0'} km
+                      td.positive UGX #{sale.transportCharge.toLocaleString()}

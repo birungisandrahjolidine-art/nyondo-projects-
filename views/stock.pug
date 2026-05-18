@@ -7,38 +7,39 @@ html
     title Stock Inventory | Nyondo Hardware
     link(rel='stylesheet' href='/css/stock.css')
   body
-    // Sidebar Navigation
+    // Sidebar
     .sidebar
       h2 Store Manager
       nav
         a(href='/stockdashboard') Dashboard
         a(href='/stockregform') Add New Stock
-        a.active(href='/inventory') Inventory Levels
+        a.active(href='/stock') Inventory Levels
         a(href='/logout') Logout
 
-    // Main Content Area
+    // Main Content
     .main-content
       header
         h1 Current Inventory
-        p Overview of available stock and reorder alerts.
+        p Overview of available stock 
 
-      // Low Stock Alert Section
+      // Low Stock Alert Section 
       section.alert-section
         .alert-card
           .alert-header
             span.warning-icon &#x26A0;
             h3 Low Stock Alerts
           ul.alert-list
-            li
-              strong Cement:
-              |  Only 3 bags left. 
-              span.action-text Reorder soon
-            li
-              strong Nails (2 inch):
-              |  Only 5 boxes left. 
-              span.action-text Reorder soon
+            if dbStock && dbStock.length > 0
+              each stock in dbStock
+                if stock.totalQuantity <= 20
+                  li
+                    strong #{stock._id}: 
+                    | Only #{stock.totalQuantity} units left. 
+                    span.action-text Reorder soon
+            else
+              li No alerts
 
-      // Inventory Table Section
+      // Inventory Table
       section.table-section
         .table-card
           table
@@ -48,19 +49,26 @@ html
                 th Item Name
                 th Quantity
                 th Selling Price
+                th Supplier       
             tbody
-              each stock in dbStock 
-                tr
-                  td
-                    img(
-                      src='/uploads/' + stock.itemimage,
-                      alt='image',
-                      width='120px',
-                      height='120px'
-                    )
-                  td #{stock.itemName}
-                  td #{stock.quantity}
-                  td #{stock.sellingPrice}
+              if dbStock && dbStock.length > 0
+                each stock in dbStock 
+                  tr
+                    td
+                      if stock.itemimage
+                        img(
+                          src='/uploads/' + stock.itemimage,
+                          alt='image',
+                          width='120px',
+                          height='120px',
+                          style='object-fit: cover; border-radius: 4px;'
+                        )
+                      else
+                        span No Image
+                    td #{stock._id}               
+                    td #{stock.totalQuantity}     
+                    td UGX #{stock.sellingPrice ? stock.sellingPrice.toLocaleString() : '0'}
+                    td #{stock.supplierName ? stock.supplierName : 'N/A'}
               else
                 tr
-                  td.text-center(colspan='4') No stock has been recorded yet
+                  td.text-center(colspan='5') No stock has been recorded yet

@@ -43,12 +43,12 @@ router.post("/creditform", async (req, res) => {
 router.get("/credit", async (req, res) => {
   try {
     const credits = await Credit.find() || [];
-
+// amount of number under credit
     const totalCredit = credits.reduce((sum, c) =>
-      sum + (Number(c.totalAmount) || 0), 0);
-
+      sum + (Number(c.totalCost) || 0), 0);
+//  total payment
     const totalPaid = credits.reduce((sum, c) =>
-      sum + (Number(c.amountPaid) || 0), 0);
+      sum + (Number(c.amountDeposited) || 0), 0);
 
     const peopleWithCredit = new Set(credits.map(c => c.customerName)).size;
 

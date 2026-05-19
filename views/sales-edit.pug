@@ -1,18 +1,28 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Edit Sales Form
-  link(rel='stylesheet' href='/css/sales-edit.css')
-.container
-  h2 Edit Sale
-  form(action='/sale/edit' method='post')
-    label Customer Name
-    input(type='text' name='customerName' placeholder='Enter customer name' required='')
-    label Customer Address
-    input(type='text' name='customerAddress' placeholder='Enter customer address' required='')
-    label Customer Distance (km)
-    input(type='number' name='customerDistance' placeholder='Enter distance' required='')
-    label Quantity
-    input(type='number' name='quantity' placeholder='Enter quantity' required='')
-    button(type='submit') Update Sale
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Edit Sales Form
+    link(rel='stylesheet' href='/css/sales-edit.css')
+  body
+    .container
+      h2 Edit Sale
+      form(action='/sale/edit/' + sale._id method='post')
+        // Hidden fields to pass existing financial data so math doesn't break
+        input(type='hidden' name='unitPrice' value=sale.unitPrice)
+        input(type='hidden' name='transportCharge' value=sale.transportCharge)
+
+        label Customer Name
+        input(type='text' name='customerName' value=sale.customerName placeholder='Enter customer name' required='')
+        
+        label Customer Address
+        input(type='text' name='customerAddress' value=sale.customerAddress placeholder='Enter customer address' required='')
+        
+        label Customer Distance (km)
+        input(type='number' name='customerDistance' value=sale.customerDistance placeholder='Enter distance' required='')
+        
+        label Quantity
+        input(type='number' name='quantity' value=sale.quantity placeholder='Enter quantity' required='')
+        
+        button(type='submit') Update Sale

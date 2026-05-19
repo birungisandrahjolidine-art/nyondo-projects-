@@ -44,6 +44,7 @@ passport.deserializeUser(Registration.deserializeUser());
 // 5.Routes
 app.use('/',require('./routes/jolidineRoutes'))
 app.use('/',require('./routes/salesRoutes'))
+
 app.use('/',require('./routes/creditRoutes'))
 app.use('/admin', require('./routes/adminRoutes'))
 

@@ -1,57 +1,3 @@
-//- doctype html
-//- head
-//-   meta(charset='UTF-8')
-//-   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-//-   title Stock Registration Form
-//-   link(rel='stylesheet' href='/css/stockregform.css')
-//- .form-container
-//-   h2 Stock Registration
-//-   form(Action="/stockregform" method="post")
-//-     label Item Name
-//-     select(name='itemName')
-//-       option Wheelbarrow
-//-       option Nails 1 inch
-//-       option Nails 3 inch
-//-       option Nails 4 inch
-//-       option Nails 5 inch
-//-       option Roofing nails in 5kgs packs
-//-       option Barbed wires high tensile
-//-       option Barbed wires low tensile
-//-       option Iron sheets (black - 30)
-//-       option Iron sheets (red - 32)
-//-       option Iron sheets (green - 28)
-//-       option Wire mesh
-//-       option Iron bars 10mm
-//-       option Iron bars 12mm
-//-       option Iron bars 16mm
-//-     .row
-//-       .input-box
-//-         label Quantity
-//-         input(type='number' placeholder='Enter quantity' name='quantity')
-//-       .input-box
-//-         label Unit Price
-//-         input(type='number' placeholder='Enter price' name='unitPrice')
-//-     .row
-//-       .input-box
-//-           label Selling price 
-//-           input(type='number' placeholder='Enter price' name='sellingPrice')
-//-       .input-box
-//-         label Supplier Name
-//-         input(type='text' placeholder='Enter supplier' name='supplierName')
-//-       .input-box
-//-         label Supplier Phone Number
-//-         input(type='tel' placeholder='Enter phone number' name='supplierPhone')
-//-     .row
-//-       .input-box
-//-         label Factory Name
-//-         input(type='text' placeholder='Enter factory name' name='factory')
-//-       .input-box
-//-         label Payment Status
-//-         select(name='paymentStatus')
-//-           option Select Payment Status
-//-           option Cash
-//-           option Credit
-//-     button(type='submit') Register Stock
 doctype html
 html
   head
@@ -68,22 +14,23 @@ html
 
         label Item Name
         select(name='itemName')
-          option(value="Wheelbarrow") Wheelbarrow
-          option(value="Nails 1 inch") Nails 1 inch
-          option(value="Nails 3 inch") Nails 3 inch
-          option(value="Nails 4 inch") Nails 4 inch
-          option(value="Nails 5 inch") Nails 5 inch
-          option(value="Roofing nails in 5kgs packs") Roofing nails in 5kgs packs
-          option(value="Barbed wires high tensile") Barbed wires high tensile
-          option(value="Barbed wires low tensile") Barbed wires low tensile
-          option(value="Iron sheets (black - 30)")  Iron sheets (black - 30)
-          option(value="Iron sheets (red - 32)") Iron sheets (red - 32)
-          option(value="Iron sheets (green - 28)") Iron sheets (green - 28)
-          option(value="Wire mesh") Wire mesh
-          option(value="Iron bars 10mm") Iron bars 10mm
-          option(value="Iron bars 10mm") Iron bars 10mm
-          option(value="Iron bars 16mm") Iron bars 16mm
-
+            option(value="Wheelbarrow") Wheelbarrow
+            option(value="Nails 1 inch") Nails 1 inch
+            option(value="Nails 3 inch") Nails 3 inch
+            option(value="Nails 4 inch") Nails 4 inch
+            option(value="Nails 5 inch") Nails 5 inch
+            option(value="Roofing nails in 5kgs packs") Roofing nails in 5kgs packs
+            option(value="Barbed wires high tensile") Barbed wires high tensile
+            option(value="Barbed wires low tensile") Barbed wires low tensile
+            option(value="Iron sheets (black - 30)")  Iron sheets (black - 30)
+            option(value="Iron sheets (red - 32)") Iron sheets (red - 32)
+            option(value="Iron sheets (green - 28)") Iron sheets (green - 28)
+            option(value="Wire mesh") Wire mesh
+            option(value="Iron bars 10mm") Iron bars 10mm
+            option(value="Iron bars 10mm") Iron bars 10mm
+            option(value="Iron bars 16mm") Iron bars 16mm
+            option(value="cem ii") cem ii 
+            option(value="cem iii") cem iii 
         .row
           .input-box
             label Quantity
@@ -103,9 +50,8 @@ html
             input(type='text' placeholder='Enter supplier' name='supplierName')
 
           .input-box
-            label Supplier Phone Number
-            input(type='tel' placeholder='Enter phone number' name='supplierPhone')
-
+            label Supplier Phone 
+            input(type='tel' value='+256' pattern='^\\+256\\d{9}$' title='Must be +256 followed by 9 digits' name='supplierPhone' required)
         .row
           .input-box
             label item image 
@@ -115,10 +61,10 @@ html
             input(type='text' placeholder='Enter factory name' name='factory')
 
           .input-box
-            label Payment Status
+            label Payment Method 
 
-            select(name='paymentStatus')
-              option Select Payment Status
+            select(name='paymentMethod')
+              option Select Payment Method 
               option Cash
               option Credit
 

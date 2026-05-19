@@ -18,8 +18,8 @@ html(lang='en')
             th Supplier Name
             th Item Delivered
             th Phone Number
-            th Payment Status
-
+            th Payment Method 
+            th Date
         tbody
           if dbStock.length > 0
             each stock in dbStock
@@ -38,7 +38,8 @@ html(lang='en')
 
                 td #{stock.supplierPhone}
 
-                td #{stock.paymentstatus}
+                td #{stock.paymentMethod}
+                td #{stock.date ? new Date(stock.date).toLocaleString() : ''}
 
           else
             tr

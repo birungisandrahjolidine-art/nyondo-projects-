@@ -16,11 +16,13 @@ html
         h2 Nyondo Admin
 
       ul
-        li: a(href='/admin') Admin Home
         li: a(href='/salesdashboard') Sales Dashboard
         li: a(href='/stockdashboard') Stock Dashboard
         li: a(href='/credit') Credit
+        li: a(href='/supplier') Supplier 
+        li: a(href='/Stock') Stock 
         li: a(href='/reports') Reports
+        li: a(href='/sale') sales
         li: a(href='/logout') Logout
         li: a(href='/index') Home
 
@@ -53,12 +55,12 @@ html
       // PROFIT 
       .finance
         .finance-box
-          h3 📊 Net Profit
+          h3  Net Profit
           p.income UGX #{profit ? profit.toLocaleString() : '0'}
 
       // creditors
       .creditors
-        h3 🧾 Creditors (customers with credit)
+        h3  Creditors (customers with credit)
 
         .creditor-list
           if credits && credits.length > 0

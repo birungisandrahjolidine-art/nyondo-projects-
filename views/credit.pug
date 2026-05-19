@@ -4,7 +4,10 @@ html
     meta(charset='UTF-8')
     title Credit page
     link(rel='stylesheet' href='/css/credit.css')
-
+    link(
+          rel='stylesheet'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
+        )
   body
     .container
 
@@ -58,9 +61,11 @@ html
                 td #{credit.amountDeposited}
                 td #{credit.balance}
                 td #{credit.date.toDateString()}
-                td.action 
-                 a.btn-receipt(href=`/creditreceipt/${credit._id}`) 
-                  |Receipt
+                td.action
+                  a.btn-receipt(href=`/creditreceipt/${credit._id}`) Receipt
+
+                  a.edit-icon(href=`/creditedit/${credit._id}`)
+                    i.fas.fa-edit
           else
             tr
               td(colspan='10') No credit records found

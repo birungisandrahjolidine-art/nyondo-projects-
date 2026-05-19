@@ -32,8 +32,7 @@ router.get('/logout', (req, res) => res.render('logout'));
 router.get('/creditform', (req, res) => res.render('creditform'));
 // router.get("/reports", (req, res) => res.render("reports"));
 router.get("/resetp", (req, res) => res.render("resetp"));
-router.get("/sales-edit", (req, res) => res.render("sales-edit"));
-router.get("/credit", (req, res) => res.render("credit"));
+router.get("/creditedit", (req, res) => res.render("creditedit"));
 
 // AUTHENTICATION ROUTES (SIGNIN & LOGIN)
 
@@ -75,7 +74,7 @@ router.post("/login", passport.authenticate("local", { failureRedirect: "/login"
 
 router.post('/stockregform', upload.single('itemimage'), async (req, res) => {
   try {
-    const { itemName, quantity, unitPrice, sellingPrice, supplierName, date, supplierPhone, factory, paymentStatus } = req.body;
+    const { itemName, quantity, unitPrice, sellingPrice, supplierName, date, supplierPhone, factory, paymentMethod } = req.body;
 
     const newStock = new Stock({
       itemName: itemName.trim(), // Trimming prevents grouping issues from trailing spaces
@@ -84,7 +83,7 @@ router.post('/stockregform', upload.single('itemimage'), async (req, res) => {
       sellingPrice: Number(sellingPrice),
       supplierName,
       date,
-      paymentStatus,
+      paymentMethod,
       supplierPhone,
       factory,
       itemimage: req.file ? req.file.filename : null
@@ -171,35 +170,6 @@ router.get("/supplier", async (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(400).send('Unable to pick supplier info');
-  }
-});
-// SALES EDIT & DELETE ROUTES
-router.get("/sale/edit/:id", async (req, res) => {
-  try {
-    const sale = await Sale.findById(req.params.id);
-    if (!sale) return res.status(404).send("Sale not found");
-    res.render("sales-edit", { sale });
-  } catch (error) {
-    console.error("Error loading edit page:", error);
-    res.status(500).send("Error loading edit page");
-  }
-});
-router.post("/sale/edit/:id", async (req, res) => {
-  try {
-    await Sale.findByIdAndUpdate(req.params.id, req.body);
-    res.redirect("/salesdashboard");
-  } catch (error) {
-    console.error("Error updating sale:", error);
-    res.status(500).send("Error updating sale");
-  }
-});
-router.post("/sale/delete/:id", async (req, res) => {
-  try {
-    await Sale.findByIdAndDelete(req.params.id);
-    res.redirect("/salesdashboard");
-  } catch (error) {
-    console.error("Error deleting sale:", error);
-    res.status(500).send("Failed to delete sale");
   }
 });
 module.exports = router;

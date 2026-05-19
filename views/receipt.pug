@@ -28,7 +28,7 @@ html
 
         p
           strong Address:
-          |  #{sale && sale.address ? sale.address : "N/A"}
+          |  #{sale && sale.CustomerAddress ? sale.CustomerAddress : "N/A"}
 
         p
           strong Date:
@@ -57,11 +57,11 @@ html
       .summary
         p
           strong Transport:
-          |  UGX #{sale.transport || 0}
+          |  UGX #{sale.transportCharge || 0}
 
         p.total
           strong GRAND TOTAL:
-          |  UGX #{(sale.quantity * sale.unitPrice) + (sale.transport || 0)}
+          |  UGX #{(sale.quantity * sale.unitPrice) + (sale.transportCharge || 0)}
 
       hr
 

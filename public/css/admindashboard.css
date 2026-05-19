@@ -24,14 +24,14 @@
         text-align: center;
         margin-bottom: 25px;
       }
-
-      .sidebar-logo {
-        width: 100px;
-        height: 100px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto 10px auto;
-      }
+       .sidebar-logo {
+    width: 200px;
+    height: 250px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+}
 
       .sidebar-header h2 {
         color: orange;
@@ -66,6 +66,7 @@
         padding: 15px;
          border-radius: 8px;
         margin-bottom: 20px;
+        color: white;
       }
       .cards {
         display: grid;
@@ -111,7 +112,6 @@
         padding: 20px;
         border-radius: 10px;
       }
-
       .creditor-list {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

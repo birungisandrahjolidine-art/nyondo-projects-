@@ -9,7 +9,7 @@ const StockSchema = new mongoose.Schema({
     type: Number
   },
   unitPrice: {
-    type: String,
+    type: Number,
     trim: true
   },
   date: {
@@ -27,7 +27,7 @@ const StockSchema = new mongoose.Schema({
     type: String,
     trim:true,
   },
-  paymentStatus:{
+  paymentMethod:{
     type: String,
     required: true,
   },

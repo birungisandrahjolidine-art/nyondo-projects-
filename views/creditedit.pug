@@ -1,0 +1,16 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Edit Credit
+  link(rel='stylesheet' href='/css/creditedit.css')
+.container
+  h2 Edit Credit
+  form(action=`/creditedit/${credit._id}` method='post')
+    .form-group
+      label Date
+      input(type='date' name='date' required='')
+    .form-group
+      label New Deposit
+      input(type='number' name='amountDeposited' placeholder='Enter amount deposited' required='')
+    button(type='submit') Update Credit

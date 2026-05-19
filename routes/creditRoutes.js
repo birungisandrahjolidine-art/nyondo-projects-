@@ -86,4 +86,51 @@ router.get("/creditreceipt/:id", async (req, res) => {
     res.status(500).send("Error loading receipt");
   }
 });
+// get and post routes for the editcredit page
+router.get('/creditedit/:id', async (req, res) => {
+
+  try {
+
+    const credit = await Credit.findById(req.params.id);
+
+    res.render('creditedit', { credit });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.send('Error loading edit page');
+  }
+
+});
+router.post('/creditedit/:id', async (req, res) => {
+
+  try {
+
+    const { date, amountDeposited } = req.body;
+
+    const credit = await Credit.findById(req.params.id);
+
+    // Update deposited amount
+    credit.amountDeposited += Number(amountDeposited);
+
+    // Update balance
+    credit.balance = credit.totalCost - credit.amountDeposited;
+
+    // Update date
+    credit.date = date;
+
+    await credit.save();
+
+    res.redirect('/credit');
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.send('Error updating credit');
+
+  }
+
+});
 module.exports = router;

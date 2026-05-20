@@ -14,9 +14,9 @@ link(rel='stylesheet' href='/css/signin.css')
     input(type='address' placeholder='address' name='address')
     input(type='Nin' placeholder='Nin' name='Nin' required='')
     input(type='comfirm password' placeholder='comfirm password' required='')
-    select(name='role' id='') User
+    select(name='role' required)
+      option(value='' disabled selected) Select role
       option(value='Admin') Admin
-      option(value='Sales attendant') Sales attendant
-      //- option(value='store Manager') Store Manager
-      option(value='Store Manager') Store Manager
+      option(value='Sales_attendant') Sales attendant
+      option(value='Store_Manager') Store Manager
     button(type='submit') Sign In

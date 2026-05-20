@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const Credit = require("../models/Credit");
+const { isAdmin } = require("../middleware/auth");
 
 
 // Get route for credit form
-router.get("/creditform", (req, res) => {
+router.get("/creditform", isAdmin,(req, res) => {
   res.render("creditform");
 });
-router.post("/creditform", async (req, res) => {
+router.post("/creditform", isAdmin,async (req, res) => {
   try {
 
     const quantity = Number(req.body.quantity || 0);
@@ -20,6 +21,7 @@ router.post("/creditform", async (req, res) => {
     const credit = new Credit({
       customerName: req.body.customerName,
       phone: req.body.phone,
+      Nin:req.body.Nin,
       itemName: req.body.itemName,
       quantity,
       unitPrice,
@@ -43,6 +45,27 @@ router.post("/creditform", async (req, res) => {
 router.get("/credit", async (req, res) => {
   try {
     const credits = await Credit.find() || [];
+    // adding the new item on credit to the existing one 
+    const itemsMap = {};
+
+credits.forEach(credit => {
+
+  if (itemsMap[credit.itemName]) {
+
+    itemsMap[credit.itemName] += Number(credit.quantity);
+
+  } else {
+
+    itemsMap[credit.itemName] = Number(credit.quantity);
+
+  }
+
+});
+
+const itemsUnderCredit = Object.entries(itemsMap).map(([itemName, quantity]) => ({
+  itemName,
+  quantity
+}));
 // amount of number under credit
     const totalCredit = credits.reduce((sum, c) =>
       sum + (Number(c.totalCost) || 0), 0);
@@ -55,6 +78,7 @@ router.get("/credit", async (req, res) => {
     res.render("credit", {
       credits,
       totalCredit,
+       itemsUnderCredit,
       totalPaid,
       peopleWithCredit
     });
@@ -87,7 +111,7 @@ router.get("/creditreceipt/:id", async (req, res) => {
   }
 });
 // get and post routes for the editcredit page
-router.get('/creditedit/:id', async (req, res) => {
+router.get('/creditedit/:id', isAdmin, async (req, res) => {
 
   try {
 
@@ -103,7 +127,7 @@ router.get('/creditedit/:id', async (req, res) => {
   }
 
 });
-router.post('/creditedit/:id', async (req, res) => {
+router.post('/creditedit/:id', isAdmin, async (req, res) => {
 
   try {
 

@@ -14,6 +14,7 @@ const port = 5000;
 
 // import usermodel
 const Registration = require('./models/Registration')
+
 // 3.configurations
 connectDB();
 // setting tempalate engines
@@ -28,13 +29,21 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use(express.urlencoded({ extended:true})); //very important
 app.use(
     expressSession({
-        secret:"My secret",
+        secret:process.env.SESSION_SECRET || "fallback_local_secret_key",
         resave: false,
         saveUninitialized: false,
     }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  res.locals.isAdmin = req.user && req.user.role === "Admin";
+  res.locals.isSalesAttendant = req.user && req.user.role === "Sales_attendant";
+  res.locals.isStoreManager = req.user && req.user.role === "Store_Manager";
+  next();
+});
 
 // passport Configurations for salt and harshing passwords
 passport.use(Registration.createStrategy());
@@ -47,6 +56,7 @@ app.use('/',require('./routes/salesRoutes'))
 
 app.use('/',require('./routes/creditRoutes'))
 app.use('/admin', require('./routes/adminRoutes'))
+// app.use('/',require('./routes/authRoutes'))
 
 // / this is the second last chunk of code:
 app.use((req, res) => {

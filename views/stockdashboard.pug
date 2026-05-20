@@ -8,9 +8,10 @@ html
   body
     .sidebar
       h2 Store Manager
+      if isStoreManager
       a(href='/stockregform') Register new stock
       a(href='/stock') Stock
-      a(href='/index') Home
+      a(href='/') Home
       a(href='/logout') Logout
 
     .main

@@ -17,7 +17,7 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required:true,
-    enum: ['Admin','Sales attendant','Store Manager']
+    enum: ['Admin','Sales_attendant','Store_Manager']
   },
   address :{
     type: String,

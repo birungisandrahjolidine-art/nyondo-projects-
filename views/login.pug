@@ -7,12 +7,12 @@ head
 .login-box
   h2 
   form.login-form(action='/login' method='post')
-    input(type='text' placeholder='Email or Username' required='')
-    input(type='password' placeholder='Password' required='')
+    input(type='text' placeholder='Email or Username' name="email" required='')
+    input(type='password' placeholder='Password' name="password" required='')
     button(type='submit') Sign In
   p
-    a(href='/resetp') Forgot Password?
+    a(href='/resetp') Forgot Password cotact admin to reset your password ?
   p
-    | Don&apos;t have an account? 
+    | Don&apos;t have an account contact admin to sign you in? 
     a(href='/signin') Sign Up
-| l
+    

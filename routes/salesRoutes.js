@@ -498,12 +498,11 @@ const router = express.Router();
 
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
+const { isAdmin, isSalesAttendant } = require("../middleware/auth");
 
-
-// ===============================
 // 1. GET SALES FORM
-// ===============================
-router.get("/salesform", async (req, res) => {
+
+router.get("/salesform", isSalesAttendant, async (req, res) => {
   try {
     const items = await Stock.find();
 
@@ -518,10 +517,10 @@ router.get("/salesform", async (req, res) => {
 });
 
 
-// ===============================
+
 // 2. POST SALES FORM (MAIN LOGIC)
-// ===============================
-router.post("/salesform", async (req, res) => {
+
+router.post("/salesform", isSalesAttendant, async (req, res) => {
   try {
     const {
       itemId,
@@ -533,30 +532,27 @@ router.post("/salesform", async (req, res) => {
       paymentMethod
     } = req.body;
 
-    // -----------------------
-    // SAFE CONVERSIONS
-    // -----------------------
+    
     const qty = Number(quantity) || 0;
     const distance = Number(customerDistance) || 0;
 
-    // -----------------------
     // GET ITEM FROM STOCK
-    // -----------------------
+   
     const item = await Stock.findById(itemId);
 
     if (!item) {
       return res.status(404).send("Item not found");
     }
 
-    // -----------------------
+   
     // TAKE PRICES FROM DB
-    // -----------------------
+   
     const unitPrice = Number(item.unitPrice) || 0;         // cost price
     const sellingPrice = Number(item.sellingPrice) || 0;   // selling price
 
-    // -----------------------
+   
     // STOCK CHECK
-    // -----------------------
+   
     if (item.quantity < qty) {
       const items = await Stock.find();
       return res.render("salesform", {
@@ -565,15 +561,15 @@ router.post("/salesform", async (req, res) => {
       });
     }
 
-    // -----------------------
+    
     // REDUCE STOCK
-    // -----------------------
+   
     item.quantity -= qty;
     await item.save();
 
-    // -----------------------
+    
     // CALCULATIONS
-    // -----------------------
+   
     const subtotal = qty * sellingPrice;
 
     let transportCharge = 0;
@@ -586,9 +582,9 @@ router.post("/salesform", async (req, res) => {
 
     const totalCharge = subtotal + transportCharge;
 
-    // -----------------------
+    
     // SAVE SALE
-    // -----------------------
+  
     const newSale = new Sale({
       itemId: item._id,
       itemName: item.itemName,
@@ -615,9 +611,8 @@ router.post("/salesform", async (req, res) => {
 });
 
 
-// ===============================
+
 // 3. SALES DASHBOARD
-// ===============================
 router.get("/salesdashboard", async (req, res) => {
   try {
     const sales = await Sale.find().sort({ date: -1 });
@@ -640,11 +635,9 @@ router.get("/salesdashboard", async (req, res) => {
   }
 });
 
-
-// ===============================
 // 4. EDIT SALE (GET)
-// ===============================
-router.get("/sale/edit/:id", async (req, res) => {
+
+router.get("/sale/edit/:id", isAdmin ,async (req, res) => {
   try {
     const sale = await Sale.findById(req.params.id);
     const items = await Stock.find();
@@ -665,10 +658,8 @@ router.get("/sale/edit/:id", async (req, res) => {
 });
 
 
-// ===============================
 // 5. EDIT SALE (POST)
-// ===============================
-router.post("/sale/edit/:id", async (req, res) => {
+router.post("/sale/edit/:id", isAdmin, async (req, res) => {
   try {
     let { quantity, unitPrice, transportCharge } = req.body;
 
@@ -691,10 +682,8 @@ router.post("/sale/edit/:id", async (req, res) => {
 });
 
 
-// ===============================
 // 6. DELETE SALE
-// ===============================
-router.post("/sale/delete/:id", async (req, res) => {
+router.post("/sale/delete/:id", isAdmin, async (req, res) => {
   try {
     await Sale.findByIdAndDelete(req.params.id);
     res.redirect("/salesdashboard");
@@ -706,9 +695,7 @@ router.post("/sale/delete/:id", async (req, res) => {
 });
 
 
-// ===============================
 // 7. RECEIPT
-// ===============================
 router.get("/receipt/:id", async (req, res) => {
   try {
     const sale = await Sale.findById(req.params.id);

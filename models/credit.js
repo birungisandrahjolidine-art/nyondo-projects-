@@ -42,10 +42,10 @@ const creditSchema = new mongoose.Schema({
     required: true,
   },
 
-  // dueDate: {
-  //   type: Date,
-  //   required: true,
-  // },
+  Nin: {
+    type: String,
+    required: true,
+  },
 
   date: {
     type: Date,

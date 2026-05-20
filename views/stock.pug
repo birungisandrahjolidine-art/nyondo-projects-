@@ -12,7 +12,8 @@ html
       h2 Store Manager
       nav
         a(href='/stockdashboard') Dashboard
-        a(href='/stockregform') Add New Stock
+        if isStoreManager
+          a(href='/stockregform') Add New Stock
         a.active(href='/stock') Inventory Levels
         a(href='/logout') Logout
 

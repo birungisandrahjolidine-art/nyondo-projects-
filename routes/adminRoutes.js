@@ -190,6 +190,7 @@ const router = express.Router();
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
 const Credit = require("../models/Credit");
+const { isAdmin } = require("../middleware/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -197,7 +198,7 @@ router.get("/", async (req, res) => {
     const sales = await Sale.find();
     const credits = await Credit.find();
 
-    // Aggregation: Groups matching items by name and adds quantities up automatically
+    // Aggregation: Groups matching items by name and adding quantities  automatically
     const aggregatedStock = await Stock.aggregate([
       {
         $group: {

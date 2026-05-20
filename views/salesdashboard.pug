@@ -10,8 +10,9 @@ html
 
     .sidebar
       h2 Dashboard
-      a(href='/salesform') Register New Sale
-      a(href='/index') Home
+      if isSalesAttendant
+        a(href='/salesform') Register New Sale
+      a(href='/') Home
       a(href='/logout') Logout
       
 
@@ -63,10 +64,12 @@ html
                   td #{sale.attendant ? sale.attendant.fullname : ''}
 
                   td.actions
-                    a.edit-btn(href=`/sale/edit/${sale._id}`) Edit
+                    if isAdmin
+                      a.edit-btn(href=`/sale/edit/${sale._id}`) Edit
                     a(href=`/receipt/${sale._id}`) receipt 
-                    form(action=`/sale/delete/${sale._id}` method="POST" onsubmit="return confirm('Are you sure you want to delete this sale? This action cannot be undone.');" style="display:inline")
-                      button.delete-btn(type="submit") Delete
+                    if isAdmin
+                      form(action=`/sale/delete/${sale._id}` method="POST" onsubmit="return confirm('Are you sure you want to delete this sale? This action cannot be undone.');" style="display:inline")
+                        button.delete-btn(type="submit") Delete
 
             else
               tr

@@ -20,16 +20,16 @@ html(lang="en")
       section.metrics-grid
         .metric-card
           h3 TOTAL REVENUE (Cash + Credit)
-          p.metric-value UGX #{totalRevenue.toLocaleString()}
+          p.metric-value UGX #{(totalRevenue || 0).toLocaleString()}
         .metric-card
           h3 TOTAL EXPENSES (Stock + Transport)
-          p.metric-value UGX #{totalExpenses.toLocaleString()}
+          p.metric-value UGX #{(totalExpenses || 0).toLocaleString()}
         .metric-card
           h3 NET CASH FLOW
-          p.metric-value(class=netCashFlow >= 0 ? 'positive' : 'negative') UGX #{netCashFlow.toLocaleString()}
+          p.metric-value(class=(netCashFlow || 0) >= 0 ? 'positive' : 'negative') UGX #{(netCashFlow || 0).toLocaleString()}
         .metric-card
           h3 OWE TO SUPPLIERS (Factory Credit)
-          p.metric-value.negative UGX #{totalSupplierCredit.toLocaleString()}
+          p.metric-value.negative UGX #{(totalSupplierCredit || 0).toLocaleString()}
 
       // Data Tables Grid
       main.data-grid

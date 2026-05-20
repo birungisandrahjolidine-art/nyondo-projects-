@@ -14,8 +14,9 @@ html
       h1 Credit page
 
       // BUTTON
-      .top-bar
-        a.btn(href='/creditform') + Add New Sale on credit
+      if isAdmin
+        .top-bar
+          a.btn(href='/creditform') + Add New Sale on credit
 
       // CARDS (DYNAMIC)
       .cards
@@ -64,27 +65,27 @@ html
                 td.action
                   a.btn-receipt(href=`/creditreceipt/${credit._id}`) Receipt
 
-                  a.edit-icon(href=`/creditedit/${credit._id}`)
-                    i.fas.fa-edit
+                  if isAdmin
+                    a.edit-icon(href=`/creditedit/${credit._id}`)
+                      i.fas.fa-edit
           else
             tr
               td(colspan='10') No credit records found
 
       // ITEMS UNDER CREDIT (OPTIONAL SIMPLE VERSION)
       h2.section-title Items Under Credit
+table
+  thead
+    tr
+      th Item Name
+      th Quantity
 
-      table
-        thead
-          tr
-            th Item Name
-            th Quantity
-
-        tbody
-          if credits.length > 0
-            each credit in credits
-              tr
-                td #{credit.itemName}
-                td #{credit.quantity}
-          else
-            tr
-              td(colspan='2') No items found
+  tbody
+    if itemsUnderCredit && itemsUnderCredit.length > 0
+      each item in itemsUnderCredit
+        tr
+          td #{item.itemName}
+          td #{item.quantity}
+    else
+      tr
+        td(colspan='2') No items found

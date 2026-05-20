@@ -8,7 +8,7 @@ const Registration = require("../models/Registration");
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
 
-
+const { isAdmin, isStoreManager } = require("../middleware/auth");
 // MULTER FILE UPLOAD SETUP
 
 const storage = multer.diskStorage({
@@ -22,24 +22,86 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 // BASIC GET ROUTES
 
-router.get("/index", (req, res) => res.render("index"));
+router.get("/", (req, res) => res.render("index"));
 router.get("/login", (req, res) => res.render("login"));
 router.get("/signin", (req, res) => res.render("signin"));
-router.get("/stockregform", (req, res) => res.render("stockregform"));
+router.get("/stockregform", isStoreManager, (req, res) => res.render("stockregform"));
 router.get("/transport", (req, res) => res.render("transport"));
 router.get("/creditreceipt", (req, res) => res.render("creditreceipt"));
 router.get('/logout', (req, res) => res.render('logout'));
-router.get('/creditform', (req, res) => res.render('creditform'));
-// router.get("/reports", (req, res) => res.render("reports"));
-router.get("/resetp", (req, res) => res.render("resetp"));
+router.get('/creditform', isAdmin, (req, res) => res.render('creditform'));
+router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
 router.get("/creditedit", (req, res) => res.render("creditedit"));
+router.get("/reports", async (req, res) => {
+  try {
+    const year = parseInt(req.query.year, 10) || new Date().getFullYear();
+    const month = parseInt(req.query.month, 10) || (new Date().getMonth() + 1);
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0, 23, 59, 59);
+
+    const sales = await Sale.find({ date: { $gte: startDate, $lte: endDate } });
+    const stockPurchases = await Stock.find({ date: { $gte: startDate, $lte: endDate } });
+
+    let totalCashSales = 0;
+    let totalCustomerCredit = 0;
+    let totalTransportExpenses = 0;
+    let totalSupplierCredit = 0;
+    let totalStockCost = 0;
+
+    sales.forEach((sale) => {
+      const charge = Number(sale.totalCharge) || 0;
+      if (sale.paymentMethod === "Credit" || sale.isSalaryScheme) {
+        totalCustomerCredit += charge;
+      } else {
+        totalCashSales += charge;
+      }
+      totalTransportExpenses += Number(sale.transportCharge) || 0;
+    });
+
+    stockPurchases.forEach((item) => {
+      const qty = Number(item.quantity) || 0;
+      const unitCost = Number(item.unitPrice || item.unitCost) || 0;
+      totalStockCost += qty * unitCost;
+      totalSupplierCredit += Number(item.supplierCreditOwed) || 0;
+    });
+
+    const totalRevenue = totalCashSales + totalCustomerCredit;
+    const totalExpenses = totalStockCost + totalTransportExpenses;
+    const netCashFlow = totalCashSales - totalTransportExpenses;
+    const reportTitle = `${startDate.toLocaleString("default", { month: "long" }).toUpperCase()} ${year}`;
+
+    res.render("reports", {
+      reportTitle,
+      totalRevenue,
+      totalExpenses,
+      netCashFlow,
+      totalSupplierCredit,
+      dbSales: sales,
+      stockItems: stockPurchases,
+    });
+  } catch (error) {
+    console.error("Error generating report:", error);
+    res.status(500).send("Unable to load report statistics.");
+  }
+});
 
 // AUTHENTICATION ROUTES (SIGNIN & LOGIN)
-
-router.post("/signin", async (req, res) => {
+router.get("/admin/register", isAdmin, (req, res) => {
+  res.render("signin");
+});
+router.post("/signin",async (req, res) => {
   try {
     console.log("Data received in terminal:", req.body);
-    const { fullname, email, role, password, phoneNumber, address, Nin } = req.body;
+    let { fullname, email, role, password, phoneNumber, address, Nin } = req.body;
+
+    const roleMap = {
+      Admin: "Admin",
+      "Sales attendant": "Sales_attendant",
+      Sales_attendant: "Sales_attendant",
+      "Store Manager": "Store_Manager",
+      Store_Manager: "Store_Manager"
+    };
+    role = roleMap[role] || role;
 
     const existingUser = await Registration.findOne({ email: email.toLowerCase() });
     if (existingUser) {
@@ -64,20 +126,30 @@ router.post("/signin", async (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local", { failureRedirect: "/login" }), (req, res) => {
-  if (req.user.role === "admin") return res.redirect("/admindashboard");
-  if (req.user.role === "salesattendant") return res.redirect("/salesdashboard");
-  if (req.user.role === "StockManager") return res.redirect("/stockdashboard");
+  console.log("Logged in user role:", req.user.role); 
+  
+  if (req.user.role === "Admin") {
+    return res.redirect("/admin");
+  }
+  if (req.user.role === "Sales_attendant") { 
+    return res.redirect("/salesdashboard");
+  }
+  if (req.user.role === "Store_Manager") { 
+    return res.redirect("/stockdashboard");
+  }
+  
+  // Fallback if role somehow isn't handled
   res.redirect("/login");
 });
 
 // STOCK REGISTRATION (POST)
 
-router.post('/stockregform', upload.single('itemimage'), async (req, res) => {
+router.post('/stockregform', isStoreManager, upload.single('itemimage'), async (req, res) => {
   try {
     const { itemName, quantity, unitPrice, sellingPrice, supplierName, date, supplierPhone, factory, paymentMethod } = req.body;
 
     const newStock = new Stock({
-      itemName: itemName.trim(), // Trimming prevents grouping issues from trailing spaces
+      itemName: itemName.trim(), // Trimming prevent grouping issues from trailing spaces
       quantity: Number(quantity),
       unitPrice: Number(unitPrice),
       sellingPrice: Number(sellingPrice),
@@ -123,30 +195,6 @@ router.get("/stock", async (req, res) => {
   }
 });
 
-// 2. ADMIN DASHBOARD: Combines quantities for clear management summaries
-router.get("/admindashboard", async (req, res) => {
-  try {
-    const aggregatedStock = await Stock.aggregate([
-      {
-        $group: {
-          _id: "$itemName",
-          totalQuantity: { $sum: "$quantity" },
-          sellingPrice: { $first: "$sellingPrice" }
-        }
-      },
-      { $sort: { _id: 1 } }
-    ]);
-
-    const rawStock = await Stock.find();
-    const totalInvestment = rawStock.reduce((acc, item) => acc + ((Number(item.quantity) || 0) * (Number(item.unitPrice) || 0)), 0);
-
-    res.render("admindashboard", { dbStock: aggregatedStock, totalInvestment });
-  } catch (error) {
-    console.error("Admin Dashboard Error:", error);
-    res.status(500).send("Unable to load Admin Dashboard");
-  }
-});
-// 1. STOCK DASHBOARD / LOG: Every entry remains separate chronologically
 router.get("/stockdashboard", async (req, res) => {
   try {
     const dbStock = await Stock.find().sort({ date: -1 });

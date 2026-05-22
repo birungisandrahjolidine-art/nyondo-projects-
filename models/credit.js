@@ -12,6 +12,11 @@ const creditSchema = new mongoose.Schema({
     required: true,
   },
 
+  address: {
+    type: String,
+    required: false,
+  },
+
   itemName: {
     type: String,
     required: true,

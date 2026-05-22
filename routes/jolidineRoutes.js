@@ -31,7 +31,8 @@ router.get("/creditreceipt", (req, res) => res.render("creditreceipt"));
 router.get('/logout', (req, res) => res.render('logout'));
 router.get('/creditform', isAdmin, (req, res) => res.render('creditform'));
 router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
-router.get("/creditedit", (req, res) => res.render("creditedit"));
+router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
+// router.get("/editusers", (req, res) => res.render("editusers"));
 router.get("/reports", async (req, res) => {
   try {
     const year = parseInt(req.query.year, 10) || new Date().getFullYear();
@@ -146,7 +147,7 @@ router.post("/login", passport.authenticate("local", { failureRedirect: "/login"
 
 router.post('/stockregform', isStoreManager, upload.single('itemimage'), async (req, res) => {
   try {
-    const { itemName, quantity, unitPrice, sellingPrice, supplierName, date, supplierPhone, factory, paymentMethod } = req.body;
+    const { itemName, quantity, unitPrice, sellingPrice, supplierName, date, supplierPhone, factory, paymentStatus } = req.body;
 
     const newStock = new Stock({
       itemName: itemName.trim(), // Trimming prevent grouping issues from trailing spaces
@@ -155,7 +156,7 @@ router.post('/stockregform', isStoreManager, upload.single('itemimage'), async (
       sellingPrice: Number(sellingPrice),
       supplierName,
       date,
-      paymentMethod,
+      paymentStatus,
       supplierPhone,
       factory,
       itemimage: req.file ? req.file.filename : null

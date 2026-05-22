@@ -523,85 +523,118 @@ router.get("/salesform", isSalesAttendant, async (req, res) => {
 router.post("/salesform", isSalesAttendant, async (req, res) => {
   try {
     const {
-      itemId,
       customerName,
       customerAddress,
       customerDistance,
       phoneNumber,
-      quantity,
-      paymentMethod
+      paymentMethod,
+      transportType
     } = req.body;
 
-    
-    const qty = Number(quantity) || 0;
     const distance = Number(customerDistance) || 0;
 
-    // GET ITEM FROM STOCK
-   
-    const item = await Stock.findById(itemId);
-
-    if (!item) {
-      return res.status(404).send("Item not found");
+    // Support both single-item form (itemId, quantity) and multi-item `items[...]`
+    let rawItems = req.body.items;
+    if (!rawItems && req.body.itemId) {
+      rawItems = { '0': { itemId: req.body.itemId, quantity: req.body.quantity } };
     }
 
-   
-    // TAKE PRICES FROM DB
-   
-    const unitPrice = Number(item.unitPrice) || 0;         // cost price
-    const sellingPrice = Number(item.sellingPrice) || 0;   // selling price
+    const itemsArray = [];
+    if (rawItems) {
+      if (Array.isArray(rawItems)) {
+        rawItems.forEach(it => itemsArray.push(it));
+      } else {
+        Object.keys(rawItems).forEach(k => itemsArray.push(rawItems[k]));
+      }
+    }
 
-   
-    // STOCK CHECK
-   
-    if (item.quantity < qty) {
-      const items = await Stock.find();
-      return res.render("salesform", {
-        stockItems: items,
-        error: "Not enough stock available"
+    if (itemsArray.length === 0) {
+      const allItems = await Stock.find();
+      return res.render('salesform', { stockItems: allItems, error: 'No items selected' });
+    }
+
+    // Validate stock and compute totals
+    const saleItems = [];
+    let subtotal = 0;
+
+    for (const raw of itemsArray) {
+      const iid = raw.itemId || raw.itemId === 0 ? raw.itemId : null;
+      const qty = Number(raw.quantity) || 0;
+
+      const stockItem = await Stock.findById(iid);
+      if (!stockItem) {
+        const allItems = await Stock.find();
+        return res.render('salesform', { stockItems: allItems, error: `Item not found` });
+      }
+
+      const available = Number(stockItem.quantity) || 0;
+      if (available < qty) {
+        const allItems = await Stock.find();
+        return res.render('salesform', { stockItems: allItems, error: `Not enough stock available for ${stockItem.itemName}` });
+      }
+
+      const sellingPrice = Number(stockItem.sellingPrice) || 0;
+      const lineTotal = qty * sellingPrice;
+
+      saleItems.push({
+        itemId: stockItem._id,
+        itemName: stockItem.itemName,
+        quantity: qty,
+        unitPrice: sellingPrice,
+        subTotal: lineTotal
       });
+
+      // reduce stock without re-validating the entire Stock document
+      await Stock.findByIdAndUpdate(stockItem._id, { $inc: { quantity: -qty } });
+
+      subtotal += lineTotal;
     }
 
-    
-    // REDUCE STOCK
-   
-    item.quantity -= qty;
-    await item.save();
-
-    
-    // CALCULATIONS
-   
-    const subtotal = qty * sellingPrice;
-
+    // Calculate transport charge based on selected transport type
     let transportCharge = 0;
+    let transportChargeType = 'Own Transport';
 
-    if (subtotal >= 500000) {
+    if (transportType === 'own') {
       transportCharge = 0;
-    } else if (distance > 10) {
+      transportChargeType = 'Own Transport';
+    } else if (transportType === 'hardware') {
+      if (subtotal >= 500000) {
+        transportCharge = 0;
+        transportChargeType = 'Hardware Provided (Free - Eligible)';
+      } else {
+        const allItems = await Stock.find();
+        return res.render('salesform', {
+          stockItems: allItems,
+          error: `You do not qualify for free hardware transport. Purchase must be ≥ 500,000 UGX. Current: ${subtotal.toLocaleString()} UGX`
+        });
+      }
+    } else if (transportType === 'paid') {
       transportCharge = 30000;
+      transportChargeType = 'Hardware Transport (Paid)';
+    } else {
+      const allItems = await Stock.find();
+      return res.render('salesform', {
+        stockItems: allItems,
+        error: 'Please select a valid transport option'
+      });
     }
 
     const totalCharge = subtotal + transportCharge;
 
-    
-    // SAVE SALE
-  
     const newSale = new Sale({
-      itemId: item._id,
-      itemName: item.itemName,
       customerName,
       customerAddress,
       customerDistance: distance,
       phoneNumber,
-      quantity: qty,
-
-      unitPrice,          // cost price from DB
       paymentMethod,
       transportCharge,
-      totalCharge
+      transportChargeType,
+      totalCharge,
+      attendant: req.user ? req.user._id : null,
+      items: saleItems
     });
 
     await newSale.save();
-
     res.redirect(`/receipt/${newSale._id}`);
 
   } catch (error) {
@@ -615,7 +648,9 @@ router.post("/salesform", isSalesAttendant, async (req, res) => {
 // 3. SALES DASHBOARD
 router.get("/salesdashboard", async (req, res) => {
   try {
-    const sales = await Sale.find().sort({ date: -1 });
+    const sales = await Sale.find()
+      .populate("attendant")
+      .sort({ date: -1 });
 
     const startOfToday = new Date();
     startOfToday.setHours(0, 0, 0, 0);
@@ -661,17 +696,38 @@ router.get("/sale/edit/:id", isAdmin ,async (req, res) => {
 // 5. EDIT SALE (POST)
 router.post("/sale/edit/:id", isAdmin, async (req, res) => {
   try {
-    let { quantity, unitPrice, transportCharge } = req.body;
+    const {
+      quantity,
+      unitPrice,
+      transportCharge,
+      customerName,
+      customerAddress,
+      customerDistance,
+      phoneNumber,
+      paymentMethod
+    } = req.body;
 
     const qty = Number(quantity) || 0;
     const price = Number(unitPrice) || 0;
     const transport = Number(transportCharge) || 0;
+    const distance = Number(customerDistance) || 0;
 
     const totalCharge = (qty * price) + transport;
 
-    req.body.totalCharge = totalCharge;
+    const updateData = {
+      customerName,
+      customerAddress,
+      customerDistance: distance,
+      phoneNumber,
+      paymentMethod,
+      transportCharge: transport,
+      totalCharge,
+      'items.0.quantity': qty,
+      'items.0.unitPrice': price,
+      'items.0.subTotal': qty * price
+    };
 
-    await Sale.findByIdAndUpdate(req.params.id, req.body);
+    await Sale.findByIdAndUpdate(req.params.id, updateData);
 
     res.redirect("/salesdashboard");
 

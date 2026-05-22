@@ -27,13 +27,12 @@ const StockSchema = new mongoose.Schema({
     type: String,
     trim:true,
   },
-  paymentMethod:{
+  paymentStatus:{
     type: String,
     required: true,
   },
   sellingPrice :{
     type: Number,
-    // required: true
   },
   itemimage: {
   type: String

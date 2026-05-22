@@ -23,7 +23,8 @@ html
         li: a(href='/Stock') Stock 
         li: a(href='/reports') Reports
         li: a(href='/signin') Register user
-        li: a(href='/logout') Logout
+        i: a(href='/logout') Logout
+        li: a(href='/resetpassword') Reset Password
         li: a(href='/') Home
 
     // MAIN 
@@ -101,4 +102,31 @@ html
                   td #{item.totalQuantity}
             else
               tr
-                td(colspan='2') No stock available
+                td(colspan='2') No stock available 
+
+      .users-table
+        h3  Registered Users
+
+        table
+          thead
+            tr
+              th Full Name
+              th Role
+              th Email
+              th Contact
+              th Actions
+          tbody
+            if users && users.length > 0
+              each user in users
+                tr
+                  td #{user.fullname}
+                  td #{user.role}
+                  td #{user.email}
+                  td  #{user.phoneNumber}
+                  td 
+                    a.edit-btn(href=`/admin/editusers/${user._id}`) Edit
+                    //- form(action=`/deleteuser/${user._id}` method="POST" onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone.');" style="display:inline")
+                    //-   button.delete-btn(type="submit") Delete
+            else
+              tr
+                td(colspan='5') No users found

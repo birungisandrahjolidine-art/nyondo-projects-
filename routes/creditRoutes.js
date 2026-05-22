@@ -21,6 +21,7 @@ router.post("/creditform", isAdmin,async (req, res) => {
     const credit = new Credit({
       customerName: req.body.customerName,
       phone: req.body.phone,
+      address: req.body.address,
       Nin:req.body.Nin,
       itemName: req.body.itemName,
       quantity,

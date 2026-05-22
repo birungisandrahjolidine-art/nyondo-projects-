@@ -191,12 +191,14 @@ const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
 const Credit = require("../models/Credit");
 const { isAdmin } = require("../middleware/auth");
+const Registration = require("../models/Registration");
 
 router.get("/", async (req, res) => {
   try {
     // 1. FETCH DATA & AGGREGATE STOCK
     const sales = await Sale.find();
     const credits = await Credit.find();
+    const users = await Registration.find();
 
     // Aggregation: Groups matching items by name and adding quantities  automatically
     const aggregatedStock = await Stock.aggregate([
@@ -234,7 +236,7 @@ router.get("/", async (req, res) => {
 
     const profit = totalSales - totalBalance;
 
-    // 3. RENDER TO PUG (Sends dbStock to match your new Pug variable definitions)
+    // 3. RENDER TO PUG (Sends dbStock to matching variable definitions)
     res.render("admindashboard", {
       totalSales,
       totalStock,
@@ -242,12 +244,46 @@ router.get("/", async (req, res) => {
       totalPaid,
       profit,
       credits,
-      dbStock: aggregatedStock
+      dbStock: aggregatedStock,
+      users
     });
 
   } catch (error) {
     console.log("ADMIN DASHBOARD ERROR:", error);
     res.status(500).send("Admin dashboard error");
+  }
+});
+// edit user routes
+router.get('/editusers/:id', async (req, res) => {
+
+  try {
+
+    const user = await Registration.findById(req.params.id);
+
+    res.render('editusers', {
+      user
+    });
+
+  } catch (error) {
+
+    console.log(error);
+    res.redirect('/admin');
+
+  }
+});
+
+router.post('/admin/editusers/:id', isAdmin, async (req, res) => {
+  try {
+    await Registration.findByIdAndUpdate(req.params.id, {
+      fullname: req.body.fullname,
+      email: req.body.email,
+      phone: req.body.phone,
+      role: req.body.role
+    });
+    res.redirect('/admin');
+  } catch (error) {
+    console.log(error);
+    res.send('Error updating user');
   }
 });
 

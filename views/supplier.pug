@@ -8,6 +8,16 @@ html(lang='en')
     link(rel='stylesheet' href='/css/supplier.css')
 
   body
+    .sidebar
+      h2 Store Manager
+      nav
+        a(href='/stockdashboard') Dashboard
+        if isStoreManager
+          a(href='/stockregform') Add New Stock
+        a(href='/stock') Inventory Levels
+        a.active(href='/supplier') Supplier Management
+          a(href='/') Home 
+        a(href='/logout') Logout
     .container
       h1 Supplier Management
 

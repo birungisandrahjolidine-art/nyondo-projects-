@@ -5,27 +5,84 @@
   font-family: Arial, sans-serif;
 }
 
+/* BODY */
 body {
   background: #f4f6f9;
-  padding: 40px;
+  display: flex;
+  min-height: 100vh;
 }
 
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background: #1e293b;
+  color: white;
+  padding: 25px 20px;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+}
+
+/* SIDEBAR TITLE */
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 35px;
+  font-size: 24px;
+  color: white;
+}
+
+/* NAVIGATION */
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* SIDEBAR LINKS */
+.sidebar nav a {
+  text-decoration: none;
+  color: #e2e8f0;
+  padding: 14px 16px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* HOVER EFFECT */
+.sidebar nav a:hover {
+  background: #334155;
+  color: black;
+  transform: translateX(5px);
+}
+
+/* ACTIVE LINK */
+.sidebar nav a.active {
+  background: orange;
+  color: white;
+}
+
+/* MAIN CONTAINER */
 .container {
-  width: 95%;
+  width: calc(100% - 270px);
   max-width: 1100px;
-  margin: auto;
+  margin-left: 270px;
+  margin-top: 40px;
   background: #fff;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+/* PAGE TITLE */
 h1 {
   text-align: center;
   margin-bottom: 25px;
   color: #333;
 }
 
+/* TABLE */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -47,6 +104,7 @@ table tbody tr:hover {
   background: #f1f5f9;
 }
 
+/* STATUS */
 .paid {
   background: #16a34a;
   color: white;
@@ -63,7 +121,18 @@ table tbody tr:hover {
   font-size: 14px;
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .container {
+    width: calc(100% - 220px);
+    margin-left: 220px;
+    padding: 20px;
+  }
+
   table {
     font-size: 14px;
   }

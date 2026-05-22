@@ -24,11 +24,11 @@ html
 
         p
           strong Phone:
-          |  #{sale && sale.phone ? sale.phone : "N/A"}
+          |  #{sale && sale.phoneNumber ? sale.phoneNumber : "N/A"}
 
         p
           strong Address:
-          |  #{sale && sale.CustomerAddress ? sale.CustomerAddress : "N/A"}
+          |  #{sale && sale.customerAddress ? sale.customerAddress : "N/A"}
 
         p
           strong Date:
@@ -45,11 +45,22 @@ html
               th Unit Price
               th Total
           tbody
-            tr
-              td #{sale.itemName}
-              td #{sale.quantity}
-              td UGX #{sale.unitPrice}
-              td UGX #{sale.quantity * sale.unitPrice}
+            if sale.items && sale.items.length
+              each item in sale.items
+                tr
+                  td #{item.itemName || 'N/A'}
+                  td #{item.quantity || 0}
+                  td UGX #{item.unitPrice || 0}
+                  td UGX #{item.subTotal || (item.quantity * item.unitPrice) || 0}
+            else
+              - const item = sale
+              - const itemQuantity = item.quantity != null ? item.quantity : 0
+              - const itemUnitPrice = item.unitPrice != null ? item.unitPrice : 0
+              tr
+                td #{item.itemName || 'N/A'}
+                td #{itemQuantity}
+                td UGX #{itemUnitPrice}
+                td UGX #{itemQuantity * itemUnitPrice}
 
       hr
 
@@ -57,11 +68,15 @@ html
       .summary
         p
           strong Transport:
-          |  UGX #{sale.transportCharge || 0}
+          |  #{sale.transportChargeType || 'N/A'}
+          if sale.transportCharge > 0
+            |  - UGX #{sale.transportCharge}
+          else
+            |  - Free
 
         p.total
           strong GRAND TOTAL:
-          |  UGX #{(sale.quantity * sale.unitPrice) + (sale.transportCharge || 0)}
+          |  UGX #{sale.totalCharge || 0}
 
       hr
 

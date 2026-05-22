@@ -8,7 +8,7 @@ head
     h2 Register new Credit
     form(action='/creditform' method='post')
       label(for='date') Date
-      input(type='date' name='dateTaken' required='')
+      input(type='date' name='date' required='')
       label Customer Name
       input(type='text' name='customerName' required='')
 
@@ -17,6 +17,9 @@ head
 
       label phone 
       input(type='text' name='phone' required='')
+
+      label Address
+      input(type='text' name='address')
 
       label Item Name
       select(name='itemName' required='')

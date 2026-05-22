@@ -49,10 +49,13 @@ html
             if dbSales && dbSales.length > 0
 
               each sale in dbSales
+                - const itemNames = sale.items && sale.items.length ? sale.items.map(i => `${i.itemName} (${i.quantity})`).join(', ') : (sale.itemName || 'N/A')
+                - const totalQuantity = sale.items && sale.items.length ? sale.items.reduce((sum, i) => sum + (i.quantity || 0), 0) : (sale.quantity || 0)
+                - const unitPrice = sale.items && sale.items.length ? sale.items[0].unitPrice : (sale.unitPrice || 0)
                 tr
-                  td #{sale.itemName}
-                  td #{sale.quantity}
-                  td UGX #{sale.unitPrice.toLocaleString()}
+                  td #{itemNames}
+                  td #{totalQuantity}
+                  td UGX #{(unitPrice).toLocaleString()}
                   td #{sale.customerName}
                   td #{sale.customerAddress}
                   td #{sale.phoneNumber}

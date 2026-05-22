@@ -7,10 +7,11 @@ html
     link(rel='stylesheet' href='/css/sales-edit.css')
   body
     .container
+      - const item = sale.items && sale.items.length ? sale.items[0] : sale
       h2 Edit Sale
       form(action='/sale/edit/' + sale._id method='post')
         // Hidden fields to pass existing financial data so math doesn't break
-        input(type='hidden' name='unitPrice' value=sale.unitPrice)
+        input(type='hidden' name='unitPrice' value=item.unitPrice || sale.unitPrice)
         input(type='hidden' name='transportCharge' value=sale.transportCharge)
 
         label Customer Name
@@ -23,6 +24,6 @@ html
         input(type='number' name='customerDistance' value=sale.customerDistance placeholder='Enter distance' required='')
         
         label Quantity
-        input(type='number' name='quantity' value=sale.quantity placeholder='Enter quantity' required='')
+        input(type='number' name='quantity' value=(item.quantity != null ? item.quantity : sale.quantity) placeholder='Enter quantity' required='')
         
         button(type='submit') Update Sale

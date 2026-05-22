@@ -32,7 +32,7 @@
 
       .btn {
         padding: 12px 25px;
-        background: orange;
+        background: darkblue;
         color: white;
         text-decoration: none;
         border-radius: 5px;
@@ -40,5 +40,5 @@
       }
 
       .btn:hover {
-        background: darkblue;
+        background: orange;
       }

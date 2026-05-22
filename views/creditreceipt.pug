@@ -151,16 +151,20 @@ html
 
       .info
         p
-          strong Customer:
-          | #{credit ? credit.customerName : "N/A"}
+          strong Customer Name:
+          |  #{credit ? credit.customerName : "N/A"}
 
         p
-          strong Phone:
-          | #{credit ? credit.phone : "N/A"}
+          strong Phone Number:
+          |  #{credit ? credit.phone : "N/A"}
+
+        p
+          strong Address:
+          |  #{credit && credit.address ? credit.address : "N/A"}
 
         p
           strong Date:
-          | #{credit && credit.date ? new Date(credit.date).toLocaleDateString() : "N/A"}
+          |  #{credit && credit.date ? new Date(credit.date).toLocaleDateString() : "N/A"}
 
       hr
 

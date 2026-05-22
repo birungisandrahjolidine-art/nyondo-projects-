@@ -5,15 +5,7 @@ const SaleSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  itemId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Stock",
-    required: true
-  },
-  itemName: {
-    type: String,
-    required: true
-  },
+
   customerName: {
     type: String,
     trim: true,
@@ -35,16 +27,6 @@ const SaleSchema = new mongoose.Schema({
     required: true
   },
 
-  quantity: {
-    type: Number,
-    required: true
-  },
-
-  unitPrice: {
-    type: Number,
-    required: true
-  },
-
   paymentMethod: {
     type: String,
     required: true
@@ -60,10 +42,51 @@ const SaleSchema = new mongoose.Schema({
     default: 0
   },
 
+  transportChargeType: {
+    type: String,
+    default: 'Own Transport'
+  },
+
+  transportPaid: {
+    type: Boolean,
+    default: true
+  },
+
   totalCharge: {
     type: Number,
     required: true
-  }
+  },
+
+  // MULTI-ITEM SUPPORT
+  items: [
+    {
+      itemId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Stock",
+        required: true
+      },
+
+      itemName: {
+        type: String,
+        required: true
+      },
+
+      quantity: {
+        type: Number,
+        required: true
+      },
+
+      unitPrice: {
+        type: Number,
+        required: true
+      },
+
+      subTotal: {
+        type: Number,
+        required: true
+      }
+    }
+  ]
 });
 
 module.exports = mongoose.model("Sale", SaleSchema);

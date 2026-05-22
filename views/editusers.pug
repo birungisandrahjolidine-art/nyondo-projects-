@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Edit User
+    link(rel='stylesheet' href='/css/editusers.css')
+
+  body
+    
+
+      // MAIN CONTENT
+      .main-content
+
+        .top-bar
+          h1 Edit Registered User
+
+        .form-container
+
+            form(action="/admin/editusers/" + user._id method="post")
+
+            .form-group
+              label Full Name
+              input(
+                type='text'
+                name='fullname'
+                placeholder='Enter full name'
+              )
+
+            .form-group
+              label Email
+              input(
+                type='email'
+                name='email'
+                placeholder='Enter email'
+              )
+
+            .form-group
+              label Phone Number
+              input(
+                type='text'
+                name='phone'
+                placeholder='Enter phone number'
+              )
+
+            .form-group
+              label Role
+              select(name='role')
+                option Admin
+                option Store Manager
+                option Sales Attendant
+
+            .form-group
+              label Password
+              input(
+                type='password'
+                name='password'
+                placeholder='Enter new password'
+              )
+
+            .buttons
+              button.save-btn(type='submit') Update User
+
+              a.cancel-btn(href='#') Cancel

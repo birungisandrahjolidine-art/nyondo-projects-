@@ -1,4 +1,3 @@
-
 doctype html
 html
   head
@@ -6,7 +5,9 @@ html
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title Stock Inventory | Nyondo Hardware
     link(rel='stylesheet' href='/css/stock.css')
+
   body
+
     // Sidebar
     .sidebar
       h2 Store Manager
@@ -19,28 +20,55 @@ html
 
     // Main Content
     .main-content
+
       header
         h1 Current Inventory
-        p Overview of available stock 
+        p Overview of available stock
 
-      // Low Stock Alert Section 
+      // =========================
+      // SUMMARY CARDS (FIXED)
+      // =========================
+      section.stats
+        .card
+          h3 Total Item Types
+          p #{dbStock.length}
+
+        .card
+          h3 Total Quantity in Stock
+          p
+            - let totalQty = dbStock.reduce((sum, item) => sum + item.totalQuantity, 0)
+            | #{totalQty}
+
+        .card
+          h3 Low Stock Items
+          p
+            - let lowCount = dbStock.filter(item => item.totalQuantity <= 20).length
+            | #{lowCount}
+
+      // =========================
+      // LOW STOCK ALERTS (FIXED)
+      // =========================
       section.alert-section
         .alert-card
           .alert-header
-            span.warning-icon &#x26A0;
+            span.warning-icon ⚠
             h3 Low Stock Alerts
-          ul.alert-list
-            if dbStock && dbStock.length > 0
-              each stock in dbStock
-                if stock.totalQuantity <= 20
-                  li
-                    strong #{stock._id}: 
-                    | Only #{stock.totalQuantity} units left. 
-                    span.action-text Reorder soon
-            else
-              li No alerts
 
-      // Inventory Table
+          ul.alert-list
+            - let lowStockItems = dbStock.filter(item => item.totalQuantity <= 20)
+
+            if lowStockItems.length > 0
+              each stock in lowStockItems
+                li
+                  strong #{stock._id}:
+                  |  Only #{stock.totalQuantity} units left.
+                  span.action-text Reorder soon
+            else
+              li All items are well stocked 🎉
+
+      // =========================
+      // INVENTORY TABLE
+      // =========================
       section.table-section
         .table-card
           table
@@ -50,26 +78,27 @@ html
                 th Item Name
                 th Quantity
                 th Selling Price
-                th Supplier       
+                th Supplier
+
             tbody
-              if dbStock && dbStock.length > 0
-                each stock in dbStock 
+              if dbStock.length > 0
+                each stock in dbStock
                   tr
                     td
                       if stock.itemimage
                         img(
                           src='/uploads/' + stock.itemimage,
-                          alt='image',
                           width='120px',
                           height='120px',
                           style='object-fit: cover; border-radius: 4px;'
                         )
                       else
                         span No Image
-                    td #{stock._id}               
-                    td #{stock.totalQuantity}     
+
+                    td #{stock._id}
+                    td #{stock.totalQuantity}
                     td UGX #{stock.sellingPrice ? stock.sellingPrice.toLocaleString() : '0'}
-                    td #{stock.supplierName ? stock.supplierName : 'N/A'}
+                    td #{stock.supplierName || 'N/A'}
               else
                 tr
-                  td.text-center(colspan='5') No stock has been recorded yet
+                  td(colspan='5') No stock has been recorded yet

@@ -205,7 +205,7 @@ router.get("/", async (req, res) => {
       {
         $group: {
           _id: "$itemName", // Groups matching names together
-          totalQuantity: { $sum: "$quantity" }, // Adds up all batch quantities
+          totalQuantity: { $sum: "$quantity" }, // Adds up all quantities
           sellingPrice: { $first: "$sellingPrice" } // Picks the baseline price context
         }
       },
@@ -272,7 +272,7 @@ router.get('/editusers/:id', async (req, res) => {
   }
 });
 
-router.post('/admin/editusers/:id', isAdmin, async (req, res) => {
+router.post('/editusers/:id', isAdmin, async (req, res) => {
   try {
     await Registration.findByIdAndUpdate(req.params.id, {
       fullname: req.body.fullname,

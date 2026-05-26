@@ -32,7 +32,7 @@ router.get('/logout', (req, res) => res.render('logout'));
 router.get('/creditform', isAdmin, (req, res) => res.render('creditform'));
 router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
 router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
-// router.get("/editusers", (req, res) => res.render("editusers"));
+// router.get("/editsupplier", (req, res) => res.render("editsupplier"));
 router.get("/reports", async (req, res) => {
   try {
     const year = parseInt(req.query.year, 10) || new Date().getFullYear();
@@ -220,5 +220,47 @@ router.get("/supplier", async (req, res) => {
     console.error(error.message);
     res.status(400).send('Unable to pick supplier info');
   }
+});
+// edit supplier page
+// OPEN EDIT PAGE
+router.get("/editsupplier/:id", async (req, res) => {
+
+  try {
+
+    const supplier = await Stock.findById(req.params.id);
+
+    console.log(supplier);
+
+    if (!supplier) {
+      return res.redirect("/supplier");
+    }
+
+    res.render("editsupplier", { supplier });
+
+  } catch (error) {
+    console.log(error);
+    return res.redirect("/supplier");
+  }
+
+});
+
+
+// UPDATE SUPPLIER
+router.post("/editsupplier/:id", async (req, res) => {
+
+  try {
+
+    await Stock.findByIdAndUpdate(req.params.id, {
+      paymentStatus: req.body.paymentStatus,
+      date: req.body.date
+    });
+
+    res.redirect("/supplier");
+
+  } catch (error) {
+    console.log(error);
+    return res.redirect("/supplier");
+  }
+
 });
 module.exports = router;

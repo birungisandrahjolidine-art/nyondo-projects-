@@ -17,48 +17,45 @@ html
 
         .form-container
 
-            form(action="/admin/editusers/" + user._id method="post")
+            form(action="/admin/editusers/" + user._id, method="post")
 
-            .form-group
-              label Full Name
-              input(
-                type='text'
-                name='fullname'
-                placeholder='Enter full name'
-              )
+              .form-group
+                label Full Name
+                input(
+                  type='text'
+                  name='fullname'
+                  placeholder='Enter full name'
+                  value=user.fullname
+                )
 
-            .form-group
-              label Email
-              input(
-                type='email'
-                name='email'
-                placeholder='Enter email'
-              )
+              .form-group
+                label Email
+                input(
+                  type='email'
+                  name='email'
+                  placeholder='Enter email'
+                  value=user.email
+                )
 
-            .form-group
-              label Phone Number
-              input(
-                type='text'
-                name='phone'
-                placeholder='Enter phone number'
-              )
+              .form-group
+                label Phone Number
+                input(
+                  type='text'
+                  name='phoneNumber'
+                  placeholder='Enter phone number'
+                  value=user.phone
+                )
 
-            .form-group
-              label Role
-              select(name='role')
-                option Admin
-                option Store Manager
-                option Sales Attendant
+              .form-group
+                label Role
+                select(name='role')
+                  option(value='admin' selected=(user.role === 'admin')) Admin
+                  option(value='sales_dashboard' selected=(user.role === 'sales_dashboard')) Sales Attendant
+                  option(value='stock_dashboard' selected=(user.role === 'stock_dashboard')) Stock Manager
+              .form-group
+                label New Password (leave blank to keep current password)
+                input(type='password' name='password' placeholder='Enter new password')
+              .buttons
+                button.save-btn(type='submit') Update User
 
-            .form-group
-              label Password
-              input(
-                type='password'
-                name='password'
-                placeholder='Enter new password'
-              )
-
-            .buttons
-              button.save-btn(type='submit') Update User
-
-              a.cancel-btn(href='#') Cancel
+                a.cancel-btn(href='/admin') Exit

@@ -1,121 +1,122 @@
-body {
+/* RESET */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
-  background: #f4f6f9;
 }
 
 /* SIDEBAR */
 .sidebar {
   position: fixed;
-  width: 200px;
-  height: 100%;
-  background: #0b1f3a;
-  padding-top: 20px;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background: darkblue;
   color: white;
+  padding: 20px;
 }
 
 .sidebar h2 {
-  text-align: center;
   color: orange;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .sidebar a {
   display: block;
   color: white;
-  padding: 12px;
   text-decoration: none;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
 .sidebar a:hover {
   background: orange;
-  color: black;
+  color: #0b1f3a;
 }
 
-/* MAIN */
+/* MAIN DASHBOARD AREA */
 .main {
-  margin-left: 240px;
+  margin-left: 220px;
   padding: 20px;
-  max-width: 1100px;
+  max-width: 1200px;
 }
 
-/* BUTTONS */
-.top-buttons {
-  margin-bottom: 20px;
-}
-
-.btn {
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-  border-radius: 5px;
-  color: white;
-}
-
-.orange {
-  background: orange;
-}
-
-.blue {
-  background: #0b1f3a;
-}
-
-/* CARDS */
+/* CENTER CONTENT */
 .card {
   background: white;
   padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+/* TITLES */
+.main h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.main h1 {
+  color: #1a237e;
   margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.alert {
-  border-left: 6px solid orange;
-}
-
-/* TABLES */
+/* TABLE */
 table {
-  width: 75%;
+  width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  min-width: 900px;
+  font-size: 14px;
 }
 
-table th, table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+th {
+  background: #1a237e;
+  color: white;
+  padding: 12px;
   text-align: left;
 }
 
-table th {
-  background: #0b1f3a;
-  color: white;
-}
-/* Styling the Grand Total Card */
-.total-investment-card {
-    background-color: #1a237e; /* Dark Blue */
-    color: white;
-    padding: 30px;
-    margin-bottom: 25px;
-    border-radius: 12px;
-    border-left: 8px solid #ffa500; /* Professional Orange accent */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
-.total-investment-card h4 {
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    opacity: 0.8;
-    margin: 0;
+/* IMAGE = SAME SIZE AS TEXT */
+td img {
+  width: 2em;
+  height: 2em;
+  object-fit: cover;
+  border-radius: 6px;
+  vertical-align: middle;
 }
 
-.total-investment-card h1 {
-    font-size: 2.8rem;
-    margin: 10px 0;
-    font-weight: bold;
+/* EMPTY STATE */
+.text-center {
+  text-align: center;
+  padding: 20px;
+  color: gray;
 }
 
-/* Ensure the table column for Stock Cost looks distinct */
-.stock-cost-column {
-    font-weight: bold;
-    color: #1a237e;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px;
+  }
+
+  .main {
+    margin-left: 180px;
+    max-width: 100%;
+  }
+
+  table {
+    font-size: 12px;
+  }
 }

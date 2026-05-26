@@ -1,235 +1,185 @@
-/* =========================
-   RESET
-========================= */
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-
-/* =========================
-   BODY
-========================= */
 body {
   background-color: #f4f6f9;
-  overflow-x: hidden;
   color: #333;
+  overflow-x: hidden;
 }
-
-/* =========================
-   SIDEBAR
-========================= */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 230px;
+  width: 220px;
   height: 100vh;
-  background-color: #0a1f44;
+  background-color: darkblue;
   padding-top: 20px;
 }
 
 .sidebar h2 {
   text-align: center;
   color: orange;
-  margin-bottom: 30px;
-  font-size: 24px;
+  margin-bottom: 25px;
+  font-size: 22px;
 }
 
 .sidebar a {
   display: block;
-  padding: 14px 20px;
+  padding: 12px 18px;
   color: white;
   text-decoration: none;
+  font-size: 14px;
   transition: 0.3s;
-  font-size: 15px;
 }
 
 .sidebar a:hover {
   background-color: orange;
   color: #0a1f44;
 }
-
-/* =========================
-   MAIN CONTENT
-========================= */
 .main-content {
-  margin-left: 230px;
+  margin-left: 220px;
   padding: 20px;
-  min-height: 100vh;
 }
-
-/* =========================
-   HEADER
-========================= */
 .header {
-  background-color: #0a1f44;
+  background-color: darkblue;
   color: white;
-  padding: 18px;
-  border-radius: 10px;
-  margin-bottom: 25px;
+  padding: 15px;
+  border-radius: 8px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .header h1 {
-  font-size: 28px;
+  font-size: 24px;
 }
-
-/* =========================
-   CARDS
-========================= */
 .cards-container {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 25px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .card {
-  background-color: white;
-  width: 280px;
-  padding: 20px;
-  border-left: 6px solid orange;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex: 1 1 250px;
+  background: white;
+  padding: 18px;
+  border-left: 5px solid orange;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .card h2 {
+  font-size: 16px;
   color: #0a1f44;
-  margin-bottom: 10px;
-  font-size: 18px;
+  margin-bottom: 8px;
 }
 
 .card p {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   color: green;
 }
-
-/* =========================
-   TABLE SECTION
-========================= */
 .table-section {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   overflow-x: auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
-.table-section h2 {
-  margin-bottom: 15px;
-  color: #0a1f44;
-}
-
-/* =========================
-   TABLE
-========================= */
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 1200px;
+  min-width: 800px;
 }
 
-/* =========================
-   TABLE HEADERS
-========================= */
 table th {
   background-color: #0a1f44;
   color: white;
-  padding: 12px;
-  text-align: center;
+  padding: 10px;
   font-size: 13px;
-  border: 1px solid #ddd;
+  text-align: center;
 }
 
-/* =========================
-   TABLE CELLS
-========================= */
 table td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  text-align: center;
+  padding: 10px;
   font-size: 13px;
-
-  /* FIX TEXT OVERFLOW */
-  white-space: normal;
+  text-align: center;
+  border: 1px solid #ddd;
   word-wrap: break-word;
 }
 
-/* =========================
-   ZEBRA STRIPES
-========================= */
 table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background: #f9f9f9;
 }
 
-/* =========================
-   HOVER EFFECT
-========================= */
 table tbody tr:hover {
-  background-color: #eef3ff;
+  background: #eef3ff;
 }
-
-/* =========================
-   BUTTONS
-========================= */
-.edit-btn,
 .delete-btn {
-  display: inline-block;
-  padding: 7px 12px;
-  margin: 2px;
-  border: none;
+  padding: 6px 10px;
+  font-size: 12px;
   border-radius: 5px;
   text-decoration: none;
-  cursor: pointer;
-  font-size: 12px;
+  display: inline-block;
   font-weight: bold;
-  transition: 0.3s;
 }
 
-/* EDIT BUTTON */
 .edit-btn {
-  background-color: orange;
+  background: orange;
   color: #0a1f44;
 }
 
 .edit-btn:hover {
-  background-color: #0a1f44;
+  background: #0a1f44;
   color: white;
 }
 
-/* DELETE BUTTON */
 .delete-btn {
-  background-color: red;
+  background: red;
   color: white;
 }
 
 .delete-btn:hover {
-  background-color: darkred;
+  background: darkred;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 768px) {
+/* Receipt button */
+a[href^="/receipt"] {
+  background: green;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+  display: inline-block;
+}
 
+a[href^="/receipt"]:hover {
+  background: darkgreen;
+}
+@media (max-width: 768px) {
   .sidebar {
-    width: 180px;
+    width: 160px;
   }
 
   .main-content {
-    margin-left: 180px;
+    margin-left: 160px;
     padding: 15px;
   }
 
   .header h1 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .card {
-    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  table {
+    min-width: 600px;
   }
 
   table th,
@@ -237,23 +187,4 @@ table tbody tr:hover {
     font-size: 11px;
     padding: 8px;
   }
-
-  .edit-btn,
-  .delete-btn {
-    padding: 5px 8px;
-    font-size: 10px;
-  }
-}
-a[href^="/receipt"] {
-  background-color: green;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-size: 12px;
-  margin-right: 5px;
-}
-
-a[href^="/receipt"]:hover {
-  background-color: darkblue;
 }

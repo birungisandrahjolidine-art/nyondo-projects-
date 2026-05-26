@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Edit Supplier Payment
+    link(rel='stylesheet', href='/css/editsupplier.css')
+
+  body
+
+    .main-content
+      .top-bar
+        h1 Edit Supplier Payment
+
+      .form-container
+
+        form(action="/editsupplier/" + supplier._id, method="post")
+
+          .form-group
+            label Payment Status
+
+            select(name="paymentStatus", required)
+              option(value="Pending", selected=supplier.paymentStatus === 'Pending') Pending
+              option(value="Cleared", selected=supplier.paymentStatus === 'Cleared') Cleared
+
+          .form-group
+            label Date
+
+            input(
+              type="date",
+              name="date",
+              value=supplier.date ? supplier.date.toISOString().split('T')[0] : '',
+              required
+            )
+
+          button(type="submit") Update Supplier

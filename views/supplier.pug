@@ -13,10 +13,10 @@ html(lang='en')
       nav
         a(href='/stockdashboard') Dashboard
         if isStoreManager
-          a(href='/stockregform') Add New Stock
+        a(href='/stockregform') Add New Stock
         a(href='/stock') Inventory Levels
         a.active(href='/supplier') Supplier Management
-          a(href='/') Home 
+        a(href='/') Home 
         a(href='/logout') Logout
     .container
       h1 Supplier Management
@@ -27,9 +27,11 @@ html(lang='en')
             th Image
             th Supplier Name
             th Item Delivered
+            th Quantity
             th Phone Number
-            th Payment Method 
+            th Payment Status
             th Date
+            th Action
         tbody
           if dbStock.length > 0
             each stock in dbStock
@@ -46,12 +48,16 @@ html(lang='en')
 
                 td #{stock.itemName}
 
+                td #{stock.quantity}
+
                 td #{stock.supplierPhone}
 
-                td #{stock.paymentMethod}
+                td #{stock.paymentStatus}
                 td #{stock.date ? new Date(stock.date).toLocaleString() : ''}
+                td
+                 a.edit-btn(href=`/editsupplier/${stock._id}`) Edit
 
           else
             tr
-              td.text-center(colspan='5')
+              td.text-center(colspan='8')
                 | No stock has been recorded yet

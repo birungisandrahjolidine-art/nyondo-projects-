@@ -1,22 +1,85 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title nyondo stock signup page
-link(rel='stylesheet' href='/css/signin.css')
-.signin-box
-  h1 Signup
-  form(action='/signin' method='post')
-    input(type='text' placeholder='fullname' name='fullname' required='')
-    input(type='text' placeholder='email' name='email' required='')
-    input(type='text' placeholder='phone number' name='phoneNumber' required='')
-    input(type='password' placeholder='password' name='password' required='')
-    input(type='address' placeholder='address' name='address')
-    input(type='Nin' placeholder='Nin' name='Nin' required='')
-    input(type='comfirm password' placeholder='comfirm password' required='')
-    select(name='role' required)
-      option(value='' disabled selected) Select role
-      option(value='Admin') Admin
-      option(value='Sales_attendant') Sales attendant
-      option(value='Store_Manager') Store Manager
-    button(type='submit') Sign In
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Nyondo Stock Signup Page
+    link(rel='stylesheet', href='/css/signin.css')
+
+  body
+
+    .signin-box
+      h1 Signup
+
+      form(action='/signin' method='post')
+
+        // FULL NAME
+        input(
+          type='text'
+          placeholder='Full Name'
+          name='fullname'
+          required
+        )
+
+        // EMAIL
+        input(
+          type='email'
+          placeholder='Email'
+          name='email'
+          required
+        )
+
+        // PHONE NUMBER
+        input(
+          type='text'
+          placeholder='+256700123456'
+          name='phoneNumber'
+          pattern='^\\+256[0-9]{9}$'
+          title='Phone number must start with +256 and contain exactly 9 digits after it'
+          required
+        )
+
+        // PASSWORD
+        input(
+          type='password'
+          placeholder='Password'
+          name='password'
+          required
+        )
+
+        // ADDRESS
+        input(
+          type='text'
+          placeholder='Address'
+          name='address'
+        )
+
+        // NIN VALIDATION
+        input(
+          type='text'
+          placeholder='NIN'
+          name='Nin'
+          pattern='[0-9]{14}'
+          minlength='14'
+          maxlength='14'
+          title='NIN must contain exactly 14 numbers'
+          required
+        )
+
+        // CONFIRM PASSWORD
+        input(
+          type='password'
+          placeholder='Confirm Password'
+          name='confirmPassword'
+          required
+        )
+
+        // ROLE
+        select(name='role' required)
+          option(value='' disabled selected) Select role
+          option(value='Admin') Admin
+          option(value='Sales_attendant') Sales attendant
+          option(value='Store_Manager') Store Manager
+
+        // SUBMIT BUTTON
+        button(type='submit') Sign Up

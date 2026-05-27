@@ -498,11 +498,11 @@ const router = express.Router();
 
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
-const { isAdmin, isSalesAttendant } = require("../middleware/auth");
+const { isAdmin, isSalesAttendant ,authorizeRoles} = require("../middleware/auth");
 
 // 1. GET SALES FORM
 
-router.get("/salesform", isSalesAttendant, async (req, res) => {
+router.get("/salesform", authorizeRoles("Sales_attendant", "Admin"), async (req, res) => {
   try {
     const items = await Stock.find();
 
@@ -518,9 +518,9 @@ router.get("/salesform", isSalesAttendant, async (req, res) => {
 
 
 
-// 2. POST SALES FORM (MAIN LOGIC)
+// 2. POST SALES FORM (with transport rules and multi-item support)
 
-router.post("/salesform", isSalesAttendant, async (req, res) => {
+router.post("/salesform", authorizeRoles("Sales_attendant", "Admin"), async (req, res) => {
   try {
     const {
       customerName,

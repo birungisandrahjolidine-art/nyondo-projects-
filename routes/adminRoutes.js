@@ -205,13 +205,16 @@ router.get("/", async (req, res) => {
       {
         $group: {
           _id: "$itemName", // Groups matching names together
-          totalQuantity: { $sum: "$quantity" }, // Adds up all quantities
+          totalQuantity: { $sum: { $toInt: "$quantity" } }, // Adds up all quantities
           sellingPrice: { $first: "$sellingPrice" } // Picks the baseline price context
         }
       },
       { $sort: { _id: 1 } } // Sorts alphabetically A-Z
     ]);
-
+    // checks stock status and flags items with 20 or less as low stock for dashboard alert
+const lowStockItems = aggregatedStock.filter( 
+  item => item.totalQuantity <= 20             
+);
     // 2. FINANCIAL CALCULATIONS 
     const totalSales = sales.reduce((sum, s) => {
       return sum + (Number(s.totalCharge) || 0);
@@ -245,6 +248,7 @@ router.get("/", async (req, res) => {
       profit,
       credits,
       dbStock: aggregatedStock,
+      lowStockItems: aggregatedStock.filter(item => item.totalQuantity <= 20),
       users
     });
 

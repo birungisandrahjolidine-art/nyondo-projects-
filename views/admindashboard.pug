@@ -23,8 +23,8 @@ html
         li: a(href='/Stock') Stock 
         li: a(href='/reports') Reports
         li: a(href='/signin') Register user
-        i: a(href='/logout') Logout
-        li: a(href='/resetpassword') Reset Password
+        li: a(href='/logout') Logout
+        li: a(href='/resetp') Reset Password
         li: a(href='/') Home
 
     // MAIN 
@@ -53,11 +53,11 @@ html
           h3 Total Paid
           p UGX #{totalPaid ? totalPaid.toLocaleString() : '0'}
 
-      // PROFIT 
-      .finance
-        .finance-box
-          h3  Net Profit
-          p.income UGX #{profit ? profit.toLocaleString() : '0'}
+      //- // PROFIT 
+      //- .finance
+      //-   .finance-box
+      //-     h3  Net Profit
+      //-     p.income UGX #{profit ? profit.toLocaleString() : '0'}
 
       // creditors
       .creditors
@@ -73,20 +73,20 @@ html
                   p.debt Owes: UGX #{credit.balance ? credit.balance.toLocaleString() : '0'}
           else
             p No creditors found
-      .low-stock
-        h3 ⚠ Low Stock Items
-
         ul
-          if dbStock && dbStock.length > 0
-            each item in dbStock
-              if item.totalQuantity <= 20
-                li
-                  span.warning #{item._id}:
-                  |  Only #{item.totalQuantity} left
-          else
-            li No stock data
+      .low-stock
+            h3  Low Stock Items
+
+            if lowStockItems && lowStockItems.length > 0
+              ul
+                each item in lowStockItems
+                  li
+                    span.warning #{item._id}:
+                    |  Only #{item.totalQuantity} left
+            else
+              p All stock levels are okay
       .stock-table
-        h3 📦 Items in Stock
+        h3  Items in Stock
 
         table
           thead

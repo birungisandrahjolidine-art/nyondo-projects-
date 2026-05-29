@@ -32,7 +32,7 @@ router.get('/logout', (req, res) => res.render('logout'));
 router.get('/creditform', isAdmin, (req, res) => res.render('creditform'));
 router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
 router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
-// router.get("/editsupplier", (req, res) => res.render("editsupplier"));
+router.get("/success", (req, res) => res.render("success"));
 router.get("/reports", async (req, res) => {
   try {
     const year = parseInt(req.query.year, 10) || new Date().getFullYear();
@@ -119,10 +119,14 @@ router.post("/signin",async (req, res) => {
     });
 
     await Registration.register(newUser, password);
-    res.redirect("/login");
+ 
+    return res.redirect("/success");
+
   } catch (error) {
     console.error("DATABASE ERROR:", error);
-    res.render("signin", { error: "Registration failed. Try again." });
+    return res.render("signin", {
+      error: "Registration failed. Try again."
+    });
   }
 });
 

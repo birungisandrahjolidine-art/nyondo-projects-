@@ -10,7 +10,15 @@ html
 
     .signin-box
       h1 Signup
+      //-  SUCCESS MESSAGE
+      if success
+        .success-message
+          = success
 
+      //-  ERROR MESSAGE
+      if error
+        .error-message
+          = error
       form(action='/signin' method='post')
 
         // FULL NAME
@@ -56,15 +64,15 @@ html
 
         // NIN VALIDATION
         input(
-          type='text'
-          placeholder='NIN'
-          name='Nin'
-          pattern='[0-9]{14}'
-          minlength='14'
-          maxlength='14'
-          title='NIN must contain exactly 14 numbers'
-          required
-        )
+            type='text'
+            placeholder='NIN'
+            name='Nin'
+            pattern='^[A-Za-z]{2}[0-9]{12}$'
+            minlength='14'
+            maxlength='14'
+            title='NIN must start with exactly 2 letters followed by exactly 12 numbers'
+            required
+          )
 
         // CONFIRM PASSWORD
         input(

@@ -1,68 +1,3 @@
-//- doctype html
-//- html
-//-   head
-//-     meta(charset='UTF-8')
-//-     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-//-     title Sales Registration
-//-     link(rel='stylesheet' href='/css/sales.css')
-
-//-   body
-//-     .container
-//-       h2 Register New Sales
-
-//-       form(action="/salesform" method="post")
-
-//-         .row
-//-           .input-box
-//-             label Customer Name
-//-             input(type='text' name='customerName' placeholder='Enter customer name' required)
-
-//-         .row
-//-           .input-box
-//-             label Customer Address
-//-             input(type='text' name='customerAddress' placeholder='Enter address' required)
-
-//-           .input-box
-//-             label Customer Distance (KM)
-//-             input(type='number' name='customerDistance' placeholder='Enter distance' required)
-
-//-         .row
-//-           .input-box
-//-             label Phone Number
-//-             input(type='text' name='phoneNumber' placeholder='Enter phone number')
-
-//-           .input-box
-//-             label Item Name
-//-             select(name='itemId' required)
-//-               option(value='') Select Item
-
-//-               each item in stockItems
-//-                 option(value=item._id)
-//-                   = item.itemName + " (Stock: " + item.quantity + ")"
-
-//-         .row
-//-           .input-box
-//-             label Transport Paid
-//-             select(name='transportPaid' required)
-//-               option(value='true' selected) Yes
-//-               option(value='false') No
-
-//-         .row
-//-           .input-box
-//-             label Quantity
-//-             input(type='number' name='quantity' required)
-
-//-           //- .input-box
-//-           //-   label Unit Price
-//-           //-   input(type='number' name='unitPrice' required)
-//-           .input-box
-//-             label Payment Method
-//-             select(name='paymentMethod' required)
-//-               option Cash
-//-               option Mobile Money
-//-               option Bank
-
-//-         button(type='submit') Submit Sales
 doctype html
 html
   head
@@ -92,10 +27,18 @@ html
             label Customer Distance (KM)
             input(type='number' name='customerDistance' required)
 
+        
         .row
           .input-box
             label Phone Number
-            input(type='text' name='phoneNumber')
+            input(
+              type='text'
+              name='phoneNumber'
+              placeholder='+256700123456'
+              pattern='^\\+256[0-9]{9}$'
+              title='Phone number must start with +256 and contain exactly 9 digits after it'
+            )
+      
 
         // ================= ITEMS SECTION =================
         h3 Items Purchased

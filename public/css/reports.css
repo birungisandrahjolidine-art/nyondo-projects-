@@ -179,3 +179,70 @@ tbody tr:hover {
     .data-grid { grid-template-columns: 1fr; }
     .dashboard-header { flex-direction: column; gap: 10px; text-align: center; }
 }
+/* =========================
+   REPORT ACTION BUTTONS
+========================= */
+
+.report-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background-color: darkblue;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background-color: #00008b;
+}
+
+.print-btn {
+    background-color: var(--positive-green);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.print-btn:hover {
+    background-color: #059669;
+}
+/* =========================
+   PRINT MODE STYLING
+========================= */
+
+@media print {
+
+    /* Hide buttons when printing */
+    .report-actions {
+        display: none;
+    }
+
+    /* Remove background for clean print */
+    body {
+        background: white;
+    }
+
+    /* Remove shadows for print clarity */
+    .dashboard-header,
+    .metric-card,
+    .data-card {
+        box-shadow: none;
+    }
+
+    /* Optional: make text darker for print */
+    * {
+        color: black !important;
+    }
+}

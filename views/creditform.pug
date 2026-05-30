@@ -13,11 +13,28 @@ head
       input(type='text' name='customerName' required='')
 
       label Nin 
-      input(type='text' name='Nin' required='')
+      input(
+          type='text'
+          placeholder='CM4900906P76ZE'
+          name='Nin'
+          pattern='^C[MF][A-Z0-9]{12}$'
+          minlength='14'
+          maxlength='14'
+          oninput='this.value=this.value.toUpperCase()'
+          title='Enter a valid Ugandan NIN e.g. CM4900906P76ZE'
+          required
+       )
 
-      label phone 
-      input(type='text' name='phone' required='')
 
+      label Phone Number
+      input(
+            type='text'
+            name='phoneNumber'
+            placeholder='+256700123456'
+            pattern='^\\+256[0-9]{9}$'
+            title='Phone number must start with +256 and contain exactly 9 digits after it'
+            )
+      
       label Address
       input(type='text' name='address')
 

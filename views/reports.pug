@@ -7,7 +7,11 @@ html(lang="en")
     link(rel="stylesheet", href="/css/reports.css") 
   body
     .dashboard-container
-      
+    
+      .report-actions
+        a.back-btn(href='/admin') ← Back to Dashboard
+        button.print-btn(onclick='window.print()') 🖨 Print Report
+
       // Header Section
       header.dashboard-header
         .header-title
@@ -60,7 +64,7 @@ html(lang="en")
                   tr
                     td(colspan="4") No sales records found for this month.
 
-        // 2. Stock Added Table (Uses unitPrice matching your schema definition)
+        // 2. Stock Added Table
         .data-card
           h2 Stock Added & Vendor Balances
           .table-container
@@ -81,21 +85,3 @@ html(lang="en")
                 if stockItems.length === 0
                   tr
                     td(colspan="4") No stock replenishment registered this month.
-
-        // 3. Transport Table
-        .data-card
-          h2 Transport Operational Costs
-          .table-container
-            table
-              thead
-                tr
-                  th Customer / Delivery Area
-                  th Distance (KM)
-                  th Transport Fee Collected
-              tbody
-                each sale in dbSales
-                  if sale.transportCharge > 0
-                    tr
-                      td #{sale.customerAddress || 'Local Delivery'}
-                      td #{sale.customerDistance || '0'} km
-                      td.positive UGX #{sale.transportCharge.toLocaleString()}

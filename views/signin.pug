@@ -64,15 +64,16 @@ html
 
         // NIN VALIDATION
         input(
-            type='text'
-            placeholder='NIN'
-            name='Nin'
-            pattern='^[A-Za-z]{2}[0-9]{12}$'
-            minlength='14'
-            maxlength='14'
-            title='NIN must start with exactly 2 letters followed by exactly 12 numbers'
-            required
-          )
+          type='text'
+          placeholder='CM4900906P76ZE'
+          name='Nin'
+          pattern='^C[MF][A-Z0-9]{12}$'
+          minlength='14'
+          maxlength='14'
+          oninput='this.value=this.value.toUpperCase()'
+          title='Enter a valid Ugandan NIN e.g. CM4900906P76ZE'
+          required
+       )
 
         // CONFIRM PASSWORD
         input(

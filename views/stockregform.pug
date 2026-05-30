@@ -49,9 +49,17 @@ html
             label Supplier Name
             input(type='text' placeholder='Enter supplier' name='supplierName')
 
-          .input-box
-            label Supplier Phone 
-            input(type='tel' value='+256' pattern='^\\+256\\d{9}$' title='Must be +256 followed by 9 digits' name='supplierPhone' required)
+          .input-box 
+            label Phone Number
+            input(
+                type='text'
+                name='phoneNumber'
+                placeholder='+256700123456'
+                pattern='^\\+256[0-9]{9}$'
+                title='Phone number must start with +256 and contain exactly 9 digits after it'
+                required='' 
+              )
+      
         .row
           .input-box
             label item image 

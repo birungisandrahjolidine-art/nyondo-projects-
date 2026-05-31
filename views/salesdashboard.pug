@@ -9,7 +9,9 @@ html
   body
 
     .sidebar
-      h2 Dashboard
+      .sidebar-header
+        img.sidebar-logo(src='/images/loggo.png' alt='Nyondo Logo')
+        h2 Nyondo Sales
       if isSalesAttendant
       a(href='/salesform') Register New Sale
       a(href='/') Home

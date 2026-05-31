@@ -19,15 +19,16 @@ html
       if error
         .error-message
           = error
-      form(action='/signin' method='post')
+      form(action='/signin' method='post' novalidate id='signupForm')
 
         // FULL NAME
         input(
           type='text'
           placeholder='Full Name'
           name='fullname'
-          required
+          required=''
         )
+        small.error
 
         // EMAIL
         input(
@@ -36,6 +37,7 @@ html
           name='email'
           required
         )
+        small.error
 
         // PHONE NUMBER
         input(
@@ -44,24 +46,25 @@ html
           name='phoneNumber'
           pattern='^\\+256[0-9]{9}$'
           title='Phone number must start with +256 and contain exactly 9 digits after it'
-          required
+          required=''
         )
-
+        small.error
         // PASSWORD
         input(
           type='password'
           placeholder='Password'
           name='password'
-          required
+          required=''
         )
-
+        small.error
         // ADDRESS
         input(
           type='text'
           placeholder='Address'
           name='address'
+          required=''
         )
-
+        small.error
         // NIN VALIDATION
         input(
           type='text'
@@ -72,23 +75,85 @@ html
           maxlength='14'
           oninput='this.value=this.value.toUpperCase()'
           title='Enter a valid Ugandan NIN e.g. CM4900906P76ZE'
-          required
+          required=''
        )
-
+        small.error
         // CONFIRM PASSWORD
         input(
           type='password'
           placeholder='Confirm Password'
           name='confirmPassword'
-          required
+          required=''
         )
-
+        small.error
         // ROLE
-        select(name='role' required)
+        select(name='role', required='')
           option(value='' disabled selected) Select role
           option(value='Admin') Admin
           option(value='Sales_attendant') Sales attendant
           option(value='Store_Manager') Store Manager
-
+        small.error
         // SUBMIT BUTTON
         button(type='submit') Sign Up
+        script.
+            const form = document.getElementById('signupForm');
+
+            form.addEventListener('submit', function (e) {
+              let isValid = true;
+
+              // clear old errors
+              document.querySelectorAll('small.error').forEach(el => {
+                el.textContent = '';
+              });
+
+              document.querySelectorAll('input, select').forEach(field => {
+                field.classList.remove('invalid');
+
+                if (!field.checkValidity()) {
+                  field.classList.add('invalid');
+
+                  const error = field.nextElementSibling;
+
+                  if (error) {
+                    // PHONE VALIDATION
+                    if (field.name === 'phoneNumber') {
+                      error.textContent = 'Phone must start with +256 and have exactly 9 digits';
+                    }
+
+                    // NIN VALIDATION
+                    else if (field.name === 'Nin') {
+                      error.textContent = 'Enter a valid Ugandan NIN (e.g. CM4900906P76ZE)';
+                    }
+
+                    // EMAIL
+                    else if (field.type === 'email') {
+                      error.textContent = 'Please enter a valid email address';
+                    }
+                    //- REQUIRED FIELDS of roles
+                     else if (field.tagName.toLowerCase() === 'select') {
+                          error.textContent = 'Please select a role';
+                        }
+                    // DEFAULT
+                    else {
+                      error.textContent = 'This field is required';
+                    }
+                  }
+
+                  isValid = false;
+                }
+              });
+
+              // PASSWORD MATCH
+              const password = document.querySelector('[name="password"]');
+              const confirmPassword = document.querySelector('[name="confirmPassword"]');
+
+              if (password.value !== confirmPassword.value) {
+                confirmPassword.classList.add('invalid');
+                confirmPassword.nextElementSibling.textContent = 'Passwords do not match';
+                isValid = false;
+              }
+
+              if (!isValid) {
+                e.preventDefault();
+              }
+            });

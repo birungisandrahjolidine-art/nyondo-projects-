@@ -49,7 +49,14 @@ body {
     margin-bottom: 30px;
     color: white;
 }
-
+.sidebar-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 70%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  object-fit: cover;
+  margin-bottom: 10px;
+}
 .sidebar-links {
     display: flex;
     flex-direction: column;

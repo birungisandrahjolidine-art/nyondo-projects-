@@ -11,16 +11,18 @@ html
   body
     .dashboard-layout
       .sidebar
-        h2 Admin
-        nav
-          a(href='/admin') Admin dashboard
-          if isStoreManager
-          a(href='/stockdashboard') Stock dashboard
-          a(href='/stock') Inventory Levels
-          a(href='/supplier') Supplier Management
-          a(href='/') Home 
-          a(href='/creditform') Register new credit 
-          a(href='/logout') Logout
+         .sidebar-header
+          img.sidebar-logo(src='/images/loggo.png' alt='Nyondo Logo')
+          h2 Admin
+          nav
+            a(href='/admin') Admin dashboard
+            if isStoreManager
+            a(href='/stockdashboard') Stock dashboard
+            a(href='/stock') Inventory Levels
+            a(href='/supplier') Supplier Management
+            a(href='/') Home 
+            a(href='/creditform') Register new credit 
+            a(href='/logout') Logout
       .container
 
         h1 Credit page

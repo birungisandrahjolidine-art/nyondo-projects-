@@ -1,62 +1,174 @@
-body {
+/* ==========================================
+   1. GLOBAL RESET & LAYOUT WRAPPER
+   ========================================== */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #eef2f7;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* centers the form */
+body {
+  background-color: #f3f4f6; /* Soft light gray background */
+  color: #333333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centers form on large screens */
+  padding: 20px;
+}
+
+/* Outer wrapper ensuring full visibility of header/button */
 .form-wrapper {
-  height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* compact form box */
+/* ==========================================
+   2. FORM CONTAINER (CARD)
+   ========================================== */
 .form-container {
-  width: 380px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  background: #ffffff;
+  width: 100%;
+  max-width: 650px; /* Optimal reading width for a double-column form */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Soft, modern shadow */
+  
+  /* Critical Fix: Keeps form from breaking out of screen heights */
+  max-height: 90vh;
+  overflow-y: auto; 
 }
 
-/* title */
-h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  color: darkblue;
+/* Elegant Title styling */
+.form-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827; /* Deep near-black */
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e5e7eb;
+  text-transform: capitalize;
 }
 
-/* inputs */
+/* ==========================================
+   3. FLEXBOX GRID (Side-by-Side Inputs)
+   ========================================== */
+.form-row {
+  display: flex;
+  gap: 20px; /* Space between the two columns */
+  margin-bottom: 18px; /* Space between vertical rows */
+  width: 100%;
+}
+
+.form-row .form-group {
+  flex: 1; /* Forces 50/50 split evenly */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Aligns bottom row components horizontally perfectly */
+.form-row.align-bottom {
+  align-items: flex-end;
+}
+
+/* ==========================================
+   4. LABELS & INPUTS
+   ========================================== */
 label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563; /* Subtle muted gray for labels */
+  margin-bottom: 6px;
 }
 
-input, select {
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #1f2937;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  height: 42px; /* Uniform height across inputs and selects */
 }
 
-/* button */
-button {
+/* Smooth Focus States */
+input:focus,
+select:focus {
+  border-color: #2563eb; /* Modern business blue */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Placeholder styling */
+input::placeholder {
+  color: #9ca3af;
+}
+
+/* ==========================================
+   5. SUBMIT BUTTON
+   ========================================== */
+.button-group {
   width: 100%;
-  margin-top: 15px;
-  padding: 10px;
-  background: darkblue;
-  color: white;
+}
+
+button[type="submit"] {
+  width: 100%;
+  height: 42px; /* Matches the input height exactly */
+  background-color: #2563eb;
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
+  transition: background-color 0.15s ease-in-out;
 }
 
-button:hover {
-  background: orange;
+button[type="submit"]:hover {
+  background-color: #1d4ed8; /* Darker blue on hover */
+}
+
+button[type="submit"]:active {
+  background-color: #1e40af;
+}
+
+/* ==========================================
+   6. RESPONSIVENESS (Mobile View)
+   ========================================== */
+@media (max-width: 520px) {
+  /* On small mobile screens, drop inputs back into a single column automatically */
+  .form-row {
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 0;
+  }
+  
+  .form-row .form-group {
+    margin-bottom: 18px;
+  }
+  
+  .form-row.align-bottom {
+    align-items: stretch;
+  }
+}
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input:focus {
+  outline: none;
+}
+
+small {
+  font-size: 12px;
 }

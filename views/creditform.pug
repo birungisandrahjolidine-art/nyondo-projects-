@@ -1,54 +1,131 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  title Credit Form
-  link(rel='stylesheet' href='/css/creditform.css')
-.form-wrapper
-  .form-container
-    h2 Register new Credit
-    form(action='/creditform' method='post')
-      label(for='date') Date
-      input(type='date' name='date' required='')
-      label Customer Name
-      input(type='text' name='customerName' required='')
+html
+  head
+    meta(charset='UTF-8')
+    title Credit Form
+    link(rel='stylesheet' href='/css/creditform.css')
+  body
+    .form-wrapper
+      .form-container
+        h2 Register new Credit
+        form(action='/creditform' method='post' novalidate)
+          
+          //- Row 1: Date & Customer Name
+          .form-row
+            .form-group
+              label(for='date') Date
+              input(type='date' name='date' required)
+            .form-group
+              label Customer Name
+              input(type='text' name='customerName' required)
 
-      label Nin 
-      input(
-          type='text'
-          placeholder='CM4900906P76ZE'
-          name='Nin'
-          pattern='^C[MF][A-Z0-9]{12}$'
-          minlength='14'
-          maxlength='14'
-          oninput='this.value=this.value.toUpperCase()'
-          title='Enter a valid Ugandan NIN e.g. CM4900906P76ZE'
-          required
-       )
+          //- Row 2: NIN & Phone Number
+          .form-row
+            .form-group
+              label Nin 
+              input(
+                type='text'
+                placeholder='CM4900906P76ZE'
+                name='Nin'
+                pattern='^C[MF][A-Z0-9]{12}$'
+                minlength='14'
+                maxlength='14'
+                oninput='this.value=this.value.toUpperCase()'
+                title='Enter a valid Ugandan NIN e.g. CM4900906P76ZE'
+                required
+              )
+            .form-group
+              label Phone Number
+              input(
+                type='text'
+                name='phoneNumber'
+                placeholder='+256700123456'
+                pattern='^\\+256[0-9]{9}$'
+                title='Phone number must start with +256 and contain exactly 9 digits after it'
+                required=""
+              )
+          
+          //- Row 3: Address & Item Name
+          .form-row
+            .form-group
+              label Address
+              input(type='text' name='address' required="")
+        
+            .form-group
+              label Item Name
+              select(name='itemName' id='itemName' required)
+                option(value='') -- Select Item --
 
+                if stockItems && stockItems.length > 0
+                  each item in stockItems
+                    option(
+                      value=item.itemName
+                      data-price=item.sellingPrice
+                    ) #{item.itemName} (Stock: #{item.quantity})
+                else
+                  option(value='' disabled) No items available in stock
 
-      label Phone Number
-      input(
-            type='text'
-            name='phoneNumber'
-            placeholder='+256700123456'
-            pattern='^\\+256[0-9]{9}$'
-            title='Phone number must start with +256 and contain exactly 9 digits after it'
-            )
-      
-      label Address
-      input(type='text' name='address')
+          //- Row 4: Quantity & Unit Price
+          .form-row
+            .form-group
+              label Quantity
+              input(type='number' name='quantity' required)
+            .form-group
+              label unitPrice 
+              input(type='number' name='unitPrice' readonly)
 
-      label Item Name
-      select(name='itemName' required='')
-        option(value='')
-        option(value='cement') Cement
-        option(value='iron_sheetsguage28') Iron Sheets guage28
-        option(value='iron_sheetsguage28') Iron Sheets guage32 
-        option(value='iron_sheetsguage28') Iron Sheets guage30
-      label Quantity
-      input(type='number' name='quantity' required='')
-      label unitPrice 
-      input(type='number' name='unitPrice' required='')
-      label Amount deposited
-      input(type='number' name='amountDeposited' required='')
-      button(type='submit') Save Credit
+          //- Row 5: Amount Deposited & Save Button
+          .form-row.align-bottom
+            .form-group
+              label Amount deposited
+              input(type='number' name='amountDeposited' required)
+            .form-group.button-group
+              button(type='submit') Save Credit
+      script.
+        document.addEventListener("DOMContentLoaded", function () {
+
+          const form = document.querySelector("form");
+
+          form.addEventListener("submit", function (e) {
+            let valid = true;
+
+            const requiredFields = form.querySelectorAll("[required]");
+
+            requiredFields.forEach(field => {
+
+              const errorId = field.name + "-error";
+
+              // remove old error
+              const oldError = document.getElementById(errorId);
+              if (oldError) oldError.remove();
+
+              // reset border
+              field.style.border = "";
+
+              // FIX: handle all field types safely
+              const value = field.value ? field.value.toString().trim() : "";
+
+              if (!value) {
+                valid = false;
+
+                // red border
+                field.style.border = "2px solid red";
+
+                // error message
+                const error = document.createElement("small");
+                error.id = errorId;
+                error.innerText = "This field is required";
+                error.style.color = "red";
+                error.style.display = "block";
+                error.style.marginTop = "5px";
+
+                field.parentNode.appendChild(error);
+              }
+            });
+
+            if (!valid) {
+              e.preventDefault();
+            }
+          });
+
+        });

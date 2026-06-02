@@ -97,3 +97,14 @@ button:hover{
         flex-direction: column;
     }
 }
+.input-box.error input,
+.input-box.error select {
+  border: 2px solid red;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}

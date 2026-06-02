@@ -75,3 +75,31 @@ button:hover{
     background: orange;
     color: black;
 }
+.input-box {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box input,
+.input-box select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input-box.error input,
+.input-box.error select {
+  border: 2px solid red;
+}
+
+.input-box small {
+  color: red;
+  visibility: hidden;
+  font-size: 12px;
+}
+
+.input-box.error small {
+  visibility: visible;
+}

@@ -10,9 +10,7 @@ html
     .container
       h2 Register New Sale
 
-      form(action="/salesform" method="post")
-
-        // ================= CUSTOMER INFO =================
+      form(action="/salesform" method="post" novalidate)
         .row
           .input-box
             label Customer Name
@@ -37,10 +35,8 @@ html
               placeholder='+256700123456'
               pattern='^\\+256[0-9]{9}$'
               title='Phone number must start with +256 and contain exactly 9 digits after it'
+              required=""
             )
-      
-
-        // ================= ITEMS SECTION =================
         h3 Items Purchased
 
         #itemsContainer
@@ -59,8 +55,6 @@ html
               input(type='number' name='items[0][quantity]' required)
 
         button(type='button' onclick='addItem()') + Add Another Item
-
-        // ================= TRANSPORT =================
         .row
           .input-box
             label Transport Type
@@ -69,50 +63,68 @@ html
               option(value='own') Use Own Transport (No Charge)
               option(value='hardware') Hardware Provides (Free if Purchase ≥ 500,000 UGX)
               option(value='paid') Pay 30,000 UGX for Hardware Transport
-
-        // ================= PAYMENT =================
         .row
           .input-box
             label Payment Method
             select(name='paymentMethod' required)
-              option Cash
-              option Mobile Money
-              option Bank
+              option(value='') Select Payment Method
+              option(value='cash') Cash
+              option(value='mobile') Mobile Money
+              option(value='bank') Bank
 
         button(type='submit') Submit Sale
+//- javascript validations
+script.
+  const form = document.querySelector('form');
 
+  form.addEventListener('submit', function (e) {
+    let isValid = true;
 
-    // ================= JAVASCRIPT =================
-    script.
-      let index = 1;
+    const fields = form.querySelectorAll('[required]');
 
-      const firstSelect = document.querySelector('#itemsContainer .item-row select');
-      const itemOptions = firstSelect ? firstSelect.innerHTML : '';
+    fields.forEach(field => {
+      const box = field.closest('.input-box') || field.parentElement;
 
-      function addItem() {
-        const container = document.getElementById('itemsContainer');
+      let error = box.querySelector('.error-text');
 
-        const div = document.createElement('div');
-        div.classList.add('item-row');
-
-        div.innerHTML = `
-          <div class="input-box">
-            <label>Item</label>
-            <select name="items[${index}][itemId]" required>
-              <option value="">Select Item</option>
-              ${itemOptions}
-            </select>
-          </div>
-
-          <div class="input-box">
-            <label>Quantity</label>
-            <input type="number" name="items[${index}][quantity]" required>
-          </div>
-
-          <button type="button" onclick="this.parentElement.remove()">Remove</button>
-        `;
-
-        container.appendChild(div);
-        index++;
+      if (!error) {
+        error = document.createElement('small');
+        error.classList.add('error-text');
+        box.appendChild(error);
       }
 
+      let value = field.value;
+
+      // Handle number fields
+      if (field.type === 'number') {
+        if (value === '' || isNaN(value)) {
+          isValid = false;
+          showError();
+          return;
+        }
+      }
+
+      // Handle select + text
+      if (!value || value === '') {
+        isValid = false;
+        showError();
+        return;
+      }
+
+      clearError();
+
+      function showError() {
+        box.classList.add('error');
+        error.innerText = 'This field is required';
+      }
+
+      function clearError() {
+        box.classList.remove('error');
+        error.innerText = '';
+      }
+    });
+
+    if (!isValid) {
+      e.preventDefault();
+    }
+  });

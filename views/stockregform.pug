@@ -10,44 +10,45 @@ html
     .form-container
       h2 Stock Registration
 
-      form(action="/stockregform" method="post" enctype='multipart/form-data')
-
-        label Item Name
-        select(name='itemName')
-            option(value="Wheelbarrow") Wheelbarrow
-            option(value="Nails 1 inch") Nails 1 inch
-            option(value="Nails 3 inch") Nails 3 inch
-            option(value="Nails 4 inch") Nails 4 inch
-            option(value="Nails 5 inch") Nails 5 inch
-            option(value="Roofing nails in 5kgs packs") Roofing nails in 5kgs packs
-            option(value="Barbed wires high tensile") Barbed wires high tensile
-            option(value="Barbed wires low tensile") Barbed wires low tensile
-            option(value="Iron sheets (black - 30)")  Iron sheets (black - 30)
-            option(value="Iron sheets (red - 32)") Iron sheets (red - 32)
-            option(value="Iron sheets (green - 28)") Iron sheets (green - 28)
-            option(value="Wire mesh") Wire mesh
-            option(value="Iron bars 10mm") Iron bars 10mm
-            option(value="Iron bars 10mm") Iron bars 10mm
-            option(value="Iron bars 16mm") Iron bars 16mm
-            option(value="cem ii") cem ii 
-            option(value="cem iii") cem iii 
+      form(action="/stockregform" method="post" enctype='multipart/form-data' novalidate)
+        .input-box 
+          label Item Name
+          select(name='itemName' required='')
+              option(value='') Select Item
+              option(value="Cement") Cement
+              option(value="Wheelbarrow") Wheelbarrow
+              option(value="Nails 1 inch") Nails 1 inch
+              option(value="Nails 3 inch") Nails 3 inch
+              option(value="Nails 4 inch") Nails 4 inch
+              option(value="Nails 5 inch") Nails 5 inch
+              option(value="Roofing nails in 5kgs packs") Roofing nails in 5kgs packs
+              option(value="Barbed wires high tensile") Barbed wires high tensile
+              option(value="Barbed wires low tensile") Barbed wires low tensile
+              option(value="Iron sheets (black - 30)")  Iron sheets (black - 30)
+              option(value="Iron sheets (red - 32)") Iron sheets (red - 32)
+              option(value="Iron sheets (green - 28)") Iron sheets (green - 28)
+              option(value="Wire mesh") Wire mesh
+              option(value="Iron bars 10mm") Iron bars 10mm
+              option(value="Iron bars 10mm") Iron bars 10mm
+              option(value="Iron bars 16mm") Iron bars 16mm
+              option(value="cem ii") cem ii 
+              option(value="cem iii") cem iii 
         .row
           .input-box
             label Quantity
-            input(type='number' placeholder='Enter quantity' name='quantity')
+            input(type='number' placeholder='Enter quantity' name='quantity' required='')
 
           .input-box
             label Unit Price
-            input(type='number' placeholder='Enter price' name='unitPrice')
-
+            input(type='number' placeholder='Enter price' name='unitPrice' required='')
         .row
           .input-box
             label Selling Price
-            input(type='number' placeholder='Enter selling price' name='sellingPrice')
+            input(type='number' placeholder='Enter selling price' name='sellingPrice' required='')
 
           .input-box
             label Supplier Name
-            input(type='text' placeholder='Enter supplier' name='supplierName')
+            input(type='text' placeholder='Enter supplier' name='supplierName' required='')
 
           .input-box 
             label Phone Number
@@ -59,21 +60,63 @@ html
                 title='Phone number must start with +256 and contain exactly 9 digits after it'
                 required='' 
               )
-      
         .row
           .input-box
             label item image 
-            input(type='file' placeholder='uploading' name='itemimage')
+            input(type='file' placeholder='uploading' name='itemimage' required='')
           .input-box
             label Factory Name
-            input(type='text' placeholder='Enter factory name' name='factory')
+            input(type='text' placeholder='Enter factory name' name='factory' required='')
 
           .input-box
             label Payment Status 
 
-            select(name='paymentStatus')
-              option Select Payment Status
-              option cleared
-              option pending
+            select(name='paymentStatus' required="")
+              option(value="") Select Payment Status
+              option(value="cleared") cleared
+              option(value="pending") pending
 
         button(type='submit') Register Stock
+      script.
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function (e) {
+          let isValid = true;
+
+          const fields = [
+            'itemName',
+            'quantity',
+            'unitPrice',
+            'sellingPrice',
+            'supplierName',
+            'phoneNumber',
+            'factory',
+            'paymentStatus'
+          ];
+
+          fields.forEach(name => {
+            const input = document.querySelector(`[name="${name}"]`);
+            const box = input.parentElement;
+
+            // create or reuse error element
+            let error = box.querySelector('.error-text');
+            if (!error) {
+              error = document.createElement('small');
+              error.classList.add('error-text');
+              box.appendChild(error);
+            }
+
+            if (input.value.trim() === '') {
+              box.classList.add('error');
+              error.innerText = 'This field is required';
+              isValid = false;
+            } else {
+              box.classList.remove('error');
+              error.innerText = '';
+            }
+          });
+
+          if (!isValid) {
+            e.preventDefault();
+          }
+        });

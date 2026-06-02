@@ -1,13 +1,68 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Login Page
-  link(rel='stylesheet' href='/css/login.css')
-.login-box
-  h2 
-  form.login-form(action='/login' method='post')
-    input(type='text' placeholder='Email or Username' name="email" required='')
-    input(type='password' placeholder='Password' name="password" required='')
-    button(type='submit') Sign In
-  
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Login Page
+    link(rel='stylesheet' href='/css/login.css')
+
+  body
+    .login-box
+      h2 Login
+
+      form#loginForm.login-form(action='/login' method='post' novalidate)
+        
+        .input-group
+          input#email(type='text' name='email' placeholder='Email or Username')
+          span.error-icon ❗
+          small.error-text
+
+        .input-group
+          input#password(type='password' name='password' placeholder='Password')
+          span.error-icon ❗
+          small.error-text
+
+        button(type='submit') Sign In
+
+    script.
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("loginForm");
+
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+
+        function setError(input, message) {
+          const group = input.parentElement;
+          group.classList.add("error");
+
+          const errorText = group.querySelector(".error-text");
+          errorText.innerText = message;
+        }
+
+        function clearError(input) {
+          const group = input.parentElement;
+          group.classList.remove("error");
+
+          const errorText = group.querySelector(".error-text");
+          errorText.innerText = "";
+        }
+
+        form.addEventListener("submit", (e) => {
+          let valid = true;
+
+          clearError(email);
+          clearError(password);
+
+          if (email.value.trim() === "") {
+            setError(email, "Email is required");
+            valid = false;
+          }
+
+          if (password.value.trim() === "") {
+            setError(password, "Password is required");
+            valid = false;
+          }
+
+          if (!valid) e.preventDefault();
+        });
+      });

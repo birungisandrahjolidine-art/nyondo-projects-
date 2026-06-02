@@ -26,4 +26,40 @@
       }
       button:hover{
         background-color: orange;
-      }
+      };
+      .input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.input-group.error input {
+  border-color: red;
+}
+
+.error-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+  display: none;
+}
+
+.input-group.error .error-icon {
+  display: block;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}

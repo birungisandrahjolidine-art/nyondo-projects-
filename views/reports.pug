@@ -7,15 +7,25 @@ html(lang="en")
     link(rel="stylesheet", href="/css/reports.css") 
   body
     .dashboard-container
-    
-      .report-actions
+
+      // Combined Top Action and Filter Row
+      .report-action-bar
         a.back-btn(href='/admin') ← Back to Dashboard
+        
+        //- form.search-form(method="get", action="/jolidine/reports")
+        //-   label Select Month:
+        //-   select(name="range")
+        //-     option(value="month") This Month
+        //-     option(value="lastMonth") Last Month
+        //-     option(value="week") This Week
+        //-     option(value="lastWeek") Last Week
+        //-   button(type="submit" class="search-submit-btn") 🔍 Search
+          
         button.print-btn(onclick='window.print()') 🖨 Print Report
 
       // Header Section
       header.dashboard-header
         .header-title
-          span
           h1 #{reportTitle} PERFORMANCE REPORT
         .header-logo
           span.logo-text NYONDO Hardware LTD
@@ -85,3 +95,30 @@ html(lang="en")
                 if stockItems.length === 0
                   tr
                     td(colspan="4") No stock replenishment registered this month.
+
+        // 3. Creditors Table
+        .data-card
+          h2 Creditors Item Details
+          .table-container
+            table
+              thead
+                tr
+                  th Customer Name
+                  th Phone
+                  th Item
+                  th Quantity
+                  th Amount
+                  th Date
+              tbody
+               each c in creditors
+                  tr
+                      td #{c.customerName}
+                      td #{c.phone || 'N/A'}
+                      td #{c.itemName}
+                      td #{c.quantity}
+                      td UGX #{(c.totalCost || 0).toLocaleString()}
+                      td #{new Date(c.date).toDateString()}
+                  if creditors.length === 0
+                    tr
+                      td(colspan="6") No credit sales found for this period.
+          

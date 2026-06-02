@@ -7,6 +7,7 @@ const multer = require('multer');
 const Registration = require("../models/Registration");
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
+const Credit = require("../models/Credit");
 
 const { isAdmin, isStoreManager } = require("../middleware/auth");
 // MULTER FILE UPLOAD SETUP
@@ -33,43 +34,162 @@ router.get('/creditform', isAdmin, (req, res) => res.render('creditform'));
 router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
 router.get("/resetp", isAdmin, (req, res) => res.render("resetp"));
 router.get("/success", (req, res) => res.render("success"));
+
 router.get("/reports", async (req, res) => {
   try {
-    const year = parseInt(req.query.year, 10) || new Date().getFullYear();
-    const month = parseInt(req.query.month, 10) || (new Date().getMonth() + 1);
-    const startDate = new Date(year, month - 1, 1);
-    const endDate = new Date(year, month, 0, 23, 59, 59);
+    const { range } = req.query;
+    const now = new Date();
 
-    const sales = await Sale.find({ date: { $gte: startDate, $lte: endDate } });
-    const stockPurchases = await Stock.find({ date: { $gte: startDate, $lte: endDate } });
+    let startDate;
+    let endDate;
+
+    // =========================
+    // DATE FILTERS
+    // =========================
+
+    if (!range || range === "month") {
+      startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+      startDate.setHours(0, 0, 0, 0);
+
+      endDate = new Date(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        0,
+        23,
+        59,
+        59,
+        999
+      );
+    }
+
+    else if (range === "lastMonth") {
+      startDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      startDate.setHours(0, 0, 0, 0);
+
+      endDate = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        0,
+        23,
+        59,
+        59,
+        999
+      );
+    }
+
+    else if (range === "week") {
+      const day = now.getDay();
+
+      startDate = new Date(now);
+      startDate.setDate(now.getDate() - day);
+      startDate.setHours(0, 0, 0, 0);
+
+      endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + 6);
+      endDate.setHours(23, 59, 59, 999);
+    }
+
+    else if (range === "lastWeek") {
+      const day = now.getDay();
+
+      startDate = new Date(now);
+      startDate.setDate(now.getDate() - day - 7);
+      startDate.setHours(0, 0, 0, 0);
+
+      endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + 6);
+      endDate.setHours(23, 59, 59, 999);
+    }
+
+    else if (range === "today") {
+      startDate = new Date();
+      startDate.setHours(0, 0, 0, 0);
+
+      endDate = new Date();
+      endDate.setHours(23, 59, 59, 999);
+    }
+
+    // =========================
+    // DATABASE FILTER
+    // =========================
+
+    const queryFilter = {
+      date: {
+        $gte: startDate,
+        $lte: endDate
+      }
+    };
+
+    // =========================
+    // FETCH DATA
+    // =========================
+
+    const salesFiltered = await Sale.find(queryFilter);
+    const stockFiltered = await Stock.find(queryFilter);
+    const creditFiltered = await Credit.find(queryFilter);
+
+    // =========================
+    // CALCULATIONS
+    // =========================
 
     let totalCashSales = 0;
-    let totalCustomerCredit = 0;
+    let totalCreditSales = 0;
     let totalTransportExpenses = 0;
-    let totalSupplierCredit = 0;
     let totalStockCost = 0;
+    let totalSupplierCredit = 0;
 
-    sales.forEach((sale) => {
-      const charge = Number(sale.totalCharge) || 0;
-      if (sale.paymentMethod === "Credit" || sale.isSalaryScheme) {
-        totalCustomerCredit += charge;
-      } else {
-        totalCashSales += charge;
-      }
+    // Sales
+    salesFiltered.forEach((sale) => {
+      totalCashSales += Number(sale.totalCharge) || 0;
       totalTransportExpenses += Number(sale.transportCharge) || 0;
     });
 
-    stockPurchases.forEach((item) => {
-      const qty = Number(item.quantity) || 0;
-      const unitCost = Number(item.unitPrice || item.unitCost) || 0;
-      totalStockCost += qty * unitCost;
-      totalSupplierCredit += Number(item.supplierCreditOwed) || 0;
+    // Credit sales
+    creditFiltered.forEach((credit) => {
+      totalCreditSales += Number(credit.totalCost) || 0;
     });
 
-    const totalRevenue = totalCashSales + totalCustomerCredit;
+    // Stock purchases
+    stockFiltered.forEach((item) => {
+      const qty = Number(item.quantity) || 0;
+      const unitPrice = Number(item.unitPrice) || 0;
+
+      totalStockCost += qty * unitPrice;
+
+      if (item.paymentStatus === "Credit") {
+        totalSupplierCredit += qty * unitPrice;
+      }
+    });
+
+    const totalRevenue = totalCashSales + totalCreditSales;
     const totalExpenses = totalStockCost + totalTransportExpenses;
     const netCashFlow = totalCashSales - totalTransportExpenses;
-    const reportTitle = `${startDate.toLocaleString("default", { month: "long" }).toUpperCase()} ${year}`;
+
+    // =========================
+    // REPORT TITLE
+    // =========================
+
+    const titleMap = {
+      month: "THIS MONTH",
+      lastMonth: "LAST MONTH",
+      week: "THIS WEEK",
+      lastWeek: "LAST WEEK",
+      today: "TODAY"
+    };
+
+    const reportTitle = titleMap[range] || "THIS MONTH";
+
+    // =========================
+    // DEBUGGING
+    // =========================
+
+    console.log("Sales:", salesFiltered.length);
+    console.log("Stock:", stockFiltered.length);
+    console.log("Creditors:", creditFiltered.length);
+
+    // =========================
+    // RENDER PAGE
+    // =========================
 
     res.render("reports", {
       reportTitle,
@@ -77,16 +197,18 @@ router.get("/reports", async (req, res) => {
       totalExpenses,
       netCashFlow,
       totalSupplierCredit,
-      dbSales: sales,
-      stockItems: stockPurchases,
+      dbSales: salesFiltered,
+      stockItems: stockFiltered,
+      creditors: creditFiltered
     });
+
   } catch (error) {
-    console.error("Error generating report:", error);
-    res.status(500).send("Unable to load report statistics.");
+    console.error("REPORT ERROR:", error);
+    res.status(500).send(error.message);
   }
 });
-
-// AUTHENTICATION ROUTES (SIGNIN & LOGIN)
+ 
+// // AUTHENTICATION ROUTES (SIGNIN & LOGIN)
 router.get("/admin/register", isAdmin, (req, res) => {
   res.render("signin");
 });
@@ -267,4 +389,6 @@ router.post("/editsupplier/:id", async (req, res) => {
   }
 
 });
+// report routees
+
 module.exports = router;

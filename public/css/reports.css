@@ -1,27 +1,31 @@
-
+/* ==========================================================================
+   1. GLOBAL ROOT VARIABLES & RESET (CRITICAL: Fixes the unstyled look)
+   ========================================================================== */
 :root {
     --bg-color: #f3f4f6;
     --card-bg: #ffffff;
-    --primary-blue:darkblue ;
-    --text-main: #333333;
-    --text-muted: #666666;
+    --primary-blue: #00008b; /* Clean Dark Blue */
+    --text-main: #1f2937;
+    --text-muted: #4b5563;
     --border-color: #e5e7eb;
     --positive-green: #10b981;
     --negative-red: #ef4444;
-    --warn-orange: #f59e0b;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
-    padding: 20px;
+    padding: 24px;
+    line-height: 1.5;
 }
 
 .dashboard-container {
@@ -29,52 +33,139 @@ body {
     margin: 0 auto;
 }
 
-/* Header Component */
+/* ==========================================================================
+   2. COMBINED TOP ACTION & FILTER BAR (FORCED SINGLE LINE)
+   ========================================================================== */
+.report-action-bar {
+    display: flex;
+    justify-content: space-between; /* Spreads back button, form, and print button across the bar */
+    align-items: center;            /* Centers items perfectly in the vertical middle */
+    gap: 20px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    flex-wrap: nowrap;              /* Crucial: Prevents the main container row from wrapping */
+}
+
+/* Inline Form Filter Controls */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;                 /* Allows the form area to fill available center space */
+    justify-content: center;      /* Centers the select box and search button in the middle */
+    flex-wrap: nowrap;            /* Forces the label, select, and button onto one line */
+}
+
+.search-form label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;          /* Prevents text from breaking into two lines */
+}
+
+.search-form select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 160px;                 /* Fixed width so it doesn't shrink awkwardly */
+    background-color: white;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;               /* Prevents browser from squeezing the dropdown narrow */
+}
+
+.search-form select:focus {
+    border-color: var(--primary-blue);
+}
+
+/* Reusable Button Utility Rules */
+.back-btn, .print-btn, .search-submit-btn {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;          /* Forces button text to stay on one line */
+    cursor: pointer;
+    flex-shrink: 0;               /* Prevents buttons from squishing or getting cut off */
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.back-btn {
+    background-color: var(--primary-blue);
+    color: white;
+}
+.back-btn:hover { 
+    background-color: #000066; 
+}
+
+.print-btn {
+    background-color: var(--positive-green);
+    color: white;
+    border: none;
+}
+.print-btn:hover { 
+    background-color: #059669; 
+}
+
+.search-submit-btn {
+    background-color: #f1f5f9;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+.search-submit-btn:hover { 
+    background-color: #e2e8f0; 
+}
+
+/* ==========================================================================
+   3. DASHBOARD BLUE BANNER HEADER
+   ========================================================================== */
 .dashboard-header {
     background-color: var(--primary-blue);
     color: white;
-    padding: 15px 20px;
+    padding: 18px 24px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px white;
-}
-
-.header-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
 }
 
 .header-title h1 {
-    font-size: 1.3rem;
-    letter-spacing: 0.5px;
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
 .logo-text {
-    font-weight: bold;
-    font-size: 1.1rem;
-    border-left: 2px solid white;
-    padding-left: 10px;
+    font-weight: 700;
+    border-left: 3px solid white;
+    padding-left: 12px;
 }
 
-/* Top Metrics Bar CSS Grid */
+/* ==========================================================================
+   4. METRICS CARDS GRID (UGX Summaries)
+   ========================================================================== */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .metric-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 15px;
+    border-radius: 8px;
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 4px white;
+    box-shadow: var(--shadow-sm);
 }
 
 .metric-card h3 {
@@ -82,11 +173,10 @@ body {
     color: var(--text-muted);
     margin-bottom: 8px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .metric-value {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-blue);
 }
@@ -94,19 +184,21 @@ body {
 .metric-value.positive { color: var(--positive-green); }
 .metric-value.negative { color: var(--negative-red); }
 
-/* Main Dashboard  */
+/* ==========================================================================
+   5. DATA TABLES & CARDS
+   ========================================================================== */
 .data-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 24px;
 }
 
 .data-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px white;
+    box-shadow: var(--shadow-sm);
 }
 
 .data-card h2 {
@@ -114,12 +206,10 @@ body {
     border-bottom: 1px solid var(--border-color);
     color: var(--primary-blue);
     font-size: 0.85rem;
-    padding: 12px 15px;
+    padding: 14px 16px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-/* Table Framework Styles */
 .table-container {
     width: 100%;
     overflow-x: auto;
@@ -129,11 +219,11 @@ table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
 }
 
 th, td {
-    padding: 10px 15px;
+    padding: 12px 16px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -147,20 +237,13 @@ tbody tr:hover {
     background-color: #f8fafc;
 }
 
-.row-total {
-    background-color: #f8fafc;
-    font-weight: bold;
-    border-top: 2px solid var(--border-color);
-}
-
 /* Status Badges */
 .badge {
     display: inline-block;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 12px;
     font-size: 0.75rem;
     font-weight: 600;
-    text-align: center;
 }
 
 .badge.active {
@@ -173,75 +256,21 @@ tbody tr:hover {
     color: #991b1b;
 }
 
-/* Responsive breakpoint for mobile viewports */
-@media (max-width: 600px) {
-    body { padding: 10px; }
-    .data-grid { grid-template-columns: 1fr; }
-    .dashboard-header { flex-direction: column; gap: 10px; text-align: center; }
-}
-/* =========================
-   REPORT ACTION BUTTONS
-========================= */
-
-.report-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.back-btn {
-    background-color: darkblue;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.back-btn:hover {
-    background-color: #00008b;
-}
-
-.print-btn {
-    background-color: var(--positive-green);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.print-btn:hover {
-    background-color: #059669;
-}
-/* =========================
-   PRINT MODE STYLING
-========================= */
-
+/* ==========================================================================
+   6. PRINT MODE MANAGEMENT
+   ========================================================================== */
 @media print {
-
-    /* Hide buttons when printing */
-    .report-actions {
-        display: none;
+    .report-action-bar {
+        display: none !important; /* Hides control row when exporting/printing */
     }
-
-    /* Remove background for clean print */
     body {
         background: white;
+        padding: 0;
     }
-
-    /* Remove shadows for print clarity */
-    .dashboard-header,
-    .metric-card,
-    .data-card {
-        box-shadow: none;
+    .dashboard-header, .metric-card, .data-card {
+        box-shadow: none !important;
+        border: 1px solid #000;
     }
-
-    /* Optional: make text darker for print */
     * {
         color: black !important;
     }

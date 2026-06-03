@@ -4,10 +4,10 @@ const Credit = require("../models/Credit");
 const Stock = require("../models/Stock"); 
 const { isAdmin } = require("../middleware/auth");
 
-// Get route for credit form - Clean & Fixed with plain object mapping
+// Get route for credit form 
 router.get("/creditform", isAdmin, async (req, res) => {
   try {
-    // .lean() converts documents to clean JS objects so filtering reads .quantity perfectly
+    // converts documents to clean JS objects it helps filtering reads .quantity perfectly
     const allItems = await Stock.find({}).lean() || [];
     
     console.log("=== DB RAW STOCK ITEMS INITIALIZED ===");
@@ -29,7 +29,7 @@ router.get("/creditform", isAdmin, async (req, res) => {
   }
 });
 
-// Post route for credit form - Fixed field tracking and simplified error output
+// Post route for credit form 
 router.post("/creditform", isAdmin, async (req, res) => {
   try {
     // 1. Get form values

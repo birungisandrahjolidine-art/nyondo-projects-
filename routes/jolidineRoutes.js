@@ -9,7 +9,7 @@ const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
 const Credit = require("../models/Credit");
 
-const { isAdmin, isStoreManager } = require("../middleware/auth");
+const { isAdmin, isStoreManager, authorizeRoles } = require("../middleware/auth");
 // MULTER FILE UPLOAD SETUP
 
 const storage = multer.diskStorage({
@@ -26,7 +26,7 @@ const upload = multer({ storage });
 router.get("/", (req, res) => res.render("index"));
 router.get("/login", (req, res) => res.render("login"));
 router.get("/signin", (req, res) => res.render("signin"));
-router.get("/stockregform", isStoreManager, (req, res) => res.render("stockregform"));
+router.get("/stockregform", authorizeRoles("Admin", "Store_Manager"), (req, res) => res.render("stockregform"));
 router.get("/transport", (req, res) => res.render("transport"));
 router.get("/creditreceipt", (req, res) => res.render("creditreceipt"));
 router.get('/logout', (req, res) => res.render('logout'));
@@ -43,10 +43,8 @@ router.get("/reports", async (req, res) => {
     let startDate;
     let endDate;
 
-    // =========================
+   
     // DATE FILTERS
-    // =========================
-
     if (!range || range === "month") {
       startDate = new Date(now.getFullYear(), now.getMonth(), 1);
       startDate.setHours(0, 0, 0, 0);
@@ -108,10 +106,7 @@ router.get("/reports", async (req, res) => {
       endDate = new Date();
       endDate.setHours(23, 59, 59, 999);
     }
-
-    // =========================
     // DATABASE FILTER
-    // =========================
 
     const queryFilter = {
       date: {
@@ -119,19 +114,13 @@ router.get("/reports", async (req, res) => {
         $lte: endDate
       }
     };
-
-    // =========================
     // FETCH DATA
-    // =========================
 
     const salesFiltered = await Sale.find(queryFilter);
     const stockFiltered = await Stock.find(queryFilter);
     const creditFiltered = await Credit.find(queryFilter);
 
-    // =========================
     // CALCULATIONS
-    // =========================
-
     let totalCashSales = 0;
     let totalCreditSales = 0;
     let totalTransportExpenses = 0;
@@ -165,10 +154,7 @@ router.get("/reports", async (req, res) => {
     const totalExpenses = totalStockCost + totalTransportExpenses;
     const netCashFlow = totalCashSales - totalTransportExpenses;
 
-    // =========================
     // REPORT TITLE
-    // =========================
-
     const titleMap = {
       month: "THIS MONTH",
       lastMonth: "LAST MONTH",
@@ -179,18 +165,14 @@ router.get("/reports", async (req, res) => {
 
     const reportTitle = titleMap[range] || "THIS MONTH";
 
-    // =========================
-    // DEBUGGING
-    // =========================
+    // debugging logs
 
     console.log("Sales:", salesFiltered.length);
     console.log("Stock:", stockFiltered.length);
     console.log("Creditors:", creditFiltered.length);
 
-    // =========================
+    
     // RENDER PAGE
-    // =========================
-
     res.render("reports", {
       reportTitle,
       totalRevenue,
@@ -208,7 +190,7 @@ router.get("/reports", async (req, res) => {
   }
 });
  
-// // AUTHENTICATION ROUTES (SIGNIN & LOGIN)
+// AUTHENTICATION ROUTES (SIGNIN & LOGIN)
 router.get("/admin/register", isAdmin, (req, res) => {
   res.render("signin");
 });
@@ -271,12 +253,12 @@ router.post("/login", passport.authenticate("local", { failureRedirect: "/login"
 
 // STOCK REGISTRATION (POST)
 
-router.post('/stockregform', isStoreManager, upload.single('itemimage'), async (req, res) => {
+router.post('/stockregform', authorizeRoles("Admin", "Store_Manager"), upload.single('itemimage'), async (req, res) => {
   try {
     const { itemName, quantity, unitPrice, sellingPrice, supplierName, date, supplierPhone, factory, paymentStatus } = req.body;
 
     const newStock = new Stock({
-      itemName: itemName.trim(), // Trimming prevent grouping issues from trailing spaces
+      itemName: itemName.trim(), 
       quantity: Number(quantity),
       unitPrice: Number(unitPrice),
       sellingPrice: Number(sellingPrice),
@@ -322,7 +304,7 @@ router.get("/stock", async (req, res) => {
   }
 });
 
-router.get("/stockdashboard", async (req, res) => {
+router.get("/stockdashboard", authorizeRoles("Admin", "Store_Manager"), async (req, res) => {
   try {
     const dbStock = await Stock.find().sort({ date: -1 });
     
@@ -348,7 +330,6 @@ router.get("/supplier", async (req, res) => {
   }
 });
 // edit supplier page
-// OPEN EDIT PAGE
 router.get("/editsupplier/:id", async (req, res) => {
 
   try {

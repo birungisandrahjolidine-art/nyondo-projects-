@@ -13,7 +13,6 @@ body {
     min-height: 100vh;
 }
 
-/* 🔹 SIDEBAR STYLES */
 .sidebar {
     background-color:  darkblue; 
     padding: 30px 20px;
@@ -155,11 +154,11 @@ h1 {
 
 .card {
     flex: 1;
-    background-color: darkblue;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .card p {
@@ -190,7 +189,7 @@ td {
     border-bottom: 2px solid darkblue;
 }
 
-tr:hover {
-    background-color: orange;
+/* tr:hover {
+    background-color: shoji white;
     color: white;
-}
+} */

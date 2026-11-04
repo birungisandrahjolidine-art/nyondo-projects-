@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Credit = require("../models/Credit");
+const Credit = require("../models/credit");
 const Stock = require("../models/Stock"); 
 const { isAdmin } = require("../middleware/auth");
 

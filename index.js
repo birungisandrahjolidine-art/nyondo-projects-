@@ -72,5 +72,10 @@ app.use((req, res) => {
 
 // 6.Bootstraping server
 // this is the last line of the code
-app.listen(port, () => console.log(`listening on port ${port}`));
+const server = app.listen(port, "0.0.0.0", () => {
+  console.log(`listening on port ${port}`);
+});
 
+// Keep-alive settings to prevent intermittent 502s on Render
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 120000;

@@ -1,16 +1,20 @@
+require('dotenv').config();
 
 //1. dependencies
+const { MongoStore } = require('connect-mongo');
 const express = require('express');
 const expressSession = require("express-session");
 const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-require('dotenv').config();
+
 const connectDB = require('./config/db')
 // 2.Instalations
 const app = express();
-const port = 5000;
+app.set('trust proxy', 1);
+const port = process.env.PORT || 5000;
+// const port = 5000;
 
 // import usermodel
 const Registration = require('./models/Registration')
@@ -29,11 +33,13 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended:true})); //very important
 app.use(
-    expressSession({
-        secret:process.env.SESSION_SECRET || "fallback_local_secret_key",
-        resave: false,
-        saveUninitialized: false,
-    }),
+  expressSession({
+    secret: process.env.SESSION_SECRET || "fallback_local_secret_key",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI || process.env.DATABASE }),
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 day
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());

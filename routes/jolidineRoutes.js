@@ -7,7 +7,7 @@ const multer = require('multer');
 const Registration = require("../models/Registration");
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
-const Credit = require("../models/Credit");
+const Credit = require("../models/credit");
 
 const { isAdmin, isStoreManager, authorizeRoles } = require("../middleware/auth");
 // MULTER FILE UPLOAD SETUP

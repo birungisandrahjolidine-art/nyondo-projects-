@@ -4,7 +4,7 @@ const router = express.Router();
 
 const Sale = require("../models/Sale");
 const Stock = require("../models/Stock");
-const Credit = require("../models/Credit");
+const Credit = require("../models/credit");
 const { isAdmin } = require("../middleware/auth");
 const Registration = require("../models/Registration");
 
